@@ -1,0 +1,143 @@
+SOLUTION_RAW                 1 Solution after simulation 1.
+  -temp                      41.7463989258
+  -pressure                  1
+  -total_h                   4.2866360207783
+  -total_o                   2.1481736641854
+  -cb                        3.6201615694153e-05
+  -density                   1
+  -totals
+    Al                       3.5457691214003e-05
+    C(4)                     8.878000639514e-05
+    Ca                       0.00042546671067561
+    Cl(-1)                   0.021075600947211
+    Fe(2)                    4.7681048327554e-12
+    Fe(3)                    6.8108290395848e-08
+    K                        0.00038542929056107
+    Mg                       0.0020789874981179
+    Na                       0.018077498782843
+    S(6)                     0.0010846600697407
+    Si                       9.5403953084687e-05
+  -pH                        8.5805321053
+  -pe                        4
+  -mu                        0.6150003567308
+  -ah2o                      0.98163009113392
+  -mass_water                0.0385997158
+  -soln_vol                  0.039004188153718
+  -total_alkalinity          0.00029715498007342
+  -activities
+    Al                       -16.333198028741
+    C(-2)                    -30
+    C(-3)                    -30
+    C(-4)                    -30
+    C(2)                     -30
+    C(4)                     -3.0797691699662
+    Ca                       -2.6317978315241
+    Cl(-1)                   -0.48914174602588
+    Cl(1)                    -30.176999186875
+    Cl(3)                    -30.176999186875
+    Cl(5)                    -30.190819306504
+    Cl(7)                    -30.190819306504
+    E                        -4
+    Fe(2)                    -10.722020885149
+    Fe(3)                    -31.090040163882
+    H(0)                     -29.940541770961
+    K                        -2.2181302382659
+    Mg                       -1.92094907613
+    Na                       -0.5312414226795
+    O(0)                     -29.940541770961
+    S(-2)                    -30.190819306504
+    S(2)                     -30.786113561294
+    S(3)                     -30.69430076535
+    S(4)                     -30.737456875429
+    S(5)                     -30.786113561294
+    S(6)                     -2.7125451034778
+    S(7)                     -30.786113561294
+    S(8)                     -30.176999186875
+    Si                       -2.878959732335
+  -gammas
+KINETICS_RAW                 1 
+  # KINETICS_MODIFY candidate identifiers #
+  -step_divide               1
+  -rk                        3
+  -bad_step_max              500
+  -use_cvode                 0
+  -cvode_steps               100
+  -cvode_order               5
+  -component                 Plagioclase
+      # KINETICS_MODIFY candidate identifiers #
+      -tol                   1e-08
+      -m                     1.2960000042
+      -m0                    1.2960000042
+      -namecoef
+        Plagioclase          1
+      -d_params
+        
+      # KineticsComp workspace variables #
+      -moles                 0
+      -initial_moles         0
+  -component                 Augite
+      # KINETICS_MODIFY candidate identifiers #
+      -tol                   1e-08
+      -m                     0.69599998
+      -m0                    0.69599998
+      -namecoef
+        Augite               1
+      -d_params
+        
+      # KineticsComp workspace variables #
+      -moles                 0
+      -initial_moles         0
+  -component                 Pigeonite
+      # KINETICS_MODIFY candidate identifiers #
+      -tol                   1e-08
+      -m                     0.126000002
+      -m0                    0.126000002
+      -namecoef
+        Pigeonite            1
+      -d_params
+        
+      # KineticsComp workspace variables #
+      -moles                 0
+      -initial_moles         0
+  -component                 Magnetite
+      # KINETICS_MODIFY candidate identifiers #
+      -tol                   1e-08
+      -m                     0.0400044456
+      -m0                    0.0400044456
+      -namecoef
+        Magnetite            1
+      -d_params
+        
+      # KineticsComp workspace variables #
+      -moles                 0
+      -initial_moles         0
+  -component                 BGlass
+      # KINETICS_MODIFY candidate identifiers #
+      -tol                   1e-08
+      -m                     9.6768892388
+      -m0                    9.6768892388
+      -namecoef
+        Al2O3                0.16
+        CaO                  0.182
+        FeO                  0.121
+        K2O                  0.00265
+        MgO                  0.195
+        Na2O                 0.0573
+        SiO2                 0.861
+      -d_params
+        
+      # KineticsComp workspace variables #
+      -moles                 0
+      -initial_moles         0
+  -equal_increments           1
+  -count                     1
+  -steps             
+    125000001.0505 
+  # KINETICS workspace variables #
+  -totals                    
+EQUILIBRIUM_PHASES_RAW       1 Pure-phase assemblage after simulation 1.
+  # EXCHANGE_MODIFY candidates; use new_def=true #
+  -new_def                   0
+  -eltList                   # List of all elements in phases and alternate reactions
+  # PPassemblage workspace variables #
+  -assemblage_totals

@@ -1,0 +1,45 @@
+#!/bin/csh
+
+# put this script in the same directory as the program
+# you want to run.
+#
+# set the name of the job
+#PBS -N navahTest
+#
+# set the output and error files
+#PBS -o /home/navah/mOutput.txt
+#PBS -e /home/navah/mErrors.txt
+#PBS -m abe -M navah@uchicago.edu
+# set the number of nodes to use, and number of processors
+# to use per node
+##PBS -l nodes=4:ppn=4
+#
+# or, if using only one node, you can do it this way too
+# PBS -l ncpus=4
+# import the environment we want. You can determine what
+# is available by running the command:
+#
+# module avail
+#
+# since the module command is a shell alias, we have to call
+# it directly by its real name, and munge some options
+#
+# in this example, I'm using the intel compilers and mvapich2
+#
+# bring in the module settings
+source /etc/profile.d/modules.csh
+module load intel/intel-12
+module load mpi/mvapich2/intel
+# set PROGNAME to the name of your program
+set PROGNAME=massacr
+
+# working directory
+set WORKDIR=/home/navah
+set NCPU=`wc -l < $PBS_NODEFILE`
+set NNODES=`uniq $PBS_NODEFILE | wc -l`
+
+#PBS -q default
+
+echo Trying MASSACR
+cd ${WORKDIR}
+${LAUNCH} ./massacr

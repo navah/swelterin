@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# run this program as follows:
+# ./KILL_DEAD_PROCS <node> e.g.
+# ./KILL_DEAD_PROCS compute-1-6
+#
+# :-)
+ssh $1 "ps -ef  | grep SAM | awk '{print \$2}' | xargs kill" 

@@ -1,0 +1,8 @@
+phreeqcpp/nvector.lo phreeqcpp/nvector.o: phreeqcpp/nvector.cpp \
+  phreeqcpp/nvector.h phreeqcpp/sundialstypes.h phreeqcpp/phrqtype.h
+
+phreeqcpp/nvector.h:
+
+phreeqcpp/sundialstypes.h:
+
+phreeqcpp/phrqtype.h:

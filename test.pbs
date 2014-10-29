@@ -1,0 +1,28 @@
+#PBS -S /bin/bash
+#PBS -N mpi
+#PBS -o mpi_out
+#PBS -e mpi_err
+##PBS -q bg
+#PBS -m a
+#PBS -V
+#PBS -l nodes=8
+NODES=8
+HOST=`hostname`
+echo Local MPD console on $HOST
+# Specify Myrinet interfaces on the hostfile.
+#grep -v $HOST $PBS_NODEFILE | sed 's/$/-myri0/' > $HOME/mpd.hosts
+echo $PBS_NODEFILE >> $HOME/mpd.hosts
+# Boot the MPI2 engine.
+mpdboot --totalnum=$NODES --file=$HOME/mpd.hosts 
+sleep 10
+# Inspect if all MPI nodes have been activated.
+mpdtrace -l
+# Check the connectivity.
+mpdringtest 100
+# Check if you can run trivial non-MPI jobs.
+mpdrun -l -n $NODES hostname
+# Execute your MPI program.
+mpiexec -n $NODES hellow2
+# Shut down the MPI2 engine and exit the PBS script.
+mpdallexit
+exit 0

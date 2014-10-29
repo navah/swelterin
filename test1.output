@@ -1,0 +1,3389 @@
+ testing debugger
+ my_id:           0
+  
+ looking for error
+           2
+  
+ max u
+  0.000000000000000E+000
+ max v
+  0.000000000000000E+000
+  
+ velocity check
+   0.00000
+   0.00000
+ conduction check
+   0.51431
+  
+ deltaT
+  9.950518112789852E-003
+ deltaPSI
+   1.00000000000000     
+           3
+  
+ max u
+  2.742166188333598E-006
+ max v
+  3.173311813715644E-006
+  
+ velocity check
+   0.01626
+   0.02895
+ conduction check
+   0.51431
+  
+ deltaT
+  7.427810647472646E-003
+ deltaPSI
+   230.265376927249     
+           4
+  
+ max u
+  2.740291594407850E-006
+ max v
+  3.164837689937970E-006
+  
+ velocity check
+   0.01625
+   0.02887
+ conduction check
+   0.51431
+  
+ deltaT
+  5.920682008291829E-003
+ deltaPSI
+   2.30145027317987     
+           5
+  
+ max u
+  2.737780483070533E-006
+ max v
+  3.152425987338724E-006
+  
+ velocity check
+   0.01623
+   0.02876
+ conduction check
+   0.51431
+  
+ deltaT
+  4.805127557361923E-003
+ deltaPSI
+   6.34966485597076     
+           6
+  
+ max u
+  2.734684906815641E-006
+ max v
+  3.139311030206149E-006
+  
+ velocity check
+   0.01622
+   0.02864
+ conduction check
+   0.51431
+  
+ deltaT
+  3.963568757451002E-003
+ deltaPSI
+  0.867307861772382     
+           7
+  
+ max u
+  2.731088107831139E-006
+ max v
+  3.125085384131346E-006
+  
+ velocity check
+   0.01619
+   0.02851
+ conduction check
+   0.51431
+  
+ deltaT
+  3.317288514676800E-003
+ deltaPSI
+   1.45048871788562     
+           8
+  
+ max u
+  2.727058987689543E-006
+ max v
+  3.109035846369192E-006
+  
+ velocity check
+   0.01617
+   0.02836
+ conduction check
+   0.51431
+  
+ deltaT
+  2.812614408993165E-003
+ deltaPSI
+   10.4341162959477     
+           9
+  
+ max u
+  2.722655122419425E-006
+ max v
+  3.091452562123441E-006
+  
+ velocity check
+   0.01614
+   0.02820
+ conduction check
+   0.51431
+  
+ deltaT
+  2.412329974826537E-003
+ deltaPSI
+   27.8506197136295     
+          10
+  
+ max u
+  2.717925033577626E-006
+ max v
+  3.073543290526347E-006
+  
+ velocity check
+   0.01612
+   0.02804
+ conduction check
+   0.51431
+  
+ deltaT
+  2.132476127789566E-003
+ deltaPSI
+   10.9161378617584     
+          11
+  
+ max u
+  2.712909921296064E-006
+ max v
+  3.054883180618245E-006
+  
+ velocity check
+   0.01609
+   0.02787
+ conduction check
+   0.51431
+  
+ deltaT
+  2.005948977774344E-003
+ deltaPSI
+   1.84044911790267     
+          12
+  
+ max u
+  2.707645003521257E-006
+ max v
+  3.035105902884947E-006
+  
+ velocity check
+   0.01606
+   0.02769
+ conduction check
+   0.51431
+  
+ deltaT
+  1.881111680353283E-003
+ deltaPSI
+   14.3520730794289     
+          13
+  
+ max u
+  2.702160563549249E-006
+ max v
+  3.014397125417099E-006
+  
+ velocity check
+   0.01602
+   0.02750
+ conduction check
+   0.51431
+  
+ deltaT
+  1.760885437570294E-003
+ deltaPSI
+   16.4039516400603     
+          14
+  
+ max u
+  2.696482778903922E-006
+ max v
+  2.992918059896255E-006
+  
+ velocity check
+   0.01599
+   0.02730
+ conduction check
+   0.51431
+  
+ deltaT
+  1.646878502915702E-003
+ deltaPSI
+   9.44809626797550     
+          15
+  
+ max u
+  2.690634384376667E-006
+ max v
+  2.970808769123573E-006
+  
+ velocity check
+   0.01595
+   0.02710
+ conduction check
+   0.51431
+  
+ deltaT
+  1.539862466346729E-003
+ deltaPSI
+   20.9902511591965     
+          16
+  
+ max u
+  2.684635207827849E-006
+ max v
+  2.948190946027390E-006
+  
+ velocity check
+   0.01592
+   0.02689
+ conduction check
+   0.51431
+  
+ deltaT
+  1.440083429008921E-003
+ deltaPSI
+   10.8030244038757     
+          17
+  
+ max u
+  2.678502607264696E-006
+ max v
+  2.925249703753523E-006
+  
+ velocity check
+   0.01588
+   0.02669
+ conduction check
+   0.51431
+  
+ deltaT
+  1.347464883015841E-003
+ deltaPSI
+   13.5046769750832     
+          18
+  
+ max u
+  2.672251830486433E-006
+ max v
+  2.902118063964621E-006
+  
+ velocity check
+   0.01585
+   0.02647
+ conduction check
+   0.51431
+  
+ deltaT
+  1.261739492951951E-003
+ deltaPSI
+   98.5485744239016     
+          19
+  
+ max u
+  2.665896313364407E-006
+ max v
+  2.878644697401072E-006
+  
+ velocity check
+   0.01581
+   0.02626
+ conduction check
+   0.51431
+  
+ deltaT
+  1.182534175620910E-003
+ deltaPSI
+   6.10345389266559     
+          20
+  
+ max u
+  2.659447929011595E-006
+ max v
+  2.854911867812205E-006
+  
+ velocity check
+   0.01577
+   0.02604
+ conduction check
+   0.51431
+  
+ deltaT
+  1.109424507429450E-003
+ deltaPSI
+   3.19881550223686     
+          21
+  
+ max u
+  2.652917197284341E-006
+ max v
+  2.830990822334761E-006
+  
+ velocity check
+   0.01573
+   0.02583
+ conduction check
+   0.51431
+  
+ deltaT
+  1.056130735156575E-003
+ deltaPSI
+   4.04120506256259     
+          22
+  
+ max u
+  2.646313461966703E-006
+ max v
+  2.806943120428566E-006
+  
+ velocity check
+   0.01569
+   0.02561
+ conduction check
+   0.51431
+  
+ deltaT
+  1.016964454940599E-003
+ deltaPSI
+   2.05331407969177     
+          23
+  
+ max u
+  2.639645041415421E-006
+ max v
+  2.782942805117551E-006
+  
+ velocity check
+   0.01565
+   0.02539
+ conduction check
+   0.51431
+  
+ deltaT
+  9.784969144621002E-004
+ deltaPSI
+   7.49275429683120     
+          24
+  
+ max u
+  2.632919357248517E-006
+ max v
+  2.759079081855163E-006
+  
+ velocity check
+   0.01561
+   0.02517
+ conduction check
+   0.51431
+  
+ deltaT
+  9.409723277598029E-004
+ deltaPSI
+   6.36393372222263     
+          25
+  
+ max u
+  2.626143044748026E-006
+ max v
+  2.735275505277621E-006
+  
+ velocity check
+   0.01557
+   0.02495
+ conduction check
+   0.51431
+  
+ deltaT
+  9.045637004956272E-004
+ deltaPSI
+   7.51296096223870     
+          26
+  
+ max u
+  2.619322047938628E-006
+ max v
+  2.711558965499578E-006
+  
+ velocity check
+   0.01553
+   0.02474
+ conduction check
+   0.51431
+  
+ deltaT
+  8.693882342175705E-004
+ deltaPSI
+   3.60505918661621     
+          27
+  
+ max u
+  2.612461701752823E-006
+ max v
+  2.687952070768714E-006
+  
+ velocity check
+   0.01549
+   0.02452
+ conduction check
+   0.51431
+  
+ deltaT
+  8.355196606380490E-004
+ deltaPSI
+   42.1572011775599     
+          28
+  
+ max u
+  2.605566803259228E-006
+ max v
+  2.664473688303052E-006
+  
+ velocity check
+   0.01545
+   0.02431
+ conduction check
+   0.51431
+  
+ deltaT
+  8.029980829519305E-004
+ deltaPSI
+   9.39277897876959     
+          29
+  
+ max u
+  2.598641673584925E-006
+ max v
+  2.641139422432196E-006
+  
+ velocity check
+   0.01541
+   0.02409
+ conduction check
+   0.51431
+  
+ deltaT
+  7.718378045616931E-004
+ deltaPSI
+   3.89481321944034     
+          30
+  
+ max u
+  2.591690211887104E-006
+ max v
+  2.617962037267469E-006
+  
+ velocity check
+   0.01537
+   0.02388
+ conduction check
+   0.51431
+  
+ deltaT
+  7.420335398957295E-004
+ deltaPSI
+   9.94084576464404     
+          31
+  
+ max u
+  2.584715942506478E-006
+ max v
+  2.594951830208302E-006
+  
+ velocity check
+   0.01533
+   0.02367
+ conduction check
+   0.51431
+  
+ deltaT
+  7.135653286062431E-004
+ deltaPSI
+   4.82068086422067     
+          32
+  
+ max u
+  2.577722056253756E-006
+ max v
+  2.572116961820378E-006
+  
+ velocity check
+   0.01528
+   0.02346
+ conduction check
+   0.51431
+  
+ deltaT
+  6.864024129859410E-004
+ deltaPSI
+   3.33537015278102     
+          33
+  
+ max u
+  2.570711446632271E-006
+ max v
+  2.549463746963160E-006
+  
+ velocity check
+   0.01524
+   0.02326
+ conduction check
+   0.51431
+  
+ deltaT
+  6.605062877688746E-004
+ deltaPSI
+   2.95538766325180     
+          34
+  
+ max u
+  2.563686741677921E-006
+ max v
+  2.526996911480969E-006
+  
+ velocity check
+   0.01520
+   0.02305
+ conduction check
+   0.51431
+  
+ deltaT
+  6.372556716685449E-004
+ deltaPSI
+   1.75688735480876     
+          35
+  
+ max u
+  2.556650331996370E-006
+ max v
+  2.504719818283015E-006
+  
+ velocity check
+   0.01516
+   0.02285
+ conduction check
+   0.51431
+  
+ deltaT
+  6.207314329383622E-004
+ deltaPSI
+   24.2111641044437     
+          36
+  
+ max u
+  2.549604395492980E-006
+ max v
+  2.492633913245049E-006
+  
+ velocity check
+   0.01512
+   0.02274
+ conduction check
+   0.51431
+  
+ deltaT
+  6.045158883244098E-004
+ deltaPSI
+   50.5646227649452     
+          37
+  
+ max u
+  2.542550919220543E-006
+ max v
+  2.488875318596451E-006
+  
+ velocity check
+   0.01508
+   0.02270
+ conduction check
+   0.51431
+  
+ deltaT
+  5.886442202749992E-004
+ deltaPSI
+   7.60692906175649     
+          38
+  
+ max u
+  2.535491718710345E-006
+ max v
+  2.484956938783620E-006
+  
+ velocity check
+   0.01503
+   0.02267
+ conduction check
+   0.51431
+  
+ deltaT
+  5.731430174246263E-004
+ deltaPSI
+   20.4943040451626     
+          39
+  
+ max u
+  2.528428455101689E-006
+ max v
+  2.480892094718233E-006
+  
+ velocity check
+   0.01499
+   0.02263
+ conduction check
+   0.51431
+  
+ deltaT
+  5.580316546651717E-004
+ deltaPSI
+   9.66545609416628     
+          40
+  
+ max u
+  2.521362650342531E-006
+ max v
+  2.476692862781199E-006
+  
+ velocity check
+   0.01495
+   0.02259
+ conduction check
+   0.51431
+  
+ deltaT
+  5.433234768476039E-004
+ deltaPSI
+   2.56366164450943     
+          41
+  
+ max u
+  2.514295700697223E-006
+ max v
+  2.472370209476428E-006
+  
+ velocity check
+   0.01491
+   0.02255
+ conduction check
+   0.51431
+  
+ deltaT
+  5.290268113868217E-004
+ deltaPSI
+   161.238105385428     
+          42
+  
+ max u
+  2.507228888766751E-006
+ max v
+  2.467934109726089E-006
+  
+ velocity check
+   0.01487
+   0.02251
+ conduction check
+   0.51431
+  
+ deltaT
+  5.151458324233457E-004
+ deltaPSI
+   253.195077530615     
+          43
+  
+ max u
+  2.500163394199613E-006
+ max v
+  2.463393650996915E-006
+  
+ velocity check
+   0.01483
+   0.02247
+ conduction check
+   0.51431
+  
+ deltaT
+  5.016812966223586E-004
+ deltaPSI
+   15.3156319158682     
+          44
+  
+ max u
+  2.493100303249073E-006
+ max v
+  2.458757125127567E-006
+  
+ velocity check
+   0.01478
+   0.02243
+ conduction check
+   0.51431
+  
+ deltaT
+  4.886311682898519E-004
+ deltaPSI
+   48.7411158016553     
+          45
+  
+ max u
+  2.486040617312424E-006
+ max v
+  2.454099691229764E-006
+  
+ velocity check
+   0.01474
+   0.02239
+ conduction check
+   0.51431
+  
+ deltaT
+  4.759911492888122E-004
+ deltaPSI
+   27.3128902740359     
+          46
+  
+ max u
+  2.478985260570980E-006
+ max v
+  2.449417528269348E-006
+  
+ velocity check
+   0.01470
+   0.02234
+ conduction check
+   0.51431
+  
+ deltaT
+  4.637551272322479E-004
+ deltaPSI
+   68.7164204277913     
+          47
+  
+ max u
+  2.471935086834896E-006
+ max v
+  2.444659717771702E-006
+  
+ velocity check
+   0.01466
+   0.02230
+ conduction check
+   0.51431
+  
+ deltaT
+  4.519155536656609E-004
+ deltaPSI
+   13.8044897062856     
+          48
+  
+ max u
+  2.464890885683366E-006
+ max v
+  2.439831875172560E-006
+  
+ velocity check
+   0.01462
+   0.02226
+ conduction check
+   0.51431
+  
+ deltaT
+  4.404637623561903E-004
+ deltaPSI
+   113.116520084854     
+          49
+  
+ max u
+  2.457853387981088E-006
+ max v
+  2.434939170052547E-006
+  
+ velocity check
+   0.01457
+   0.02221
+ conduction check
+   0.51431
+  
+ deltaT
+  4.293902364319818E-004
+ deltaPSI
+   18.3261126058781     
+          50
+  
+ max u
+  2.450823270840071E-006
+ max v
+  2.429986368123977E-006
+  
+ velocity check
+   0.01453
+   0.02217
+ conduction check
+   0.51431
+  
+ deltaT
+  4.189928719903680E-004
+ deltaPSI
+   1.48699822237782     
+          51
+  
+ max u
+  2.443801162089682E-006
+ max v
+  2.424977868699151E-006
+  
+ velocity check
+   0.01449
+   0.02212
+ conduction check
+   0.51431
+  
+ deltaT
+  4.111416376447656E-004
+ deltaPSI
+   13.6358405568791     
+          52
+  
+ max u
+  2.436787644308624E-006
+ max v
+  2.419917738177805E-006
+  
+ velocity check
+   0.01445
+   0.02208
+ conduction check
+   0.51431
+  
+ deltaT
+  4.034294789841780E-004
+ deltaPSI
+   11.4348053002774     
+          53
+  
+ max u
+  2.429783258467145E-006
+ max v
+  2.414809740021454E-006
+  
+ velocity check
+   0.01441
+   0.02203
+ conduction check
+   0.51431
+  
+ deltaT
+  3.958613111853290E-004
+ deltaPSI
+   10.5414692194289     
+          54
+  
+ max u
+  2.422788507221669E-006
+ max v
+  2.409657361624141E-006
+  
+ velocity check
+   0.01437
+   0.02198
+ conduction check
+   0.51431
+  
+ deltaT
+  3.884408018392717E-004
+ deltaPSI
+   8.86289166271458     
+          55
+  
+ max u
+  2.415803857899329E-006
+ max v
+  2.404463838435326E-006
+  
+ velocity check
+   0.01432
+   0.02193
+ conduction check
+   0.51431
+  
+ deltaT
+  3.811705361276884E-004
+ deltaPSI
+   114.556412537114     
+          56
+  
+ max u
+  2.408829745205424E-006
+ max v
+  2.399232175647567E-006
+  
+ velocity check
+   0.01428
+   0.02189
+ conduction check
+   0.51431
+  
+ deltaT
+  3.740521629562953E-004
+ deltaPSI
+  0.991355497649920     
+          57
+  
+ max u
+  2.401866573682936E-006
+ max v
+  2.393965167721660E-006
+  
+ velocity check
+   0.01424
+   0.02184
+ conduction check
+   0.51431
+  
+ deltaT
+  3.670865240604979E-004
+ deltaPSI
+   1.43999267394805     
+          58
+  
+ max u
+  2.394914719950307E-006
+ max v
+  2.388665415991414E-006
+  
+ velocity check
+   0.01420
+   0.02179
+ conduction check
+   0.51431
+  
+ deltaT
+  3.602737679069273E-004
+ deltaPSI
+   3.24967956348302     
+          59
+  
+ max u
+  2.387974534739888E-006
+ max v
+  2.383335344556365E-006
+  
+ velocity check
+   0.01416
+   0.02174
+ conduction check
+   0.51431
+  
+ deltaT
+  3.536134500459015E-004
+ deltaPSI
+  0.920887779892006     
+          60
+  
+ max u
+  2.381046344758212E-006
+ max v
+  2.377977214651041E-006
+  
+ velocity check
+   0.01412
+   0.02169
+ conduction check
+   0.51431
+  
+ deltaT
+  3.471046214077450E-004
+ deltaPSI
+   12.2374025988192     
+          61
+  
+ max u
+  2.374130454385293E-006
+ max v
+  2.372593137652651E-006
+  
+ velocity check
+   0.01408
+   0.02164
+ conduction check
+   0.51431
+  
+ deltaT
+  3.407459058825500E-004
+ deltaPSI
+   5.48200316859118     
+          62
+  
+ max u
+  2.367227147229851E-006
+ max v
+  2.367185086873088E-006
+  
+ velocity check
+   0.01404
+   0.02159
+ conduction check
+   0.51431
+  
+ deltaT
+  3.375516396570074E-004
+ deltaPSI
+   2.06476626981705     
+          63
+  
+ max u
+  2.360336687554271E-006
+ max v
+  2.361754908262834E-006
+  
+ velocity check
+   0.01400
+   0.02155
+ conduction check
+   0.51431
+  
+ deltaT
+  3.347486834380133E-004
+ deltaPSI
+   4.77050000651380     
+          64
+  
+ max u
+  2.353459321582016E-006
+ max v
+  2.356304330139882E-006
+  
+ velocity check
+   0.01396
+   0.02150
+ conduction check
+   0.51431
+  
+ deltaT
+  3.320086614185455E-004
+ deltaPSI
+   2.69305076654305     
+          65
+  
+ max u
+  2.346595278699360E-006
+ max v
+  2.350834972044258E-006
+  
+ velocity check
+   0.01391
+   0.02145
+ conduction check
+   0.51431
+  
+ deltaT
+  3.293292092075746E-004
+ deltaPSI
+   5.49503826862716     
+          66
+  
+ max u
+  2.339744772560951E-006
+ max v
+  2.345348352806891E-006
+  
+ velocity check
+   0.01387
+   0.02140
+ conduction check
+   0.51431
+  
+ deltaT
+  3.267080858156121E-004
+ deltaPSI
+   28.1512933018597     
+          67
+  
+ max u
+  2.332908002108661E-006
+ max v
+  2.339845897912461E-006
+  
+ velocity check
+   0.01383
+   0.02135
+ conduction check
+   0.51431
+  
+ deltaT
+  3.241431654686835E-004
+ deltaPSI
+   2.06885089935113     
+          68
+  
+ max u
+  2.326085152511697E-006
+ max v
+  2.334328946226286E-006
+  
+ velocity check
+   0.01379
+   0.02129
+ conduction check
+   0.51431
+  
+ deltaT
+  3.216324300747228E-004
+ deltaPSI
+   82.4636952703845     
+          69
+  
+ max u
+  2.319276396035139E-006
+ max v
+  2.328798756147975E-006
+  
+ velocity check
+   0.01375
+   0.02124
+ conduction check
+   0.51431
+  
+ deltaT
+  3.191739622885374E-004
+ deltaPSI
+   47.6715709048662     
+          70
+  
+ max u
+  2.312481892843641E-006
+ max v
+  2.323256511247568E-006
+  
+ velocity check
+   0.01371
+   0.02119
+ conduction check
+   0.51431
+  
+ deltaT
+  3.167659391130992E-004
+ deltaPSI
+   22.0038032004953     
+          71
+  
+ max u
+  2.305701791745724E-006
+ max v
+  2.317703325434691E-006
+  
+ velocity check
+   0.01367
+   0.02114
+ conduction check
+   0.51431
+  
+ deltaT
+  3.144066259950581E-004
+ deltaPSI
+   1.38194943475581     
+          72
+  
+ max u
+  2.298936230884332E-006
+ max v
+  2.312140247704342E-006
+  
+ velocity check
+   0.01363
+   0.02109
+ conduction check
+   0.51431
+  
+ deltaT
+  3.120943713662909E-004
+ deltaPSI
+   3.61617102689528     
+          73
+  
+ max u
+  2.292185338377959E-006
+ max v
+  2.306568266500142E-006
+  
+ velocity check
+   0.01359
+   0.02104
+ conduction check
+   0.51431
+  
+ deltaT
+  3.098276015905898E-004
+ deltaPSI
+   1.60293280863660     
+          74
+  
+ max u
+  2.285449232916896E-006
+ max v
+  2.300988313730054E-006
+  
+ velocity check
+   0.01355
+   0.02099
+ conduction check
+   0.51431
+  
+ deltaT
+  3.076048162847955E-004
+ deltaPSI
+   6.59105272718267     
+          75
+  
+ max u
+  2.278728024318107E-006
+ max v
+  2.295401268466789E-006
+  
+ velocity check
+   0.01351
+   0.02094
+ conduction check
+   0.51431
+  
+ deltaT
+  3.054245839793144E-004
+ deltaPSI
+   3.54546860844777     
+          76
+  
+ max u
+  2.272021814042369E-006
+ max v
+  2.289807960361787E-006
+  
+ velocity check
+   0.01347
+   0.02089
+ conduction check
+   0.51431
+  
+ deltaT
+  3.032855380882158E-004
+ deltaPSI
+   2.91305992187931     
+          77
+  
+ max u
+  2.265330695676843E-006
+ max v
+  2.284209172798420E-006
+  
+ velocity check
+   0.01343
+   0.02084
+ conduction check
+   0.51431
+  
+ deltaT
+  3.011863731670870E-004
+ deltaPSI
+   23.2471893362618     
+          78
+  
+ max u
+  2.258654755385537E-006
+ max v
+  2.278605645807637E-006
+  
+ velocity check
+   0.01339
+   0.02079
+ conduction check
+   0.51431
+  
+ deltaT
+  2.991258414286915E-004
+ deltaPSI
+   8.97335500263415     
+          79
+  
+ max u
+  2.251994072330564E-006
+ max v
+  2.272998078766969E-006
+  
+ velocity check
+   0.01335
+   0.02074
+ conduction check
+   0.51431
+  
+ deltaT
+  2.971027495018936E-004
+ deltaPSI
+   64.1978871475492     
+          80
+  
+ max u
+  2.245348719066357E-006
+ max v
+  2.267387132901529E-006
+  
+ velocity check
+   0.01331
+   0.02068
+ conduction check
+   0.51431
+  
+ deltaT
+  2.951159554093904E-004
+ deltaPSI
+   1.43256204408886     
+          81
+  
+ max u
+  2.238718761908821E-006
+ max v
+  2.261773433604436E-006
+  
+ velocity check
+   0.01327
+   0.02063
+ conduction check
+   0.51431
+  
+ deltaT
+  2.931643657485152E-004
+ deltaPSI
+  0.977814569521666     
+          82
+  
+ max u
+  2.232104261281470E-006
+ max v
+  2.256157572591500E-006
+  
+ velocity check
+   0.01324
+   0.02058
+ conduction check
+   0.51431
+  
+ deltaT
+  2.912469330616038E-004
+ deltaPSI
+   41.6576264688863     
+          83
+  
+ max u
+  2.225505272040338E-006
+ max v
+  2.250540109904503E-006
+  
+ velocity check
+   0.01320
+   0.02053
+ conduction check
+   0.51431
+  
+ deltaT
+  2.893626533746413E-004
+ deltaPSI
+   860.922389628019     
+          84
+  
+ max u
+  2.218921843778850E-006
+ max v
+  2.244921575774908E-006
+  
+ velocity check
+   0.01316
+   0.02048
+ conduction check
+   0.51431
+  
+ deltaT
+  2.875105638996363E-004
+ deltaPSI
+   6.78074387075879     
+          85
+  
+ max u
+  2.212354021114591E-006
+ max v
+  2.239302472360372E-006
+  
+ velocity check
+   0.01312
+   0.02043
+ conduction check
+   0.51431
+  
+ deltaT
+  2.856897408821041E-004
+ deltaPSI
+   7.87410946745987     
+          86
+  
+ max u
+  2.205801843958959E-006
+ max v
+  2.233683275363524E-006
+  
+ velocity check
+   0.01308
+   0.02038
+ conduction check
+   0.51431
+  
+ deltaT
+  2.838992975825486E-004
+ deltaPSI
+   4.75942474392111     
+          87
+  
+ max u
+  2.199295301269380E-006
+ max v
+  2.228064435542640E-006
+  
+ velocity check
+   0.01304
+   0.02033
+ conduction check
+   0.51431
+  
+ deltaT
+  2.821383823908589E-004
+ deltaPSI
+   1.31603286889004     
+          88
+  
+ max u
+  2.193034823873283E-006
+ max v
+  2.222446380122712E-006
+  
+ velocity check
+   0.01300
+   0.02027
+ conduction check
+   0.51431
+  
+ deltaT
+  2.804061770490813E-004
+ deltaPSI
+   1.47162914174720     
+          89
+  
+ max u
+  2.186787448931049E-006
+ max v
+  2.216829514114979E-006
+  
+ velocity check
+   0.01297
+   0.02022
+ conduction check
+   0.51431
+  
+ deltaT
+  2.787018949897864E-004
+ deltaPSI
+   7.11444180627756     
+          90
+  
+ max u
+  2.180553229074608E-006
+ max v
+  2.211214221551232E-006
+  
+ velocity check
+   0.01293
+   0.02017
+ conduction check
+   0.51431
+  
+ deltaT
+  2.770247797694850E-004
+ deltaPSI
+   1.93938865968012     
+          91
+  
+ max u
+  2.174332213220116E-006
+ max v
+  2.205600866639957E-006
+  
+ velocity check
+   0.01289
+   0.02012
+ conduction check
+   0.51431
+  
+ deltaT
+  2.753741036002607E-004
+ deltaPSI
+   26.1134381653795     
+          92
+  
+ max u
+  2.168124446756668E-006
+ max v
+  2.199989794849827E-006
+  
+ velocity check
+   0.01286
+   0.02007
+ conduction check
+   0.51431
+  
+ deltaT
+  2.737491659648127E-004
+ deltaPSI
+   19.6859604127741     
+          93
+  
+ max u
+  2.161929971724172E-006
+ max v
+  2.194381333926329E-006
+  
+ velocity check
+   0.01282
+   0.02002
+ conduction check
+   0.51431
+  
+ deltaT
+  2.721492923142172E-004
+ deltaPSI
+   4.83773922261381     
+          94
+  
+ max u
+  2.155748826981080E-006
+ max v
+  2.188775794845517E-006
+  
+ velocity check
+   0.01278
+   0.01997
+ conduction check
+   0.51431
+  
+ deltaT
+  2.705738328408893E-004
+ deltaPSI
+   33.3522962737615     
+          95
+  
+ max u
+  2.149581048362689E-006
+ max v
+  2.183173472710577E-006
+  
+ velocity check
+   0.01275
+   0.01992
+ conduction check
+   0.51431
+  
+ deltaT
+  2.690221613212087E-004
+ deltaPSI
+   34.7731451528383     
+          96
+  
+ max u
+  2.143426668830425E-006
+ max v
+  2.177574647594165E-006
+  
+ velocity check
+   0.01271
+   0.01987
+ conduction check
+   0.51431
+  
+ deltaT
+  2.674936740248313E-004
+ deltaPSI
+   8.36204193805739     
+          97
+  
+ max u
+  2.137285718613023E-006
+ max v
+  2.171979585331182E-006
+  
+ velocity check
+   0.01267
+   0.01981
+ conduction check
+   0.51431
+  
+ deltaT
+  2.659877886832350E-004
+ deltaPSI
+   5.06383849678553     
+          98
+  
+ max u
+  2.131158225339741E-006
+ max v
+  2.166388538264709E-006
+  
+ velocity check
+   0.01264
+   0.01976
+ conduction check
+   0.51431
+  
+ deltaT
+  2.645039435178766E-004
+ deltaPSI
+   7.58804395640776     
+          99
+  
+ max u
+  2.125044214166415E-006
+ max v
+  2.160801745948999E-006
+  
+ velocity check
+   0.01260
+   0.01971
+ conduction check
+   0.51431
+  
+ deltaT
+  2.630415963197615E-004
+ deltaPSI
+   279.410080671173     
+         100
+  
+ max u
+  2.118943707894549E-006
+ max v
+  2.155219435811747E-006
+  
+ velocity check
+   0.01256
+   0.01966
+ conduction check
+   0.51431
+  
+ deltaT
+  2.616002235800495E-004
+ deltaPSI
+   9.22330579705014     
+         101
+  
+ max u
+  2.112856727084042E-006
+ max v
+  2.149641823778851E-006
+  
+ velocity check
+   0.01253
+   0.01961
+ conduction check
+   0.51431
+  
+ deltaT
+  2.601793196684081E-004
+ deltaPSI
+   2.75268577788205     
+         102
+  
+ max u
+  2.106783290159865E-006
+ max v
+  2.144069114863878E-006
+  
+ velocity check
+   0.01249
+   0.01956
+ conduction check
+   0.51431
+  
+ deltaT
+  2.587783960513477E-004
+ deltaPSI
+   6.31242878197204     
+         103
+  
+ max u
+  2.100723413512980E-006
+ max v
+  2.138501503724693E-006
+  
+ velocity check
+   0.01246
+   0.01951
+ conduction check
+   0.51431
+  
+ deltaT
+  2.573969805576103E-004
+ deltaPSI
+   724.830350173952     
+         104
+  
+ max u
+  2.094677111596076E-006
+ max v
+  2.132939175189013E-006
+  
+ velocity check
+   0.01242
+   0.01946
+ conduction check
+   0.51431
+  
+ deltaT
+  2.560346166770185E-004
+ deltaPSI
+   1.81049088653234     
+         105
+  
+ max u
+  2.088644397013991E-006
+ max v
+  2.127382304751429E-006
+  
+ velocity check
+   0.01238
+   0.01941
+ conduction check
+   0.51431
+  
+ deltaT
+  2.546908628983150E-004
+ deltaPSI
+   2.56255137268421     
+         106
+  
+ max u
+  2.082625280609752E-006
+ max v
+  2.121831059043093E-006
+  
+ velocity check
+   0.01235
+   0.01936
+ conduction check
+   0.51431
+  
+ deltaT
+  2.533652920790510E-004
+ deltaPSI
+   2.31878623038898     
+         107
+  
+ max u
+  2.076619771545841E-006
+ max v
+  2.116285596276363E-006
+  
+ velocity check
+   0.01231
+   0.01931
+ conduction check
+   0.51431
+  
+ deltaT
+  2.520574908503346E-004
+ deltaPSI
+   16.0416598634706     
+         108
+  
+ max u
+  2.070627877381402E-006
+ max v
+  2.110746066665258E-006
+  
+ velocity check
+   0.01228
+   0.01926
+ conduction check
+   0.51431
+  
+ deltaT
+  2.507670590475709E-004
+ deltaPSI
+   18.4121325829909     
+         109
+  
+ max u
+  2.064649604145471E-006
+ max v
+  2.105212612823641E-006
+  
+ velocity check
+   0.01224
+   0.01920
+ conduction check
+   0.51431
+  
+ deltaT
+  2.494936091743024E-004
+ deltaPSI
+   10.4769258030555     
+         110
+  
+ max u
+  2.058684956406395E-006
+ max v
+  2.099685370142833E-006
+  
+ velocity check
+   0.01221
+   0.01915
+ conduction check
+   0.51431
+  
+ deltaT
+  2.482367658889315E-004
+ deltaPSI
+   3.47701447182446     
+         111
+  
+ max u
+  2.052733937337781E-006
+ max v
+  2.094164467148613E-006
+  
+ velocity check
+   0.01217
+   0.01910
+ conduction check
+   0.51431
+  
+ deltaT
+  2.469961655159981E-004
+ deltaPSI
+   3.82234606716767     
+         112
+  
+ max u
+  2.046796548781083E-006
+ max v
+  2.088650025840163E-006
+  
+ velocity check
+   0.01214
+   0.01905
+ conduction check
+   0.51431
+  
+ deltaT
+  2.457714555865971E-004
+ deltaPSI
+   3.17994120308844     
+         113
+  
+ max u
+  2.040872791305002E-006
+ max v
+  2.083142162011501E-006
+  
+ velocity check
+   0.01210
+   0.01900
+ conduction check
+   0.51431
+  
+ deltaT
+  2.445622943946315E-004
+ deltaPSI
+   2.65382551339573     
+         114
+  
+ max u
+  2.034962664261966E-006
+ max v
+  2.077640985555951E-006
+  
+ velocity check
+   0.01207
+   0.01895
+ conduction check
+   0.51431
+  
+ deltaT
+  2.433683505768098E-004
+ deltaPSI
+   4.54098165757587     
+         115
+  
+ max u
+  2.029066165841725E-006
+ max v
+  2.072146600755626E-006
+  
+ velocity check
+   0.01203
+   0.01890
+ conduction check
+   0.51431
+  
+ deltaT
+  2.421893027139848E-004
+ deltaPSI
+   78.3946350132124     
+         116
+  
+ max u
+  2.023183293122332E-006
+ max v
+  2.066659106555473E-006
+  
+ velocity check
+   0.01200
+   0.01885
+ conduction check
+   0.51431
+  
+ deltaT
+  2.410248389477448E-004
+ deltaPSI
+   1.72190632689094     
+         117
+  
+ max u
+  2.017314042118590E-006
+ max v
+  2.061178596824178E-006
+  
+ velocity check
+   0.01196
+   0.01880
+ conduction check
+   0.51431
+  
+ deltaT
+  2.398746566199739E-004
+ deltaPSI
+   1.89052030049967     
+         118
+  
+ max u
+  2.011458407828122E-006
+ max v
+  2.055705160601350E-006
+  
+ velocity check
+   0.01193
+   0.01875
+ conduction check
+   0.51431
+  
+ deltaT
+  2.387384619215304E-004
+ deltaPSI
+   5.91479770946714     
+         119
+  
+ max u
+  2.005616384275106E-006
+ max v
+  2.050238882332632E-006
+  
+ velocity check
+   0.01189
+   0.01870
+ conduction check
+   0.51431
+  
+ deltaT
+  2.376159695655334E-004
+ deltaPSI
+   4.32397927769178     
+         120
+  
+ max u
+  1.999787964552010E-006
+ max v
+  2.044779842093027E-006
+  
+ velocity check
+   0.01186
+   0.01865
+ conduction check
+   0.51431
+  
+ deltaT
+  2.365069024686976E-004
+ deltaPSI
+   8.14947352936530     
+         121
+  
+ max u
+  1.993973140859203E-006
+ max v
+  2.039328115799088E-006
+  
+ velocity check
+   0.01182
+   0.01860
+ conduction check
+   0.51431
+  
+ deltaT
+  2.354109914490235E-004
+ deltaPSI
+   3.98337410064495     
+         122
+  
+ max u
+  1.988171904542677E-006
+ max v
+  2.033883775410514E-006
+  
+ velocity check
+   0.01179
+   0.01855
+ conduction check
+   0.51431
+  
+ deltaT
+  2.343279749407679E-004
+ deltaPSI
+   3.65573694752564     
+         123
+  
+ max u
+  1.982384246129941E-006
+ max v
+  2.028446889122111E-006
+  
+ velocity check
+   0.01175
+   0.01850
+ conduction check
+   0.51431
+  
+ deltaT
+  2.332575987144253E-004
+ deltaPSI
+   4.40392197303751     
+         124
+  
+ max u
+  1.976610155364239E-006
+ max v
+  2.023017521546054E-006
+  
+ velocity check
+   0.01172
+   0.01846
+ conduction check
+   0.51431
+  
+ deltaT
+  2.321996156166274E-004
+ deltaPSI
+   2.66707157189270     
+         125
+  
+ max u
+  1.970849621237041E-006
+ max v
+  2.017595733885118E-006
+  
+ velocity check
+   0.01169
+   0.01841
+ conduction check
+   0.51431
+  
+ deltaT
+  2.311537853163388E-004
+ deltaPSI
+   8.55056283639054     
+         126
+  
+ max u
+  1.965102632019158E-006
+ max v
+  2.012181584097943E-006
+  
+ velocity check
+   0.01165
+   0.01836
+ conduction check
+   0.51431
+  
+ deltaT
+  2.301198740644953E-004
+ deltaPSI
+   158.864243282431     
+         127
+  
+ max u
+  1.959369175290135E-006
+ max v
+  2.006775127055768E-006
+  
+ velocity check
+   0.01162
+   0.01831
+ conduction check
+   0.51431
+  
+ deltaT
+  2.290976544623955E-004
+ deltaPSI
+   25.4273144310244     
+         128
+  
+ max u
+  1.953649237966503E-006
+ max v
+  2.001376414691824E-006
+  
+ velocity check
+   0.01158
+   0.01826
+ conduction check
+   0.51431
+  
+ deltaT
+  2.281751521889645E-004
+ deltaPSI
+   3.78258615775227     
+         129
+  
+ max u
+  1.947942806328643E-006
+ max v
+  1.995985496143385E-006
+  
+ velocity check
+   0.01155
+   0.01821
+ conduction check
+   0.51431
+  
+ deltaT
+  2.272866094230854E-004
+ deltaPSI
+  0.858463231359905     
+         130
+  
+ max u
+  1.942249866046250E-006
+ max v
+  1.990602417887035E-006
+  
+ velocity check
+   0.01152
+   0.01816
+ conduction check
+   0.51431
+  
+ deltaT
+  2.264076662315730E-004
+ deltaPSI
+   5.78223090464761     
+         131
+  
+ max u
+  1.936570402202844E-006
+ max v
+  1.985227223867360E-006
+  
+ velocity check
+   0.01148
+   0.01811
+ conduction check
+   0.51431
+  
+ deltaT
+  2.255381414669730E-004
+ deltaPSI
+   3.99826125605794     
+         132
+  
+ max u
+  1.930904399318988E-006
+ max v
+  1.979859955619567E-006
+  
+ velocity check
+   0.01145
+   0.01806
+ conduction check
+   0.51431
+  
+ deltaT
+  2.246778588094215E-004
+ deltaPSI
+   1.86313921909253     
+         133
+  
+ max u
+  1.925251841374457E-006
+ max v
+  1.974500652385834E-006
+  
+ velocity check
+   0.01142
+   0.01801
+ conduction check
+   0.51431
+  
+ deltaT
+  2.238266466023866E-004
+ deltaPSI
+   4.37895851904827     
+         134
+  
+ max u
+  1.919612711829487E-006
+ max v
+  1.969149351226815E-006
+  
+ velocity check
+   0.01138
+   0.01796
+ conduction check
+   0.51431
+  
+ deltaT
+  2.229843376948814E-004
+ deltaPSI
+   2.80241847912955     
+         135
+  
+ max u
+  1.913986993644991E-006
+ max v
+  1.963813509663888E-006
+  
+ velocity check
+   0.01135
+   0.01791
+ conduction check
+   0.51431
+  
+ deltaT
+  2.221507692934620E-004
+ deltaPSI
+   15.0994791636457     
+         136
+  
+ max u
+  1.908374669301845E-006
+ max v
+  1.958520692565038E-006
+  
+ velocity check
+   0.01132
+   0.01787
+ conduction check
+   0.51431
+  
+ deltaT
+  2.213257828169299E-004
+ deltaPSI
+   8.88970578689842     
+         137
+  
+ max u
+  1.902775720819361E-006
+ max v
+  1.953235619438962E-006
+  
+ velocity check
+   0.01128
+   0.01782
+ conduction check
+   0.51431
+  
+ deltaT
+  2.205092237556851E-004
+ deltaPSI
+   3.56237809584210     
+         138
+  
+ max u
+  1.900993762481423E-006
+ max v
+  1.947958334773910E-006
+  
+ velocity check
+   0.01127
+   0.01777
+ conduction check
+   0.51431
+  
+ deltaT
+  2.197009415421884E-004
+ deltaPSI
+   21.2625861508861     
+         139
+  
+ max u
+  1.900084456316500E-006
+ max v
+  1.942688881005562E-006
+  
+ velocity check
+   0.01127
+   0.01772
+ conduction check
+   0.51431
+  
+ deltaT
+  2.189007894193748E-004
+ deltaPSI
+   166.311101990807     
+         140
+  
+ max u
+  1.899178663013490E-006
+ max v
+  1.937427298604250E-006
+  
+ velocity check
+   0.01126
+   0.01767
+ conduction check
+   0.51431
+  
+ deltaT
+  2.181086243213206E-004
+ deltaPSI
+   2.14007446153715     
+         141
+  
+ max u
+  1.898276397640202E-006
+ max v
+  1.932173626158491E-006
+  
+ velocity check
+   0.01126
+   0.01763
+ conduction check
+   0.51431
+  
+ deltaT
+  2.173243067526217E-004
+ deltaPSI
+   94.4532660715149     
+         142
+  
+ max u
+  1.897377674981859E-006
+ max v
+  1.926927900454672E-006
+  
+ velocity check
+   0.01125
+   0.01758
+ conduction check
+   0.51431
+  
+ deltaT
+  2.165477006756848E-004
+ deltaPSI
+   3.27413462107490     
+         143
+  
+ max u
+  1.896482509543832E-006
+ max v
+  1.921690156553285E-006
+  
+ velocity check
+   0.01125
+   0.01753
+ conduction check
+   0.51431
+  
+ deltaT
+  2.157786734029775E-004
+ deltaPSI
+   15.6076368497925     
+         144
+  
+ max u
+  1.895590915554219E-006
+ max v
+  1.916460427861777E-006
+  
+ velocity check
+   0.01124
+   0.01748
+ conduction check
+   0.51431
+  
+ deltaT
+  2.150170954893287E-004
+ deltaPSI
+   12.0570093046635     
+         145
+  
+ max u
+  1.894702906966386E-006
+ max v
+  1.911238746204456E-006
+  
+ velocity check
+   0.01123
+   0.01744
+ conduction check
+   0.51431
+  
+ deltaT
+  2.142628406332803E-004
+ deltaPSI
+   92.4938251688880     
+         146
+  
+ max u
+  1.893818497461490E-006
+ max v
+  1.906025141888924E-006
+  
+ velocity check
+   0.01123
+   0.01739
+ conduction check
+   0.51431
+  
+ deltaT
+  2.135157855798380E-004
+ deltaPSI
+   1070.43987340937     
+         147
+  
+ max u
+  1.892937700450824E-006
+ max v
+  1.900819643769917E-006
+  
+ velocity check
+   0.01122
+   0.01734
+ conduction check
+   0.51431
+  
+ deltaT
+  2.127758100238328E-004
+ deltaPSI
+   7.56135590095505     
+         148
+  
+ max u
+  1.892060529078263E-006
+ max v
+  1.895622279310336E-006
+  
+ velocity check
+   0.01122
+   0.01729
+ conduction check
+   0.51431
+  
+ deltaT
+  2.120427965244520E-004
+ deltaPSI
+   1.90142510314903     
+         149
+  
+ max u
+  1.891186996222439E-006
+ max v
+  1.890433074639468E-006
+  
+ velocity check
+   0.01121
+   0.01725
+ conduction check
+   0.51431
+  
+ deltaT
+  2.113166304148804E-004
+ deltaPSI
+   6.35697775303336     
+         150
+  
+ max u
+  1.890317114499136E-006
+ max v
+  1.885252054608774E-006
+  
+ velocity check
+   0.01121
+   0.01720
+ conduction check
+   0.51431
+  
+ deltaT
+  2.105971997197663E-004
+ deltaPSI
+   4.57181326769205     
+         151
+  
+ max u
+  1.889450896263380E-006
+ max v
+  1.880079242845307E-006
+  
+ velocity check
+   0.01120
+   0.01715
+ conduction check
+   0.51431
+  
+ deltaT
+  2.098843950758041E-004
+ deltaPSI
+   2.15825196948167     
+         152
+  
+ max u
+  1.888588353611636E-006
+ max v
+  1.874914661802613E-006
+  
+ velocity check
+   0.01120
+   0.01710
+ conduction check
+   0.51431
+  
+ deltaT
+  2.091781096521040E-004
+ deltaPSI
+   25.0914777577945     
+         153
+  
+ max u
+  1.887729498383953E-006
+ max v
+  1.869758332809765E-006
+  
+ velocity check
+   0.01119
+   0.01706
+ conduction check
+   0.51431
+  
+ deltaT
+  2.084782390765978E-004
+ deltaPSI
+   7.80179002331568     
+         154
+  
+ max u
+  1.886874342166001E-006
+ max v
+  1.864610276117719E-006
+  
+ velocity check
+   0.01119
+   0.01701
+ conduction check
+   0.51431
+  
+ deltaT
+  2.077846813639755E-004
+ deltaPSI
+   3.51488207115135     
+         155
+  
+ max u
+  1.886022896291138E-006
+ max v
+  1.859470510944444E-006
+  
+ velocity check
+   0.01118
+   0.01696
+ conduction check
+   0.51431
+  
+ deltaT
+  2.070973368449530E-004
+ deltaPSI
+   35.7326892098705     
+         156
+  
+ max u
+  1.885175171842441E-006
+ max v
+  1.854339055517191E-006
+  
+ velocity check
+   0.01118
+   0.01692
+ conduction check
+   0.51431
+  
+ deltaT
+  2.064161081001847E-004
+ deltaPSI
+   1.65973967201428     
+         157
+  
+ max u
+  1.884331179654643E-006
+ max v
+  1.849215927113805E-006
+  
+ velocity check
+   0.01117
+   0.01687
+ conduction check
+   0.51431
+  
+ deltaT
+  2.057408998947125E-004
+ deltaPSI
+   8.65037590387508     
+         158
+  
+ max u
+  1.883490930316168E-006
+ max v
+  1.844101142101661E-006
+  
+ velocity check
+   0.01117
+   0.01682
+ conduction check
+   0.51431
+  
+ deltaT
+  2.050716191150943E-004
+ deltaPSI
+   6.35160489945347     
+         159
+  
+ max u
+  1.882654434170997E-006
+ max v
+  1.838994715974868E-006
+  
+ velocity check
+   0.01116
+   0.01678
+ conduction check
+   0.51431
+  
+ deltaT
+  2.044081747111572E-004
+ deltaPSI
+   7.88483370639953     
+         160
+  
+ max u
+  1.881821701320584E-006
+ max v
+  1.833896663390581E-006
+  
+ velocity check
+   0.01116
+   0.01673
+ conduction check
+   0.51431
+  
+ deltaT
+  2.037504776343666E-004
+ deltaPSI
+   2.98963906367190     
+         161
+  
+ max u
+  1.880992741625740E-006
+ max v
+  1.828806998202833E-006
+  
+ velocity check
+   0.01115
+   0.01668
+ conduction check
+   0.51431
+  
+ deltaT
+  2.030984407835438E-004
+ deltaPSI
+   21.0589226374960     
+         162
+  
+ max u
+  1.880167564708573E-006
+ max v
+  1.823725733495525E-006
+  
+ velocity check
+   0.01115
+   0.01664
+ conduction check
+   0.51431
+  
+ deltaT
+  2.024519789503117E-004
+ deltaPSI
+   3.05214810646269     
+         163
+  
+ max u
+  1.879346179954211E-006
+ max v
+  1.818652881613699E-006
+  
+ velocity check
+   0.01114
+   0.01659
+ conduction check
+   0.51431
+  
+ deltaT
+  2.018110087658271E-004
+ deltaPSI
+   2.85698792938965     
+         164
+  
+ max u
+  1.878528596512724E-006
+ max v
+  1.814430196847618E-006
+  
+ velocity check
+   0.01114
+   0.01655
+ conduction check
+   0.51431
+  
+ deltaT
+  2.011754486505516E-004
+ deltaPSI
+   6.12971112157878     
+         165
+  
+ max u
+  1.877714823300897E-006
+ max v
+  1.813067873108967E-006
+  
+ velocity check
+   0.01113
+   0.01654
+ conduction check
+   0.51431
+  
+ deltaT
+  2.005452187649090E-004
+ deltaPSI
+   75.9018211197432     
+         166
+  
+ max u
+  1.876904869003968E-006
+ max v
+  1.811708799968947E-006
+  
+ velocity check
+   0.01113
+   0.01653
+ conduction check
+   0.51431
+  
+ deltaT
+  1.999202409606323E-004
+ deltaPSI
+   7.69292702765099     
+         167
+  
+ max u
+  1.876098742077602E-006
+ max v
+  1.810352917499940E-006
+  
+ velocity check
+   0.01112
+   0.01652
+ conduction check
+   0.51431
+  
+ deltaT
+  1.993004387374737E-004
+ deltaPSI
+   5.19826114877643     
+         168
+  
+ max u
+  1.875296450749381E-006
+ max v
+  1.809000167105568E-006
+  
+ velocity check
+   0.01112
+   0.01650
+ conduction check
+   0.51431
+  
+ deltaT
+  1.986857371957222E-004
+ deltaPSI
+   15.3043297348574     
+         169
+  
+ max u
+  1.874498003020794E-006
+ max v
+  1.807650491491047E-006
+  
+ velocity check
+   0.01112
+   0.01649
+ conduction check
+   0.51431
+  
+ deltaT
+  1.980760629946627E-004
+ deltaPSI
+   7.65753911024476     
+         170
+  
+ max u
+  1.873703406668834E-006
+ max v
+  1.806303834634373E-006
+  
+ velocity check
+   0.01111
+   0.01648
+ conduction check
+   0.51431
+  
+ deltaT
+  1.974713443126799E-004
+ deltaPSI
+   9.73448013700951     
+         171
+  
+ max u
+  1.872912669247813E-006
+ max v
+  1.804960141758474E-006
+  
+ velocity check
+   0.01111
+   0.01647
+ conduction check
+   0.51431
+  
+ deltaT
+  1.968715108025809E-004
+ deltaPSI
+   30.1805871935222     
+         172
+  
+ max u
+  1.872125798090976E-006
+ max v
+  1.803619359303903E-006
+  
+ velocity check
+   0.01110
+   0.01645
+ conduction check
+   0.51431
+  
+ deltaT
+  1.962764935569345E-004
+ deltaPSI
+   5.59537374468440     
+         173
+  
+ max u
+  1.871342800312375E-006
+ max v
+  1.802281434902457E-006
+  
+ velocity check
+   0.01110
+   0.01644
+ conduction check
+   0.51431
+  
+ deltaT
+  1.956862250678424E-004
+ deltaPSI
+   11.2657362867086     
+         174
+  
+ max u
+  1.870563682808385E-006
+ max v
+  1.800946317351400E-006
+  
+ velocity check
+   0.01109
+   0.01643
+ conduction check
+   0.51431
+  
+ deltaT
+  1.951006391920451E-004
+ deltaPSI
+   5.76276736571827     
+         175
+  
+ max u
+  1.869788452259485E-006
+ max v
+  1.799613956588425E-006
+  
+ velocity check
+   0.01109
+   0.01642
+ conduction check
+   0.51431
+  
+ deltaT
+  1.945196711135731E-004
+ deltaPSI
+   4.64668472477933     
+         176
+  
+ max u
+  1.869017115131950E-006
+ max v
+  1.798284303667284E-006
+  
+ velocity check
+   0.01108
+   0.01640
+ conduction check
+   0.51431
+  
+ deltaT
+  1.939432573109460E-004
+ deltaPSI
+   17.7425234018154     
+         177
+  
+ max u
+  1.868249677679502E-006
+ max v
+  1.796957310734041E-006
+  
+ velocity check
+   0.01108
+   0.01639
+ conduction check
+   0.51431
+  
+ deltaT
+  1.933713355240525E-004
+ deltaPSI
+   2.72872301686934     
+         178
+  
+ max u
+  1.867486145944930E-006
+ max v
+  1.795632931004012E-006
+  
+ velocity check
+   0.01107
+   0.01638
+ conduction check
+   0.51431
+  
+ deltaT
+  1.928038447201259E-004
+ deltaPSI
+   43.7007080451473     
+         179
+  
+ max u
+  1.866726525761863E-006
+ max v
+  1.794311118739280E-006
+  
+ velocity check
+   0.01107
+   0.01637
+ conduction check
+   0.51431
+  
+ deltaT
+  1.922407250652304E-004
+ deltaPSI
+   2.15005977136671     
+         180
+  
+ max u
+  1.865970822756228E-006
+ max v
+  1.792991829226742E-006
+  
+ velocity check
+   0.01106
+   0.01636
+ conduction check
+   0.51431
+  
+ deltaT
+  1.916819178923094E-004
+ deltaPSI
+   3.37602526935689     
+         181
+  
+ max u
+  1.865219042348059E-006
+ max v
+  1.791675018756889E-006
+  
+ velocity check
+   0.01106
+   0.01634
+ conduction check
+   0.51431
+  
+ deltaT
+  1.911273656712413E-004
+ deltaPSI
+   15.0964144443909     
+         182
+  
+ max u
+  1.864471189753123E-006
+ max v
+  1.790360644602868E-006
+  
+ velocity check
+   0.01106
+   0.01633
+ conduction check
+   0.51431
+  
+ deltaT
+  1.905770119822578E-004
+ deltaPSI
+   6.33912814254452     
+         183
+  
+ max u
+  1.863727269984440E-006
+ max v
+  1.789048665000382E-006
+  
+ velocity check
+   0.01105
+   0.01632
+ conduction check
+   0.51431
+  
+ deltaT
+  1.900308014872802E-004
+ deltaPSI
+   3.37053564600970     
+         184
+  
+ max u
+  1.862987287853962E-006
+ max v
+  1.787739039127867E-006
+  
+ velocity check
+   0.01105
+   0.01631
+ conduction check
+   0.51431
+  
+ deltaT
+  1.894886799032564E-004
+ deltaPSI
+   4.25561450132250     
+         185
+  
+ max u
+  1.862251247974227E-006
+ max v
+  1.786431727087294E-006
+  
+ velocity check
+   0.01104
+   0.01630
+ conduction check
+   0.51431
+  
+ deltaT
+  1.889505939765205E-004
+ deltaPSI
+   12.8540493243609     
+         186
+  
+ max u
+  1.861519154759909E-006
+ max v
+  1.785126689885374E-006
+  
+ velocity check
+   0.01104
+   0.01628
+ conduction check
+   0.51431
+  
+ deltaT
+  1.884164914566236E-004
+ deltaPSI
+   1.19636201765886     
+         187
+  
+ max u
+  1.860791012429401E-006
+ max v
+  1.783823889415348E-006
+  
+ velocity check
+   0.01103
+   0.01627
+ conduction check
+   0.51431
+  
+ deltaT
+  1.878863210733201E-004
+ deltaPSI
+   7.37434647645865     
+         188
+  
+ max u
+  1.860066825006571E-006
+ max v
+  1.782523288439067E-006
+  
+ velocity check
+   0.01103
+   0.01626
+ conduction check
+   0.51431
+  
+ deltaT
+  1.873600325126322E-004
+ deltaPSI
+   35.5223045772946     
+         189
+  
+ max u
+  1.859346596322140E-006
+ max v
+  1.781224850569670E-006
+  
+ velocity check
+   0.01103
+   0.01625
+ conduction check
+   0.51431
+  
+ deltaT
+  1.868375763916026E-004
+ deltaPSI
+   4.63443187538254     
+         190
+  
+ max u
+  1.858630330015368E-006
+ max v
+  1.779928540254484E-006
+  
+ velocity check
+   0.01102
+   0.01624
+ conduction check
+   0.51431
+  
+ deltaT
+  1.863189042402738E-004
+ deltaPSI
+   5.89294413787553     
+         191
+  
+ max u
+  1.857918029535693E-006
+ max v
+  1.778634322758676E-006
+  
+ velocity check
+   0.01102
+   0.01623
+ conduction check
+   0.51431
+  
+ deltaT
+  1.858039684751728E-004
+ deltaPSI
+   58.6850460089445     
+         192
+  
+ max u
+  1.857209698144220E-006
+ max v
+  1.777342164148871E-006
+  
+ velocity check
+   0.01101
+   0.01621
+ conduction check
+   0.51431
+  
+ deltaT
+  1.852927223819575E-004
+ deltaPSI
+   38.2248573228578     
+         193
+  
+ max u
+  1.856505338915289E-006
+ max v
+  1.776052031277429E-006
+  
+ velocity check
+   0.01101
+   0.01620
+ conduction check
+   0.51431
+  
+ deltaT
+  1.847851200926729E-004
+ deltaPSI
+   3.22451759761022     
+         194
+  
+ max u
+  1.855804954738165E-006
+ max v
+  1.774763891767074E-006
+  
+ velocity check
+   0.01100
+   0.01619
+ conduction check
+   0.51431
+  
+ deltaT
+  1.842811165663444E-004
+ deltaPSI
+   14.7683073849967     
+         195
+  
+ max u
+  1.855108548318465E-006
+ max v
+  1.773477713995849E-006
+  
+ velocity check
+   0.01100
+   0.01618
+ conduction check
+   0.51431
+  
+ deltaT
+  1.837806675709674E-004
+ deltaPSI
+   9.36063543833520     
+         196
+  
+ max u
+  1.854416122179731E-006
+ max v
+  1.772193467082346E-006
+  
+ velocity check
+   0.01100
+   0.01617
+ conduction check
+   0.51431
+  
+ deltaT
+  1.832837296632066E-004
+ deltaPSI
+   11.1310293721074     
+         197
+  
+ max u
+  1.853727678665090E-006
+ max v
+  1.770911120871398E-006
+  
+ velocity check
+   0.01099
+   0.01616
+ conduction check
+   0.51431
+  
+ deltaT
+  1.827902601706531E-004
+ deltaPSI
+   1.67087303947100     
+         198
+  
+ max u
+  1.853043219938672E-006
+ max v
+  1.769630645920000E-006
+  
+ velocity check
+   0.01099
+   0.01614
+ conduction check
+   0.51431
+  
+ deltaT
+  1.823002171739230E-004
+ deltaPSI
+   6.17819676804935     
+         199
+  
+ max u
+  1.852362747987202E-006
+ max v
+  1.768352013483635E-006
+  
+ velocity check
+   0.01098
+   0.01613
+ conduction check
+   0.51431
+  
+ deltaT
+  1.818135594895646E-004
+ deltaPSI
+   5.83642898164736     
+         200
+  
+ max u
+  1.851686264621596E-006
+ max v
+  1.767075195502837E-006
+  
+ velocity check
+   0.01098
+   0.01612
+ conduction check
+   0.51431
+  
+ deltaT
+  1.813302466533862E-004
+ deltaPSI
+   27.5325954946065     
+  
+ ALL DONE!

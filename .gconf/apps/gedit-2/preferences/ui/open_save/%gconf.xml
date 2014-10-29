@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<gconf>
+        <entry name="selector_height" mtime="1414620072" type="int" value="224">
+        </entry>
+        <entry name="selector_width" mtime="1414620072" type="int" value="499">
+        </entry>
+</gconf>
