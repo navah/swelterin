@@ -142,7 +142,6 @@ end do
 
 
 
-
 ! this should fix it, i just realized it might not.
 permeability(:,yn) = permeability(:,yn-1)
 

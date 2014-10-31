@@ -1,108 +1,3 @@
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qsub pbssub.csh
-qstatq
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qstat
-make -f berMakeFile
-make -f berMakeFile
-make -f berMakeFile
-make -f berMakeFile
-make -f berMakeFile
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qsub pbssub.csh
-qstat
-qstat
-make -f berMakeFile
-qsub pbssub.csh
-qstat
-qsub pbssub.csh
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qstat
-$ export PSM_SHAREDCONTEXTS_MAX=4
-export PSM_SHAREDCONTEXTS_MAX=4 
-export PSM_RANKS_PER_CONTEXT=3
-qsub pbssub.csh
-qstat
-qstat
-qstat -B
-qstat -q
-qstat -f
-qhost
-watch qhost
-list host
-pbsnodes
-qsub pbssub.csh
-qstat
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-ipath_control -i
-ipath_control -i
-opensm -o
-qstat
-qstat
-qstat
-qstat
-qdel 1133.berserker.uchicago.edu
-qstat
-qstat
-qstat
-./KILL_DEAD_PROCS compute-1-10
-./KILL_DEAD_PROCS compute-1-10
-qstat
-qsub pbssub.csh
-qstat
-qstat
-./KILL_DEAD_PROCS compute-1-10
-./KILL_DEAD_PROCS compute-1-10/1
-./KILL_DEAD_PROCS compute-1-9
-./KILL_DEAD_PROCS compute-1-10
-qsub pbssub.csh
-qstat
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qstat
-qstat
-qdel 1121.berserker.uchicago.edu
-qstat
-./KILL_DEAD_PROCS compute-1-10
 ./KILL_DEAD_PROCS *
 ./KILL_DEAD_PROCS compute-1-10
 qstat
@@ -997,4 +892,109 @@ gedit --help
 cd ..
 git -u push origin master
 git push origin master
+logout
+git push origin master
+push -u origin master
+git push -u origin master
+git add *
+git remote add origin git@github.com:navahnavahnavah/swelterin.git
+git add .
+git push -u origin master
+git push -u origin master
+git remote add origin git@github.com:navahnavahnavah/swelterin.git
+git push -u origin master
+git push -u origin master
+logout
+cd ~/.ssh
+ls
+emacs id_rsa.pub
+gedit id_rsa.pub
+git push -u origin master
+git push -u origin master
+git push -u origin master
+git add *.f90
+cd ..
+git push -u origin master
+git add *.f90
+git push -u origin master
+git commit -m "starting up..."
+git push -u origin master
+git commit -m "trimming it down"
+git push -u origin master
+git add .
+git commit -m "trimming it down"
+git push -u origin master
+make -f berMakeFile
+qsub pbssub.csh
+qstat
+emacs alteration.f90
+qstat
+qstat
+logout
+emacs massacr.f90
+qstat
+qdel 1528.berserker.uchicago.edu
+make -f berMakeFile
+qsub pbssub.csh
+qstat
+qstat
+qsub pbssub.csh
+qstat
+qstat
+qstat
+qstat
+./KILL_DEAD_PROCS compute-1-8
+qsub pbssub.csh
+qstat
+qstat
+qsub pbssub.csh
+qstat
+qstat
+qstat
+qstat
+qstat
+qstat
+qstat
+qstat
+qstat
+qstat
+make -f berMakeFile
+qsub pbssub.csh
+qstat
+qstat
+qstat
+qstat
+qstat
+git add *
+git commit -m "remote pare-down"
+git commit -a push -u origin master
+git commit -a
+emacs massacr.f90
+git push -u origin master
+make -f berMakeFile
+qsub pbssub.csh
+qstat
+qstat
+qstat
+qstat
+make -f berMakeFile
+qsub pbssub.csh
+qstat
+qstat
+qstat
+qstat
+qstat
+qstat
+qstat
+qstat
+make -f berMakeFile
+qsub pbssub.csh
+qstat
+qstat
+qstat
+qstat
+qstat
+make -f berMakeFile
+qsub pbssub.csh
+qstat
 logout

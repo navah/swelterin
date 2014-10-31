@@ -46,8 +46,8 @@ set PROGNAME=massacr
 set LAUNCH=/usr/mpi/intel/mvapich-1.2.0-qlc/bin/mpirun
  
 # working directory
-#set WORKDIR=${HOME}
-set WORKDIR=/home/navah/no_secondary
+set WORKDIR=${HOME}
+#set WORKDIR=/home/navah/no_secondary
  
 set NCPU=`wc -l < $PBS_NODEFILE`
 set NNODES=`uniq $PBS_NODEFILE | wc -l`

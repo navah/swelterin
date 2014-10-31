@@ -257,7 +257,7 @@ secondary(:,:,:) = 0.0
 ! solute(:,:,14) = 2.200e-3 ! HCO3-
 ! solute(:,:,15) = 0.0 ! CO3-2
 
-! today
+! ocean today (w. sources)
 solute(:,:,1) = 7.8 ! ph
 solute(:,:,2) = .0023 ! Alk 1.6e-3
 solute(:,:,3) = .03860 ! water mass
@@ -282,23 +282,14 @@ soluteOcean = (/ solute(1,1,1), solute(1,1,2), solute(1,1,3), solute(1,1,4), sol
 ! properties of the medium
 medium(:,:,1) = 0.0 ! phi 
 medium(:,:,2) = 0.0 ! s_sp
-!medium(:,:,3) = .386 ! water_volume
 medium(:,:,3) = .03860 ! water_volume
 !medium(:,1:(xn/cell)*(5/13),3) = .03 ! water_volume
 medium(:,:,4) = 0.0 ! rho_s
 medium(:,:,5) = 1.0 ! rxn toggle
-medium(:,yn/cell,5) = 0.0
-!medium(1,:,5) = 0.0
-!medium(xn/cell,:,5) = 0.0
-!medium(:,1,5) = 0.0
 !medium(:,yn/cell,5) = 0.0
 medium(:,:,6) = 0.0 ! x-coord
 medium(:,:,7) = 0.0 ! y-coord
 
-
-! set reaction cells
-medium(:,(xn/cell)/2:(xn/cell),5) = 1.0 ! only bottom half reacts
-			  
 write(*,*) "testing..."
 
 !--------------INITIALIZE ALL PROCESSORS
@@ -327,10 +318,10 @@ call init()
 
 ! fill coordinate arrays
 do i = 1,(xn/cell)
-do ii = 1,(yn/cell)
-	medium(i,ii,6) = x(i*cell) 
-	medium(i,ii,7) = y(ii*cell)
-end do
+	do ii = 1,(yn/cell)
+		medium(i,ii,6) = x(i*cell) 
+		medium(i,ii,7) = y(ii*cell)
+	end do
 end do
 
 ! boundary & initial condtions for flow equations
@@ -394,7 +385,7 @@ do j = 2, tn
 		write(*,*) j
 	end if
 
-	! HEAT FLUX BOUNDARY CONDITIONS
+	! THERMAL BOUNDARY CONDITIONS
 	
 	! bottom
 	do i = 1,xn
@@ -447,44 +438,16 @@ do j = 2, tn
 ! 		 yep = write_matrix(xn, yn, real(permeability,kind=4), 'steady_permeability.txt')
 ! 	end if
 	
-
-
-	
 	! interpolate fine grid onto coarse grid
 	do i = 1,xn/cell
 	do ii = 1,yn/cell
-		!uCoarse(i,ii) = (u(i*cell,ii*cell)+u(i*cell-1,ii*cell))/2
-		!vCoarse(i,ii) = (v(i*cell,ii*cell)+v(i*cell,ii*cell-1))/2
-
-!		uCoarse(i,ii) = (u(i*cell,ii*cell) + (u(i*cell-1,ii*cell) + u(i*cell,ii*cell-1) &
-!						& + u(i*cell+1,ii*cell) + u(i*cell,ii*cell+1))*(2.0/3.0) &
-! 						& + (u(i*cell+1,ii*cell+1) + u(i*cell-1,ii*cell+1) + u(i*cell+1,ii*cell-1) &
-!                                                & + u(i*cell-1,ii*cell-1))*(1.0/6.0))/(10.0/3.0)
-!                vCoarse(i,ii) = (v(i*cell,ii*cell) + (v(i*cell-1,ii*cell) + v(i*cell,ii*cell-1) &
-!						& + v(i*cell+1,ii*cell) + v(i*cell,ii*cell+1))*(2.0/3.0) &
-! 						& + (v(i*cell+1,ii*cell+1) + v(i*cell-1,ii*cell+1) + v(i*cell+1,ii*cell-1) &
-!                                                & + v(i*cell-1,ii*cell-1))*(1.0/6.0))/(10.0/3.0)
-
- 		!vCoarse(i,ii) = (v(i*cell,ii*cell) + v(i*cell-1,ii*cell) + v(i*cell,ii*cell-1) &
- 		!				& + v(i*cell-1,ii*cell-1) + v(i*cell+1,ii*cell) + v(i*cell,ii*cell+1) &
- 		!				& + v(i*cell+1,ii*cell+1) + v(i*cell-1,ii*cell+1) + v(i*cell+1,ii*cell-1))/9.0
-                !uCoarse(i,ii) = sum(u(i*cell:i*cell+cell,ii*cell:ii*cell+cell))/(cell*cell)
-                !vCoarse(i,ii) = sum(v(i*cell:i*cell+cell,ii*cell:ii*cell+cell))/(cell*cell)
- 		!uCoarse(i,ii) = u(i*cell,ii*cell)
- 		!vCoarse(i,ii) = v(i*cell,ii*cell)
-		
- 		!uCoarse(i,ii) = sum(u(i*cell-cell:i*cell,ii*cell-cell:ii*cell))/(cell*cell)
- 		!vCoarse(i,ii) = sum(v(i*cell-cell:i*cell,ii*cell-cell:ii*cell))/(cell*cell)
-                psiCoarse(i,ii) = psi(i*cell,ii*cell)
-
-
-
+        psiCoarse(i,ii) = psi(i*cell,ii*cell)
 	end do
 	end do
 
-        velocitiesCoarse0 = velocitiesCoarse(psiCoarse)
-        uCoarse = velocitiesCoarse0(1:xn/cell,1:yn/cell)
-        vCoarse = velocitiesCoarse0(1:xn/cell,yn/cell+1:2*yn/cell)
+    velocitiesCoarse0 = velocitiesCoarse(psiCoarse)
+    uCoarse = velocitiesCoarse0(1:xn/cell,1:yn/cell)
+    vCoarse = velocitiesCoarse0(1:xn/cell,yn/cell+1:2*yn/cell)
 
 	uTransport = uTransport + uCoarse
 	vTransport = vTransport + vCoarse
@@ -499,289 +462,92 @@ do j = 2, tn
 		vTransport = vTransport/mstep
 	
 		
-! 		! vertical boundary conditions
-!  		solute(1,:,:) = (4.0/3.0)*solute(2,:,:) - (1.0/3.0)*solute(3,:,:) !l
-!  		solute(xn/cell,:,:) = (4.0/3.0)*solute((xn/cell)-1,:,:) - (1.0/3.0)*solute((xn/cell)-2,:,:) !r
-	
-		! other boundary condition examples
-		!solute(1,:,5) = 6.0e-3 ! left
-		!solute(xn/cell,:,5) = 0.0 ! right
-
-	
-! 		! smooth out glitch cells  BAD IDEA!!!!
-! 		do i=2,xn/cell-1
-! 			do ii=2,yn/cell-1
-! 				if (primary(i,ii,5) .eq. 0.0) then
+!!!!!!!!!! CHANGE TRANSPORT !!!!!!!!!!!!!!
+			
+! ! 			! convert pH, pe to concentrations
+!  			!do i=1,xn/cell
+!  			!	do ii=1,yn/cell
+!  			!		solute(i,ii,1) = 10**(-solute(i,ii,1))
+!  			!		!solute(i,ii,2) = 10**(-solute(i,ii,2))
+!  			!	end do
+!  			!end do
 !
-! 					do n=1,g_pri
-! 						primary(i,ii,n) = (primary(i+1,ii,n) + primary(i-1,ii,n) &
-! 										& + primary(i,ii+1,n) + primary(i,ii-1,n))/4.0
-! 					end do
-!
-! 					do n=1,g_sec
-! 						secondary(i,ii,n) = (secondary(i+1,ii,n) + secondary(i-1,ii,n) &
-! 										& + secondary(i,ii+1,n) + secondary(i,ii-1,n))/4.0
-! 					end do
-!
-! 					do n=1,g_sol
-! 						solute(i,ii,n) = (solute(i+1,ii,n) + solute(i-1,ii,n) &
-! 										& + solute(i,ii+1,n) + solute(i,ii-1,n))/4.0
-! 					end do
-!
-! 					do n=1,g_med-2
-! 						medium(i,ii,n) = (medium(i+1,ii,n) + medium(i-1,ii,n) &
-! 										& + medium(i,ii+1,n) + medium(i,ii-1,n))/4.0
-! 					end do
+!                         ! actual boundary conditions
+! 		do n=1,g_sol
+! 			!solute(:,yn/cell,n) = (soluteOcean(n)) ! top
+! 			do i=1,(yn/cell)
+! 				if (vTransport(i,yn/cell) .lt. 0.0) then
+! 					solute(i,yn/cell,n) = (soluteOcean(n)) ! last
+!                                     else
+!                                        solute(i,yn/cell,n)=(4.0/3.0)*solute(i,yn/cell-1,n)-(1.0/3.0)*solute(i,yn/cell-2,n)
 !
 ! 				end if
 ! 			end do
+! 			!solute(:,1,n) = (soluteOcean(n)) ! last
+! 			!solute(1,:,n) = (soluteOcean(n)) ! last
+! 			!solute(yn/cell,:,n) = (soluteOcean(n)) ! last
+! 			solute(:,1,n) = (4.0/3.0)*solute(:,2,n) - (1.0/3.0)*solute(:,3,n) ! bottom
+! 			!solute(1,:,n) = (4.0/3.0)*solute(2,:,n) - &
+! 			!					& (1.0/3.0)*solute(3,:,n)  ! left
+! 			!solute(yn/cell,:,n) = (4.0/3.0)*solute(yn/cell-1,:,n) - &
+! 			!					& (1.0/3.0)*solute(yn/cell-2,:,n)  ! right
 ! 		end do
 !
-! 		do i=2,xn/cell-1
 !
-! 			! bottom boundary
-! 			if (primary(i,1,5) .eq. 0.0) then
-! 				do n=1,g_pri
-! 					primary(i,1,n) = (primary(i+1,1,n) + primary(i-1,1,n) &
-! 									& + primary(i,2,n))/3.0
-! 				end do
 !
-! 				do n=1,g_sec
-! 					secondary(i,1,n) = (secondary(i+1,1,n) + secondary(i-1,1,n) &
-! 									& + secondary(i,2,n))/3.0
-! 				end do
-!
-! 				do n=1,g_sol
-! 					solute(i,1,n) = (solute(i+1,1,n) + solute(i-1,1,n) &
-! 									& + solute(i,2,n))/3.0
-! 				end do
-!
-! 				do n=1,g_med-2
-! 					medium(i,1,n) = (medium(i+1,1,n) + medium(i-1,1,n) &
-! 									& + medium(i,2,n))/3.0
-! 				end do
-! 			end if
-!
-! 			! top boundary
-! 			if (primary(i,yn/cell,5) .eq. 0.0) then
-! 				do n=1,g_pri
-! 					primary(i,yn/cell,n) = (primary(i+1,yn/cell,n) + primary(i-1,yn/cell,n) &
-! 									& + primary(i,yn/cell-1,n))/3.0
-! 				end do
-!
-! 				do n=1,g_sec
-! 					secondary(i,yn/cell,n) = (secondary(i+1,yn/cell,n) + secondary(i-1,yn/cell,n) &
-! 									& + secondary(i,yn/cell-1,n))/3.0
-! 				end do
-!
-! 				do n=1,g_sol
-! 					solute(i,yn/cell,n) = (solute(i+1,yn/cell,n) + solute(i-1,yn/cell,n) &
-! 									& + solute(i,yn/cell-1,n))/3.0
-! 				end do
-!
-! 				do n=1,g_med-2
-! 					medium(i,yn/cell,n) = (medium(i+1,yn/cell,n) + medium(i-1,yn/cell,n) &
-! 									& + medium(i,yn/cell-1,n))/3.0
-! 				end do
-! 			end if
-!
-! 			! left boundary
-! 			if (primary(1,i,5) .eq. 0.0) then
-! 				do n=1,g_pri
-! 					primary(1,i,n) = (primary(1,i+1,n) + primary(1,i-1,n) &
-! 									& + primary(2,i,n))/3.0
-! 				end do
-!
-! 				do n=1,g_sec
-! 					secondary(1,i,n) = (secondary(1,i+1,n) + secondary(1,i-1,n) &
-! 									& + secondary(2,i,n))/3.0
-! 				end do
-!
-! 				do n=1,g_sol
-! 					solute(1,i,n) = (solute(1,i+1,n) + solute(1,i-1,n) &
-! 									& + solute(2,i,n))/3.0
-! 				end do
-!
-! 				do n=1,g_med-2
-! 					medium(1,i,n) = (medium(1,i+1,n) + medium(1,i-1,n) &
-! 									& + medium(2,i,n))/3.0
-! 				end do
-! 			end if
-!
-! 			! right boundary
-! 			if (primary(xn/cell,i,5) .eq. 0.0) then
-! 				do n=1,g_pri
-! 					primary(xn/cell,i,n) = (primary(xn/cell,i+1,n) + primary(xn/cell,i-1,n) &
-! 									& + primary(xn/cell-1,i,n))/3.0
-! 				end do
-!
-! 				do n=1,g_sec
-! 					secondary(xn/cell,i,n) = (secondary(xn/cell,i+1,n) + secondary(xn/cell,i-1,n) &
-! 									& + secondary(xn/cell-1,i,n))/3.0
-! 				end do
-!
-! 				do n=1,g_sol
-! 					solute(xn/cell,i,n) = (solute(xn/cell,i+1,n) + solute(xn/cell,i-1,n) &
-! 									& + solute(xn/cell-1,i,n))/3.0
-! 				end do
-!
-! 				do n=1,g_med-2
-! 					medium(xn/cell,i,n) = (medium(xn/cell,i+1,n) + medium(xn/cell,i-1,n) &
-! 									& + medium(xn/cell-1,i,n))/3.0
-! 				end do
-! 			end if
-!
-! 		end do
-
-
-
-!!!!!!!!!! CURRENTLY FORGETTING ABOUT TRANSPORT STEP I THINK ????
-!!!!!!!!!! should have marked down where i left off.
-!!!!!!!!!! ACTUALLY IT HAPPENS DOWN BELOW...
-			
-! 			! convert pH, pe to concentrations
- 			!do i=1,xn/cell
- 			!	do ii=1,yn/cell
- 			!		solute(i,ii,1) = 10**(-solute(i,ii,1))
- 			!		!solute(i,ii,2) = 10**(-solute(i,ii,2))
- 			!	end do
- 			!end do
-
-	! 		! transport each solute
-	! 		do n=5,g_sol
-	! 			solTemp = solute(:,:,n)
-	! 			solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-	! 		end do
-
-                        ! actual boundary conditions
-		do n=1,g_sol
-			!solute(:,yn/cell,n) = (soluteOcean(n)) ! top
-			do i=1,(yn/cell)
-				if (vTransport(i,yn/cell) .lt. 0.0) then
-					solute(i,yn/cell,n) = (soluteOcean(n)) ! last				 
-                                    else
-                                       solute(i,yn/cell,n)=(4.0/3.0)*solute(i,yn/cell-1,n)-(1.0/3.0)*solute(i,yn/cell-2,n)
-
-				end if
-			end do
-			!solute(:,1,n) = (soluteOcean(n)) ! last 
-			!solute(1,:,n) = (soluteOcean(n)) ! last 
-			!solute(yn/cell,:,n) = (soluteOcean(n)) ! last
-			solute(:,1,n) = (4.0/3.0)*solute(:,2,n) - (1.0/3.0)*solute(:,3,n) ! bottom
-			!solute(1,:,n) = (4.0/3.0)*solute(2,:,n) - &
-			!					& (1.0/3.0)*solute(3,:,n)  ! left
-			!solute(yn/cell,:,n) = (4.0/3.0)*solute(yn/cell-1,:,n) - &
-			!					& (1.0/3.0)*solute(yn/cell-2,:,n)  ! right
-		end do
-
-		
-
-			n=1 ! ph
-	 		solTemp = solute(:,:,n)
-	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-! 			n=2 ! pe
+! 			n=1 ! ph
 ! 	 		solTemp = solute(:,:,n)
 ! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-			n=4 ! c
-	 		solTemp = solute(:,:,n)
-	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-			n=5 ! ca
-	 		solTemp = solute(:,:,n)
-	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-			n=6 ! mg
-	 		solTemp = solute(:,:,n)
-	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-			n=7 ! na
-	 		solTemp = solute(:,:,n)
-	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-			n=8 ! k
-	 		solTemp = solute(:,:,n)
-	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-			n=9 ! fe
-	 		solTemp = solute(:,:,n)
-	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-			n=10 ! s issues
-	 		solTemp = solute(:,:,n)
-	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-			n=11 ! si
-	 		solTemp = solute(:,:,n)
-	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-			n=12 ! cl
-	 		solTemp = solute(:,:,n)
-	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-			n=13 ! al
-	 		solTemp = solute(:,:,n)
-	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+! ! 			n=2 ! pe
+! ! 	 		solTemp = solute(:,:,n)
+! ! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+! 			n=4 ! c
+! 	 		solTemp = solute(:,:,n)
+! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+! 			n=5 ! ca
+! 	 		solTemp = solute(:,:,n)
+! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+! 			n=6 ! mg
+! 	 		solTemp = solute(:,:,n)
+! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+! 			n=7 ! na
+! 	 		solTemp = solute(:,:,n)
+! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+! 			n=8 ! k
+! 	 		solTemp = solute(:,:,n)
+! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+! 			n=9 ! fe
+! 	 		solTemp = solute(:,:,n)
+! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+! 			n=10 ! s issues
+! 	 		solTemp = solute(:,:,n)
+! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+! 			n=11 ! si
+! 	 		solTemp = solute(:,:,n)
+! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+! 			n=12 ! cl
+! 	 		solTemp = solute(:,:,n)
+! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+! 			n=13 ! al
+! 	 		solTemp = solute(:,:,n)
+! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+!
+!
+! ! 			!! convert [H+], [e-] back to pH, pe
+!  			!do i=1,xn/cell
+!  			!	do ii=1,yn/cell
+!  			!		solute(i,ii,1) = -log10(solute(i,ii,1))
+! ! 			!		!solute(i,ii,2) = -log10(solute(i,ii,2))
+!  			!	end do
+!  			!end do
 
-
-	
-!!$		! actual boundary conditions
-!!$		do n=1,g_sol
-!!$			!solute(:,yn/cell,n) = (soluteOcean(n)) ! top
-!!$			do i=1,(yn/cell)
-!!$				if (vTransport(i,yn/cell) .lt. 0.0) then
-!!$					solute(i,yn/cell,n) = (soluteOcean(n)) ! last				 
-!!$                                    else
-!!$                                       solute(i,yn/cell,n)=(4.0/3.0)*solute(i,yn/cell-1,n)-(1.0/3.0)*solute(i,yn/cell-2,n)
-!!$
-!!$				end if
-!!$			end do
-!!$			!solute(:,1,n) = (soluteOcean(n)) ! last 
-!!$			!solute(1,:,n) = (soluteOcean(n)) ! last 
-!!$			!solute(yn/cell,:,n) = (soluteOcean(n)) ! last
-!!$			solute(:,1,n) = (4.0/3.0)*solute(:,2,n) - (1.0/3.0)*solute(:,3,n) ! bottom
-!!$			solute(1,:,n) = (4.0/3.0)*solute(2,:,n) - &
-!!$								& (1.0/3.0)*solute(3,:,n)  ! left
-!!$			solute(yn/cell,:,n) = (4.0/3.0)*solute(yn/cell-1,:,n) - &
-!!$								& (1.0/3.0)*solute(yn/cell-2,:,n)  ! right
-!!$		end do
-
-! 			!! convert [H+], [e-] to pH, pe
- 			!do i=1,xn/cell
- 			!	do ii=1,yn/cell
- 			!		solute(i,ii,1) = -log10(solute(i,ii,1))
-! 			!		!solute(i,ii,2) = -log10(solute(i,ii,2))
- 			!	end do
- 			!end do
-		
-			
-! 		!mixed top boundary condition
-! 		do i=1,(yn/cell)
-! 			if (vTransport(i,yn/cell-1) .lt. 0.0) then
-! 				do n=1,g_sol
-! 					solute(i,yn/cell-1,n) = (soluteOcean(n))
-! 				end do
-! 				! dont let seawater cells react
-! 				!medium(i,yn/cell-1,5) = 0.0
-! ! 			else
-! ! 				do n=1,g_sol
-! ! 					solute(i,yn/cell-1,n) = (soluteOcean(n))
-! ! 				end do
-! 			end if
-! 			do n=1,g_sol
-! 				!solute(2,i,n) = soluteOcean(n)
-! 				!solute(yn/cell-1,i,n) = soluteOcean(n)
-! 				!solute(i,2,n) = soluteOcean(n)
-! 			end do
-! 		end do
-
-
+!!!!!!!!!! CHANGE TRANSPORT !!!!!!!!!!!!!!
 
 write(*,*) maxval(solute(:,:,4))
-	
+
 		!-TRANSPOSE 1
 		! stretch everything out
-		
-		
 		!hLong = reshape(h(1:xn-1:cell,1:yn-1:cell), (/(xn/cell)*(yn/cell)/)) ! for cell > 1
-		do i = 1,(xn/cell)*(yn/cell)
-			if (hLong(i) .gt. 305.0) then
-				!write(*,*) "old temp:"
-				!write(*,*) hLong(i)
-				!hLong(i) = 305.0
-			end if
-		end do
-
 		hLong = reshape(h(1:xn:cell,1:yn:cell), (/(xn/cell)*(yn/cell)/)) ! for cell = 1
 		priLong = reshape(primary, (/(xn/cell)*(yn/cell), g_pri/))
 		secLong = reshape(secondary, (/(xn/cell)*(yn/cell), g_sec/))
@@ -895,10 +661,6 @@ write(*,*) maxval(solute(:,:,4))
 		end do
 		
 
-
-
-		
-	
 		! reset coarse grid velocities for next timestep
 		uTransport = 0.0
 		vTransport = 0.0
@@ -944,8 +706,8 @@ yep = write_matrix ( xn, yn, real(rho,kind=4), 'rho.txt' )
 yep = write_matrix ( xn, yn,real(permeability,kind=4), 'permeability.txt' )
 
 ! secondary minerals
-yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,1),kind=4), 'sec_stilbite.txt')
-yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,2),kind=4), 'sec_sio2.txt')
+! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,1),kind=4), 'sec_stilbite.txt')
+! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,2),kind=4), 'sec_sio2.txt')
 ! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,3),kind=4), 'sec_kaolinite.txt')
 ! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,4),kind=4), 'sec_albite.txt')
  yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,5),kind=4), 'sec_saponite.txt')
@@ -955,19 +717,19 @@ yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,2),kind=4)
  yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,9),kind=4), 'sec_mont_na.txt')
 ! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,10),kind=4), 'sec_goethite.txt')
 ! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,11),kind=4), 'sec_dolomite.txt')
- yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,12),kind=4), 'sec_smectite.txt')
+! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,12),kind=4), 'sec_smectite.txt')
 ! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,13),kind=4), 'sec_dawsonite.txt')
 ! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,14),kind=4), 'sec_magnesite.txt')
 ! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,15),kind=4), 'sec_siderite.txt')
-yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,16),kind=4), 'sec_calcite.txt')
- yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,17),kind=4), 'sec_quartz.txt')
+ yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,16),kind=4), 'sec_calcite.txt')
+! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,17),kind=4), 'sec_quartz.txt')
 ! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,18),kind=4), 'sec_kspar.txt')
  yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,19),kind=4), 'sec_saponite_na.txt')
  yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,20),kind=4), 'sec_nont_na.txt')
- yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,21),kind=4), 'sec_nont_mg.txt')
- yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,22),kind=4), 'sec_nont_k.txt')
- yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,23),kind=4), 'sec_nont_h.txt')
- yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,24),kind=4), 'sec_nont_ca.txt')
+! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,21),kind=4), 'sec_nont_mg.txt')
+! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,22),kind=4), 'sec_nont_k.txt')
+! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,23),kind=4), 'sec_nont_h.txt')
+! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,24),kind=4), 'sec_nont_ca.txt')
 ! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,25),kind=4), 'sec_muscovite.txt')
 ! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,26),kind=4), 'sec_mesolite.txt')
 ! yep = write_matrix(xn/cell, yn*tn/(cell*mstep), real(secondaryMat(:,:,27),kind=4), 'sec_hematite.txt')
@@ -1106,12 +868,6 @@ else
 			if (medLocal(m,5) .eq. 1.0) then
                            write(*,*) medLocal(m,6:7)
 				! run the phreeqc alteration model
-! 				write(*,*) "pri local"
-! 				write(*,*) priLocal(m,:)
-! 				write(*,*) "sec local"
-! 				write(*,*) secLocal(m,:)
-! 				write(*,*) "sol local"
-! 				write(*,*) solLocal(m,:)
  				alt0 = alt_next(hLocal(m),dt_local*mstep,priLocal(m,:), &
  						    secLocal(m,:),solLocal(m,:),medLocal(m,:))
 			end if
