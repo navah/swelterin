@@ -341,11 +341,11 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
 ! &"    -water		5.0	# kg" //NEW_LINE('')// &
 ! &"END" //NEW_LINE('')// &
 
-! ! ----------------------------------%%
-! ! HYDROTHERMAL MINERAL CHOICES
-! ! ----------------------------------%%
-!
-! &"EQUILIBRIUM_PHASES 1" //NEW_LINE('')// &
+! ----------------------------------%%
+! HYDROTHERMAL MINERAL CHOICES
+! ----------------------------------%%
+
+&"EQUILIBRIUM_PHASES 1" //NEW_LINE('')// &
 ! !&"    CO2(g) -3.25 1000" //NEW_LINE('')// &
 ! &"    Kaolinite 0.0 " // trim(s_kaolinite)  //NEW_LINE('')// &
 ! &"    Goethite 0.0 " // trim(s_goethite) //NEW_LINE('')// &
@@ -428,17 +428,17 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
 ! ! &"   Greenalite 0.0 " // trim(s_greenalite) //NEW_LINE('')// &
 ! ! &"   Aragonite 0.0 " // trim(s_aragonite) //NEW_LINE('')// &
 ! ! no dolomite, aragonite
-! &"SAVE solution 1"  //NEW_LINE('')// &
-! &"SAVE equilibrium_phases 1"  //NEW_LINE('')// &
-! &"END"  //NEW_LINE('')// &
+&"SAVE solution 1"  //NEW_LINE('')// &
+&"SAVE equilibrium_phases 1"  //NEW_LINE('')// &
+&"END"  //NEW_LINE('')// &
 
 
 ! ----------------------------------%%
 ! PRIMARY (KINETIC) CONSTITUENTS
 ! ----------------------------------%%
 
-!&"Use solution 1" //NEW_LINE('')// &
-!&"Use equilibrium_phases 1" //NEW_LINE('')// &
+&"Use solution 1" //NEW_LINE('')// &
+&"Use equilibrium_phases 1" //NEW_LINE('')// &
 &"KINETICS" //NEW_LINE('')// &
 &"Plagioclase" //NEW_LINE('')// &
 &"-m0 " // trim(s_feldspar) //NEW_LINE('')// &

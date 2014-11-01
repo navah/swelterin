@@ -1,8 +1,3 @@
-./KILL_DEAD_PROCS *
-./KILL_DEAD_PROCS compute-1-10
-qstat
-qsub pbssub.csh
-qstat
 qstat
 ./KILL_DEAD_PROCS compute-1-10.berserker.uchicago.edu
 ./KILL_DEAD_PROCS compute-1-10
@@ -998,3 +993,8 @@ make -f berMakeFile
 qsub pbssub.csh
 qstat
 logout
+git commit -m "pare-down"
+git add 
+git add .
+git commit -m "pare-down"
+git push origin master

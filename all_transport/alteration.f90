@@ -341,104 +341,104 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
 ! &"    -water		5.0	# kg" //NEW_LINE('')// &
 ! &"END" //NEW_LINE('')// &
 
-! ! ----------------------------------%%
-! ! HYDROTHERMAL MINERAL CHOICES
-! ! ----------------------------------%%
-!
-! &"EQUILIBRIUM_PHASES 1" //NEW_LINE('')// &
-! !&"    CO2(g) -3.25 1000" //NEW_LINE('')// &
-! &"    Kaolinite 0.0 " // trim(s_kaolinite)  //NEW_LINE('')// &
-! &"    Goethite 0.0 " // trim(s_goethite) //NEW_LINE('')// &
-! &"    Celadonite 0.0 " // trim(s_celadonite) //NEW_LINE('')// &
-! &"    SiO2(am) 0.0 " // trim(s_sio2) //NEW_LINE('')// &
-! &"    Albite 0.0 " // trim(s_albite) //NEW_LINE('')// &
-! &"    Calcite 0.0 " // trim(s_calcite) //NEW_LINE('')// &
-! &"    Montmor-Na 0.0 " // trim(s_mont_na) //NEW_LINE('')// &
-! &"    Saponite-Mg 0.0 " // trim(s_saponite) //NEW_LINE('')// &
-! &"    Stilbite 0.0 " // trim(s_stilbite) //NEW_LINE('')// &
-! &"    Clinoptilolite-Ca 0.0 " // trim(s_clinoptilolite) //NEW_LINE('')// &
-! &"    Pyrite 0.0 " // trim(s_pyrite) //NEW_LINE('')// &
-! &"    Quartz 0.0 " // trim(s_quartz) //NEW_LINE('')// &
-! &"    K-Feldspar 0.0 " // trim(s_kspar) //NEW_LINE('')// &
-!
-! ! NEW MINS
-!
-! ! &"    Dolomite 0.0 " // trim(s_dolomite) //NEW_LINE('')// &
-!  &"    Saponite-Na 0.0 " // trim(s_saponite_na) //NEW_LINE('')// &
-!  &"    Nontronite-Na 0.0 " // trim(s_nont_na) //NEW_LINE('')// &
-!  &"    Nontronite-Mg 0.0 " // trim(s_nont_mg) //NEW_LINE('')// &
-!  &"    Nontronite-K 0.0 " // trim(s_nont_k) //NEW_LINE('')// &
-!  &"    Nontronite-H 0.0 " // trim(s_nont_h) //NEW_LINE('')// &
-!  &"    Nontronite-Ca 0.0 " // trim(s_nont_ca) //NEW_LINE('')// &
-!  &"    Muscovite 0.0 " // trim(s_muscovite) //NEW_LINE('')// &
-! ! &"    Mesolite 0.0 " // trim(s_mesolite) //NEW_LINE('')// & !!!!!!!!
-!  &"    Hematite 0.0 " // trim(s_hematite) //NEW_LINE('')// &
-!  &"    Diaspore 0.0 " // trim(s_diaspore) //NEW_LINE('')// &
-!
-! ! &"    Dawsonite 0.0 " // trim(s_dawsonite) //NEW_LINE('')// &
-! ! &"    Anhydrite 0.0 " // trim(s_magnesite) //NEW_LINE('')// & ! formerly magnesite
-!
-!
-! !!!! &"    Quartz 0.0 0.0" //NEW_LINE('')// &
-!  &"    Smectite-high-Fe-Mg 0.0 " // trim(s_smectite) //NEW_LINE('')// &
-! ! &"    Dolomite 0.0 " // trim(s_dolomite) //NEW_LINE('')// &
-! ! &"    Siderite 0.0 " // trim(s_siderite) //NEW_LINE('')// &
-!
-! !! MINERALS ADDED 10/18/2014
-!  &"    Akermanite 0.0 " // trim(s_akermanite) //NEW_LINE('')// &
-!  &"    Analcime 0.0 " // trim(s_analcime) //NEW_LINE('')// &
-!  &"    Annite 0.0 " // trim(s_annite) //NEW_LINE('')// &
-!  &"    Clinozoisite 0.0 " // trim(s_clinozoisite) //NEW_LINE('')// &
-!  &"    Dicalcium_silicate 0.0 " // trim(s_dicalcium_silicate) //NEW_LINE('')// &
-!  &"    Diopside 0.0 " // trim(s_diopside) //NEW_LINE('')// &
-!  &"    Epidote  0.0 " // trim(s_epidote ) //NEW_LINE('')// &
-!  &"    Ettringite 0.0 " // trim(s_ettringite) //NEW_LINE('')// &
-!  &"    Ferrite-Ca 0.0 " // trim(s_ferrite_ca) //NEW_LINE('')// &
-!  &"    Foshagite 0.0 " // trim(s_foshagite) //NEW_LINE('')// &
-!  &"    Gismondine 0.0 " // trim(s_gismondine) //NEW_LINE('')// &
-!  &"    Gyrolite 0.0 " // trim(s_gyrolite) //NEW_LINE('')// &
-!  &"    Hedenbergite 0.0 " // trim(s_hedenbergite) //NEW_LINE('')// &
-!  &"    Hillebrandite 0.0 " // trim(s_hillebrandite) //NEW_LINE('')// &
-!  &"    Larnite 0.0 " // trim(s_Larnite) //NEW_LINE('')// &
-!  &"    Laumontite 0.0 " // trim(s_laumontite) //NEW_LINE('')// &
-!  &"    Lawsonite 0.0 " // trim(s_lawsonite) //NEW_LINE('')// &
-!  &"    Merwinite 0.0 " // trim(s_merwinite) //NEW_LINE('')// &
-!  &"    Monticellite 0.0 " // trim(s_monticellite) //NEW_LINE('')// &
-!  &"    Natrolite 0.0 " // trim(s_natrolite) //NEW_LINE('')// &
-!  &"    Okenite 0.0 " // trim(s_okenite) //NEW_LINE('')// &
-!  &"    Phlogopite 0.0 " // trim(s_phlogopite) //NEW_LINE('')// &
-!  &"    Prehnite 0.0 " // trim(s_prehnite) //NEW_LINE('')// &
-!  &"    Pseudowollastonite 0.0 " // trim(s_pseudowollastonite) //NEW_LINE('')// &
-!  &"    Rankinite 0.0 " // trim(s_rankinite) //NEW_LINE('')// &
-!  &"    Scolecite 0.0 " // trim(s_scolecite) //NEW_LINE('')// &
-!  &"    Tobermorite-9A 0.0 " // trim(s_tobermorite_9a) //NEW_LINE('')// &
-!  &"    Tremolite 0.0 " // trim(s_tremolite) //NEW_LINE('')// &
-!  &"    Wollastonite 0.0 " // trim(s_wollastonite) //NEW_LINE('')// &
-!  &"    Xonotlite 0.0 " // trim(s_xonotlite) //NEW_LINE('')// &
-!  &"    Zoisite 0.0 " // trim(s_zoisite) //NEW_LINE('')// &
-!  !! NEXT ROUND
-!  &"   Andradite 0.0 " // trim(s_andradite) //NEW_LINE('')// &
-!  &"   Troilite 0.0 " // trim(s_troilite) //NEW_LINE('')// &
-!  &"   Pyrrhotite 0.0 " // trim(s_pyrrhotite) //NEW_LINE('')// &
-!  &"   Minnesotaite 0.0 " // trim(s_minnesotaite) //NEW_LINE('')// &
-!  &"   Fayalite 0.0 " // trim(s_fayalite) //NEW_LINE('')// &
-!  &"   Daphnite-7a 0.0 " // trim(s_daphnite_7a) //NEW_LINE('')// &
-!  &"   Daphnite-14a 0.0 " // trim(s_daphnite_14a) //NEW_LINE('')// &
-!  &"   Cronstedtite-7a 0.0 " // trim(s_cronstedtite_7a) //NEW_LINE('')// &
-! ! &"   Greenalite 0.0 " // trim(s_greenalite) //NEW_LINE('')// &
-! ! &"   Aragonite 0.0 " // trim(s_aragonite) //NEW_LINE('')// &
-! ! no dolomite, aragonite
-! &"SAVE solution 1"  //NEW_LINE('')// &
-! &"SAVE equilibrium_phases 1"  //NEW_LINE('')// &
-! &"END"  //NEW_LINE('')// &
+! ----------------------------------%%
+! HYDROTHERMAL MINERAL CHOICES
+! ----------------------------------%%
+
+&"EQUILIBRIUM_PHASES 1" //NEW_LINE('')// &
+!&"    CO2(g) -3.25 1000" //NEW_LINE('')// &
+&"    Kaolinite 0.0 " // trim(s_kaolinite)  //NEW_LINE('')// &
+&"    Goethite 0.0 " // trim(s_goethite) //NEW_LINE('')// &
+&"    Celadonite 0.0 " // trim(s_celadonite) //NEW_LINE('')// &
+&"    SiO2(am) 0.0 " // trim(s_sio2) //NEW_LINE('')// &
+&"    Albite 0.0 " // trim(s_albite) //NEW_LINE('')// &
+&"    Calcite 0.0 " // trim(s_calcite) //NEW_LINE('')// &
+&"    Montmor-Na 0.0 " // trim(s_mont_na) //NEW_LINE('')// &
+&"    Saponite-Mg 0.0 " // trim(s_saponite) //NEW_LINE('')// &
+&"    Stilbite 0.0 " // trim(s_stilbite) //NEW_LINE('')// &
+&"    Clinoptilolite-Ca 0.0 " // trim(s_clinoptilolite) //NEW_LINE('')// &
+&"    Pyrite 0.0 " // trim(s_pyrite) //NEW_LINE('')// &
+&"    Quartz 0.0 " // trim(s_quartz) //NEW_LINE('')// &
+&"    K-Feldspar 0.0 " // trim(s_kspar) //NEW_LINE('')// &
+
+! NEW MINS
+
+! &"    Dolomite 0.0 " // trim(s_dolomite) //NEW_LINE('')// &
+ &"    Saponite-Na 0.0 " // trim(s_saponite_na) //NEW_LINE('')// &
+ &"    Nontronite-Na 0.0 " // trim(s_nont_na) //NEW_LINE('')// &
+ &"    Nontronite-Mg 0.0 " // trim(s_nont_mg) //NEW_LINE('')// &
+ &"    Nontronite-K 0.0 " // trim(s_nont_k) //NEW_LINE('')// &
+ &"    Nontronite-H 0.0 " // trim(s_nont_h) //NEW_LINE('')// &
+ &"    Nontronite-Ca 0.0 " // trim(s_nont_ca) //NEW_LINE('')// &
+ &"    Muscovite 0.0 " // trim(s_muscovite) //NEW_LINE('')// &
+! &"    Mesolite 0.0 " // trim(s_mesolite) //NEW_LINE('')// & !!!!!!!!
+ &"    Hematite 0.0 " // trim(s_hematite) //NEW_LINE('')// &
+ &"    Diaspore 0.0 " // trim(s_diaspore) //NEW_LINE('')// &
+
+! &"    Dawsonite 0.0 " // trim(s_dawsonite) //NEW_LINE('')// &
+! &"    Anhydrite 0.0 " // trim(s_magnesite) //NEW_LINE('')// & ! formerly magnesite
+
+
+!!!! &"    Quartz 0.0 0.0" //NEW_LINE('')// &
+ &"    Smectite-high-Fe-Mg 0.0 " // trim(s_smectite) //NEW_LINE('')// &
+! &"    Dolomite 0.0 " // trim(s_dolomite) //NEW_LINE('')// &
+! &"    Siderite 0.0 " // trim(s_siderite) //NEW_LINE('')// &
+
+!! MINERALS ADDED 10/18/2014
+ &"    Akermanite 0.0 " // trim(s_akermanite) //NEW_LINE('')// &
+ &"    Analcime 0.0 " // trim(s_analcime) //NEW_LINE('')// &
+ &"    Annite 0.0 " // trim(s_annite) //NEW_LINE('')// &
+ &"    Clinozoisite 0.0 " // trim(s_clinozoisite) //NEW_LINE('')// &
+ &"    Dicalcium_silicate 0.0 " // trim(s_dicalcium_silicate) //NEW_LINE('')// &
+ &"    Diopside 0.0 " // trim(s_diopside) //NEW_LINE('')// &
+ &"    Epidote  0.0 " // trim(s_epidote ) //NEW_LINE('')// &
+ &"    Ettringite 0.0 " // trim(s_ettringite) //NEW_LINE('')// &
+ &"    Ferrite-Ca 0.0 " // trim(s_ferrite_ca) //NEW_LINE('')// &
+ &"    Foshagite 0.0 " // trim(s_foshagite) //NEW_LINE('')// &
+ &"    Gismondine 0.0 " // trim(s_gismondine) //NEW_LINE('')// &
+ &"    Gyrolite 0.0 " // trim(s_gyrolite) //NEW_LINE('')// &
+ &"    Hedenbergite 0.0 " // trim(s_hedenbergite) //NEW_LINE('')// &
+ &"    Hillebrandite 0.0 " // trim(s_hillebrandite) //NEW_LINE('')// &
+ &"    Larnite 0.0 " // trim(s_Larnite) //NEW_LINE('')// &
+ &"    Laumontite 0.0 " // trim(s_laumontite) //NEW_LINE('')// &
+ &"    Lawsonite 0.0 " // trim(s_lawsonite) //NEW_LINE('')// &
+ &"    Merwinite 0.0 " // trim(s_merwinite) //NEW_LINE('')// &
+ &"    Monticellite 0.0 " // trim(s_monticellite) //NEW_LINE('')// &
+ &"    Natrolite 0.0 " // trim(s_natrolite) //NEW_LINE('')// &
+ &"    Okenite 0.0 " // trim(s_okenite) //NEW_LINE('')// &
+ &"    Phlogopite 0.0 " // trim(s_phlogopite) //NEW_LINE('')// &
+ &"    Prehnite 0.0 " // trim(s_prehnite) //NEW_LINE('')// &
+ &"    Pseudowollastonite 0.0 " // trim(s_pseudowollastonite) //NEW_LINE('')// &
+ &"    Rankinite 0.0 " // trim(s_rankinite) //NEW_LINE('')// &
+ &"    Scolecite 0.0 " // trim(s_scolecite) //NEW_LINE('')// &
+ &"    Tobermorite-9A 0.0 " // trim(s_tobermorite_9a) //NEW_LINE('')// &
+ &"    Tremolite 0.0 " // trim(s_tremolite) //NEW_LINE('')// &
+ &"    Wollastonite 0.0 " // trim(s_wollastonite) //NEW_LINE('')// &
+ &"    Xonotlite 0.0 " // trim(s_xonotlite) //NEW_LINE('')// &
+ &"    Zoisite 0.0 " // trim(s_zoisite) //NEW_LINE('')// &
+ !! NEXT ROUND
+ &"   Andradite 0.0 " // trim(s_andradite) //NEW_LINE('')// &
+ &"   Troilite 0.0 " // trim(s_troilite) //NEW_LINE('')// &
+ &"   Pyrrhotite 0.0 " // trim(s_pyrrhotite) //NEW_LINE('')// &
+ &"   Minnesotaite 0.0 " // trim(s_minnesotaite) //NEW_LINE('')// &
+ &"   Fayalite 0.0 " // trim(s_fayalite) //NEW_LINE('')// &
+ &"   Daphnite-7a 0.0 " // trim(s_daphnite_7a) //NEW_LINE('')// &
+ &"   Daphnite-14a 0.0 " // trim(s_daphnite_14a) //NEW_LINE('')// &
+ &"   Cronstedtite-7a 0.0 " // trim(s_cronstedtite_7a) //NEW_LINE('')// &
+! &"   Greenalite 0.0 " // trim(s_greenalite) //NEW_LINE('')// &
+! &"   Aragonite 0.0 " // trim(s_aragonite) //NEW_LINE('')// &
+! no dolomite, aragonite
+&"SAVE solution 1"  //NEW_LINE('')// &
+&"SAVE equilibrium_phases 1"  //NEW_LINE('')// &
+&"END"  //NEW_LINE('')// &
 
 
 ! ----------------------------------%%
 ! PRIMARY (KINETIC) CONSTITUENTS
 ! ----------------------------------%%
 
-!&"Use solution 1" //NEW_LINE('')// &
-!&"Use equilibrium_phases 1" //NEW_LINE('')// &
+&"Use solution 1" //NEW_LINE('')// &
+&"Use equilibrium_phases 1" //NEW_LINE('')// &
 &"KINETICS" //NEW_LINE('')// &
 &"Plagioclase" //NEW_LINE('')// &
 &"-m0 " // trim(s_feldspar) //NEW_LINE('')// &
