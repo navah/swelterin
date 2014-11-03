@@ -10,15 +10,15 @@
 # you want to run.
 #
 # set the name of the job
-#PBS -N all_t_next_4
+#PBS -N all_t_ph_4
 #
 # set the output and error files
-#PBS -o /home/navah/all_transport/mOut.txt
-#PBS -e /home/navah/all_transport/mErr.txt
+#PBS -o /home/navah/all_transport_ph/mOut.txt
+#PBS -e /home/navah/all_transport_ph/mErr.txt
 #PBS -m abe -M navah@uchicago.edu
 # set the number of nodes to use, and number of processors
 # to use per node
-#PBS -l nodes=compute-1-5:ppn=12
+#PBS -l nodes=compute-1-4:ppn=12
 #
 # or, if using only one node, you can do it this way too
 ##PBS -l ncpus=5
@@ -47,7 +47,7 @@ set LAUNCH=/usr/mpi/intel/mvapich-1.2.0-qlc/bin/mpirun
  
 # working directory
 set WORKDIR=${HOME}
-set WORKDIR=/home/navah/all_transport
+set WORKDIR=/home/navah/all_transport_ph
  
 set NCPU=`wc -l < $PBS_NODEFILE`
 set NNODES=`uniq $PBS_NODEFILE | wc -l`

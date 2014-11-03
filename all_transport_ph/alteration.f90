@@ -302,7 +302,7 @@ write(s_timestep,'(F25.10)') timestep
 ! ----------------------------------%%
 
 inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
-!&"    pH " // trim(s_pH) //NEW_LINE('')// &
+&"    pH " // trim(s_pH) //NEW_LINE('')// &
 !&"    pe " // trim(s_pe) //NEW_LINE('')// &
 &"    units   mol/kgw" //NEW_LINE('')// &
 &"    temp" // trim(s_temp) //NEW_LINE('')// &
@@ -317,7 +317,7 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
 &"    Al " // trim(s_al) //NEW_LINE('')// &
 &"    C " // trim(s_co2) //NEW_LINE('')// &
 !&"    C " // trim(s_hco3) // "as HCO3-" //NEW_LINE('')// &
-&"    Alkalinity " // trim(s_alk) //NEW_LINE('')// &
+!&"    Alkalinity " // trim(s_alk) //NEW_LINE('')// &
 !&"    -water		5.0	# kg" //NEW_LINE('')// &
 &"    -water "// trim(s_w) //NEW_LINE('')// &
 
@@ -565,8 +565,8 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
 
 &"R(water_volume)" //NEW_LINE('')// &
 &"-start" //NEW_LINE('')// &
-&"10 water_volume = TOT('water')" //NEW_LINE('')// &
-!&"10 water_volume = 0.3" //NEW_LINE('')// &
+!&"10 water_volume = TOT('water')" //&
+&"10 water_volume = 0.3" //NEW_LINE('')// &
 &"100 SAVE water_volume" //NEW_LINE('')// &
 &"-end" //NEW_LINE('')// &
   

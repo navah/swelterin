@@ -290,8 +290,6 @@ medium(:,yn/cell,5) = 0.0
 medium(:,:,6) = 0.0 ! x-coord
 medium(:,:,7) = 0.0 ! y-coord
 
-
-
 write(*,*) "testing..."
 
 !--------------INITIALIZE ALL PROCESSORS
@@ -460,19 +458,19 @@ do j = 2, tn
 		yep = write_matrix( 2, 1, real((/j*1.0, tn/), kind = 4), 'upStep1.txt' )
 	
 		! make coarse grid average velocities
-		uTransport = (uTransport/mstep)
-		vTransport = (vTransport/mstep)
+		uTransport = uTransport/mstep
+		vTransport = vTransport/mstep
 	
 		
 !!!!!!!!!! CHANGE TRANSPORT !!!!!!!!!!!!!!
 			
-! 			! convert pH, pe to concentrations
- 			!do i=1,xn/cell
- 			!	do ii=1,yn/cell
- 			!		solute(i,ii,1) = 10**(-solute(i,ii,1))
- 			!		!solute(i,ii,2) = 10**(-solute(i,ii,2))
- 			!	end do
- 			!end do
+			! convert pH, pe to concentrations
+ 			do i=1,xn/cell
+ 				do ii=1,yn/cell
+ 					solute(i,ii,1) = 10**(-solute(i,ii,1))
+ 					!solute(i,ii,2) = 10**(-solute(i,ii,2))
+ 				end do
+ 			end do
 
                         ! actual boundary conditions
 		do n=1,g_sol
@@ -480,8 +478,8 @@ do j = 2, tn
 			do i=1,(yn/cell)
 				if (vTransport(i,yn/cell) .lt. 0.0) then
 					solute(i,yn/cell,n) = (soluteOcean(n)) ! last
-                else
-                    solute(i,yn/cell,n)=(4.0/3.0)*solute(i,yn/cell-1,n)-(1.0/3.0)*solute(i,yn/cell-2,n)
+                                    else
+                                       solute(i,yn/cell,n)=(4.0/3.0)*solute(i,yn/cell-1,n)-(1.0/3.0)*solute(i,yn/cell-2,n)
 
 				end if
 			end do
@@ -500,9 +498,9 @@ do j = 2, tn
 			n=1 ! ph
 	 		solTemp = solute(:,:,n)
 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
- 			n=2 ! pe
- 	 		solTemp = solute(:,:,n)
- 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+! 			n=2 ! pe
+! 	 		solTemp = solute(:,:,n)
+! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
 			n=4 ! c
 	 		solTemp = solute(:,:,n)
 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
@@ -535,13 +533,13 @@ do j = 2, tn
 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
 
 
-! 			!! convert [H+], [e-] back to pH, pe
- 			!do i=1,xn/cell
- 			!	do ii=1,yn/cell
- 			!		solute(i,ii,1) = -log10(solute(i,ii,1))
-! 			!		!solute(i,ii,2) = -log10(solute(i,ii,2))
- 			!	end do
- 			!end do
+			!! convert [H+], [e-] back to pH, pe
+ 			do i=1,xn/cell
+ 				do ii=1,yn/cell
+ 					solute(i,ii,1) = -log10(solute(i,ii,1))
+			!		!solute(i,ii,2) = -log10(solute(i,ii,2))
+ 				end do
+ 			end do
 
 !!!!!!!!!! CHANGE TRANSPORT !!!!!!!!!!!!!!
 
@@ -551,11 +549,6 @@ write(*,*) maxval(solute(:,:,4))
 		! stretch everything out
 		!hLong = reshape(h(1:xn-1:cell,1:yn-1:cell), (/(xn/cell)*(yn/cell)/)) ! for cell > 1
 		hLong = reshape(h(1:xn:cell,1:yn:cell), (/(xn/cell)*(yn/cell)/)) ! for cell = 1
-! 		do i = 1,(xn/cell)*(yn/cell)
-! 			if (hLong(i) .lt. 280.0) then
-! 				hLong(i) = 280.0
-! 			end if
-! 		end do
 		priLong = reshape(primary, (/(xn/cell)*(yn/cell), g_pri/))
 		secLong = reshape(secondary, (/(xn/cell)*(yn/cell), g_sec/))
 		solLong = reshape(solute, (/(xn/cell)*(yn/cell), g_sol/))
@@ -807,10 +800,6 @@ yep = write_matrix ( xn/cell, yn*tn/(cell*mstep), real(mediumMat(:,:,4),kind=4),
 
 write(*,*) " "
 write(*,*) "ALL DONE!"
-write(*,*) tn
-write(*,*) "steps"
-write(*,*) tn/mstep
-write(*,*) "msteps"
 
 ! what to do if you are a slave processor
 else
@@ -881,44 +870,38 @@ else
 				! run the phreeqc alteration model
  				alt0 = alt_next(hLocal(m),dt_local*mstep,priLocal(m,:), &
  						    secLocal(m,:),solLocal(m,:),medLocal(m,:))
-			
-			
-			
-			if (alt0(1,2) .gt. 1.0) then
-				! parse the phreeqc output
-				! changed 5 -> 3
-				solLocal(m,:) = (/ alt0(1,2), alt0(1,3), alt0(1,4), alt0(1,5), alt0(1,6), &
-				alt0(1,7), alt0(1,8), alt0(1,9), alt0(1,10), alt0(1,11), alt0(1,12), &
-				alt0(1,13), alt0(1,14), alt0(1,15), 0.0D+00/)
-
-				secLocal(m,:) = (/ alt0(1,16), alt0(1,18), alt0(1,20), &
-				alt0(1,22), alt0(1,24), alt0(1,26), alt0(1,28), alt0(1,30), alt0(1,32), alt0(1,34), &
-				alt0(1,36), alt0(1,38), alt0(1,40), alt0(1,42), alt0(1,44), alt0(1,46), alt0(1,48), &
-				alt0(1,50), alt0(1,52), alt0(1,54), alt0(1,56), alt0(1,58), alt0(1,60), alt0(1,62), &
-				alt0(1,64), alt0(1,66), alt0(1,68), alt0(1,70), &
-				alt0(1,72), alt0(1,74), alt0(1,76), alt0(1,78), alt0(1,80), alt0(1,82), alt0(1,84), &
-				alt0(1,86), alt0(1,88), alt0(1,90), alt0(1,92), alt0(1,94), alt0(1,96), alt0(1,98), &
-				alt0(1,100), alt0(1,102), alt0(1,104), alt0(1,106), alt0(1,108), alt0(1,110), alt0(1,112), &
-				alt0(1,114), alt0(1,116), alt0(1,118), alt0(1,120), alt0(1,122), alt0(1,124), alt0(1,126), &
-				alt0(1,128), alt0(1,130), alt0(1,132), &
-				alt0(1,134), alt0(1,136), alt0(1,138), alt0(1,140), alt0(1,142), alt0(1,144), alt0(1,146), &
-				alt0(1,148), alt0(1,150), alt0(1,152) /)
-
-				!priLocal(m,:) = (/ alt0(1,72), alt0(1,74), alt0(1,76), alt0(1,78), alt0(1,80)/)
-				priLocal(m,:) = (/ alt0(1,154), alt0(1,156), alt0(1,158), alt0(1,160), alt0(1,162)/)
-
-				!medLocal(m,1:4) = (/ alt0(1,82), alt0(1,83), alt0(1,84), alt0(1,4)/)
-				medLocal(m,1:4) = (/ alt0(1,164), alt0(1,165), alt0(1,4), alt0(1,166)/)
-
-				! print something you want to look at
-				!write(*,*) medLocal(m,3) ! water
-			
-				!write(*,*) alt0
 			end if
+
+
+			! parse the phreeqc output
+			! changed 5 -> 3
+			solLocal(m,:) = (/ alt0(1,2), alt0(1,3), alt0(1,4), alt0(1,5), alt0(1,6), &
+			alt0(1,7), alt0(1,8), alt0(1,9), alt0(1,10), alt0(1,11), alt0(1,12), &
+			alt0(1,13), alt0(1,14), alt0(1,15), 0.0D+00/)
+
+			secLocal(m,:) = (/ alt0(1,16), alt0(1,18), alt0(1,20), &
+			alt0(1,22), alt0(1,24), alt0(1,26), alt0(1,28), alt0(1,30), alt0(1,32), alt0(1,34), &
+			alt0(1,36), alt0(1,38), alt0(1,40), alt0(1,42), alt0(1,44), alt0(1,46), alt0(1,48), &
+			alt0(1,50), alt0(1,52), alt0(1,54), alt0(1,56), alt0(1,58), alt0(1,60), alt0(1,62), &
+			alt0(1,64), alt0(1,66), alt0(1,68), alt0(1,70), &
+			alt0(1,72), alt0(1,74), alt0(1,76), alt0(1,78), alt0(1,80), alt0(1,82), alt0(1,84), &
+			alt0(1,86), alt0(1,88), alt0(1,90), alt0(1,92), alt0(1,94), alt0(1,96), alt0(1,98), &
+			alt0(1,100), alt0(1,102), alt0(1,104), alt0(1,106), alt0(1,108), alt0(1,110), alt0(1,112), &
+			alt0(1,114), alt0(1,116), alt0(1,118), alt0(1,120), alt0(1,122), alt0(1,124), alt0(1,126), &
+			alt0(1,128), alt0(1,130), alt0(1,132), &
+			alt0(1,134), alt0(1,136), alt0(1,138), alt0(1,140), alt0(1,142), alt0(1,144), alt0(1,146), &
+			alt0(1,148), alt0(1,150), alt0(1,152) /)
+
+			!priLocal(m,:) = (/ alt0(1,72), alt0(1,74), alt0(1,76), alt0(1,78), alt0(1,80)/)
+			priLocal(m,:) = (/ alt0(1,154), alt0(1,156), alt0(1,158), alt0(1,160), alt0(1,162)/)
+
+			!medLocal(m,1:4) = (/ alt0(1,82), alt0(1,83), alt0(1,84), alt0(1,4)/)
+			medLocal(m,1:4) = (/ alt0(1,164), alt0(1,165), alt0(1,4), alt0(1,166)/)
+
+			! print something you want to look at
+			!write(*,*) medLocal(m,3) ! water
 			
-			end if
-			
-			
+			!write(*,*) alt0
 			
 		end do
 		
@@ -1553,7 +1536,7 @@ do i = 1,(xn/cell)*(yn/cell)
 	end if
 
 	! first edge
-	if (any(mod((/i-1/),xn/cell) .eq. 0.0) .or. (i .eq. 1)) then
+	if (any(mod((/i-1/),xn/cell) .eq. 0.0)) then
 		aBand(i,2) = 1.0 - uLong(i)*qx
 		if (i .gt. 1) then
 		aBand(i,1) =  0.0
@@ -1564,7 +1547,7 @@ do i = 1,(xn/cell)*(yn/cell)
 	end if
 
 	! last edge
-	if (any(mod((/i/),xn/cell) .eq. 0.0) .or. (i .eq. (xn/cell)*(yn/cell))) then
+	if (any(mod((/i/),xn/cell) .eq. 0.0)) then
 		aBand(i,2) = 1.0 + uLong(i)*qx
 		if (i .gt. 1) then
 		aBand(i,3) =  0.0
@@ -1636,7 +1619,7 @@ do i = 1,(xn/cell)*(yn/cell)
 	end if
 
 	! first edge x 2
-	if (any(mod((/i-1/),xn/cell) .eq. 0.0) .or. (i .eq. 1)) then
+	if (any(mod((/i-1/),xn/cell) .eq. 0.0)) then
 		bBand(i,2) = 1.0 - vLong(i)*qy
 		if (i .gt. 1) then
 		bBand(i,1) =  0.0
@@ -1647,7 +1630,7 @@ do i = 1,(xn/cell)*(yn/cell)
 	end if
 
 	! last edge x 2
-	if (any(mod((/i/),xn/cell) .eq. 0.0) .or. (i .eq. (xn/cell)*(yn/cell))) then
+	if (any(mod((/i/),xn/cell) .eq. 0.0)) then
 		bBand(i,2) = 1.0 + vLong(i)*qy
 		if (i .gt. 1) then
 		bBand(i,3) =  0.0

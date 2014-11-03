@@ -1,189 +1,3 @@
-qstat
-./KILL_DEAD_PROCS compute-1-10.berserker.uchicago.edu
-./KILL_DEAD_PROCS compute-1-10
-./KILL_DEAD_PROCS compute-1-10
-./KILL_DEAD_PROCS compute-1-1
-qsub pbssub.csh
-./KILL_DEAD_PROCS compute-1-2
-qsub pbssub.csh
-qstat
-qstat
-./KILL_DEAD_PROCS compute-1-10.local0
-./KILL_DEAD_PROCS compute-1-10.local.0
-./KILL_DEAD_PROCS compute-1-10.local
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-ls
-cd ..
-ls
-cd ..
-ls
-cd opt
-ls
-ls torque/
-ls
-cd torque/
-ls
-ls aux/
-ls
-cd aux/
-ls
-ls -a
-cd ..
-ls
-cd ..
-cd ..
-ls
-cd home
-ls
-cd navah
-ls
-./KILL_DEAD_PROCS compute-1-*
-./KILL_DEAD_PROCS compute*
-./KILL_DEAD_PROCS compute-1-10
-./KILL_DEAD_PROCS compute-1-1
-qsub pbssub.csh
-qstat
-qsub -l pbssub.csh
-qsub -I pbssub.csh
-qsub pbssub.csh
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-./KILL_DEAD_PROCS compute-1-10
-./KILL_DEAD_PROCS compute-1-9
-./KILL_DEAD_PROCS compute-1-
-./KILL_DEAD_PROCS compute-1-8
-./KILL_DEAD_PROCS compute-1-7
-./KILL_DEAD_PROCS compute-1-6
-./KILL_DEAD_PROCS compute-1-5
-qsub pbssub.csh
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qstat
-./KILL_DEAD_PROCS compute-1-10
-qsub pbssub.csh
-qstat
-qsub pbssub.csh
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qsub pbssub.csh
-qstat
-qstat
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qstat
-qstat
-qdel 1147.berserker.uchicago.edu
-qstat
-qsub pbssub.csh
-qsub pbssub.csh
-qsub pbssub.csh
-./KILL_DEAD_PROCS compute-1-10
-qsub pbssub.csh
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qsub pbssub.csh
-qstat
-qstat
-qstat
-qdel 1153.berserker.uchicago.edu
-qdel 1154.berserker.uchicago.edu
-qsub pbssub.csh
-qstat
-qstat
-qstat
-qstat
-history
-history
-ls
-vi pbssub.csh 
-history
-which qdel
-qstat
-which qdel
-cd /opt/torque/
-ls
-cd mom_logs/
-ls
-ls -la
-less 32040908
-less 20140908 
-history
-grep 1154 *
-less 20140811
-grep 1153 *
-ls
-top
-grep navah *
-cd ..
-ls
-cd server_logs/
-ls
-cd ..
-cd mom_logs/
-ls
-ls -la
-ps -ef
-stat /proc/31969
-man ps
-ps -ejH
-ps
-pstree
-ls
-cd /var/spool/tor
-cd /opt/torque/
-ls
-cd mom_priv/
-ls
-ls -la
-history
-history --help
-vi pbssub.csh 
-man mpirun
-man qdel
 pbs -v
 /opt/torque/bin/qstat -v
 /opt/torque/bin/qstat -V
@@ -998,3 +812,189 @@ git add
 git add .
 git commit -m "pare-down"
 git push origin master
+qstat
+qsub pbssub.csh
+qstat
+qstat
+qstat
+make -f berMakeFile
+cd kinetics_only
+qsub kinsub.csh
+qstat
+qstat
+qstat
+qdel 1566.berserker.uchicago.edu
+qstat
+qsub kinsub.csh
+qstat
+qstat
+qdel 1567.berserker.uchicago.edu
+qstat
+qstat
+qstat
+qstat
+pwd
+cd ..
+ls
+cd kinetics_only_no_transport/
+ls
+make -f berMakeFile
+qstat
+qsub kinsub.csh
+qstat
+qstat
+pwd
+cd ..
+ls
+cd kinetics_only_transport/
+pwd
+make -f berMakeFile
+qsub kinsub.csh
+qstat
+qstat
+qstat
+cd ..
+cd all_no_transport
+pwd
+make -f berMakeFile
+qsub kinsub.csh
+qstat
+qstat
+qstat
+qstat
+qstat
+qstat
+cd ..
+cd all_transport
+make -f berMakeFile
+qsub kinsub.csh
+cd ..
+cd kinetics_only_no_transport
+make -f berMakeFile
+qsub kinsub.csh
+qstat
+cd ..
+cd kinetics_only_transport
+make -f berMakeFile
+qsub kinsub.csh
+qstat
+qstat
+qstat
+cd ..
+pwd
+git add .
+git commit -m "isolating processes"
+git push -u origin master
+qstat
+qstat
+qstat
+cd all_transport_ph
+make -f berMakeFile
+qsub kinsub.csh
+cd ..
+cd all_transport
+make -f berMakeFile
+qsub kinsub.csh
+qstat
+make -f berMakeFile
+qsub kinsub.csh
+qstat
+cd ..
+pwd
+make -f berMakeFile
+make -f berMakeFile
+make -f berMakeFile
+make -f berMakeFile
+make -f berMakeFile
+make -f berMakeFile
+make -f berMakeFile
+make -f berMakeFile
+make -f berMakeFile
+make -f berMakeFile
+make -f berMakeFile
+make -f berMakeFile
+make -f berMakeFile mv massacr empty
+make -f berMakeFile
+mv massacr empty
+cd all_transport
+make -f berMakeFile
+make -f berMakeFile
+qsub kinsub.csh
+qstat
+qstat
+qstat
+make -f berMakeFile
+qsub kinsub.csh
+make -f berMakeFile
+qsub kinsub.csh
+qstat
+qstat
+qdel 1581.berserker.uchicago.edu
+qstat
+make -f berMakeFile
+qsub kinsub.csh
+qstat
+qstat
+qstat
+qstat
+qsub kinsub.csh
+qstat
+qstat
+qstat
+qstat
+qstat
+qstat
+qstt
+qstat
+make -f berMakeFile
+qsub kinsub.csh
+qstat
+qstat
+qstat
+make -f berMakeFile
+qsub kinsub.csh
+make -f berMakeFile
+qsub kinsub.csh
+make -f berMakeFile
+qsub kinsub.csh
+make -f berMakeFile
+qsub kinsub.csh
+qdel 1588.berserker.uchicago.edu
+qstat
+make -f berMakeFile
+qsub kinsub.csh
+qstat
+qstat
+qstat
+qsub kinsub.csh
+qdel 1592.berserker.uchicago.edu
+make -f berMakeFile
+qsub kinsub.csh
+qstat
+qdel 1593.berserker.uchicago.edu
+qstat
+make -f berMakeFile
+qsub kinsub.csh
+qstat
+qstat
+qstat
+qsub kinsub.csh
+qstat
+qstat
+qstat
+qstat
+qstat
+make -f berMakeFile
+qsub kinsub.csh
+qstat
+qstat
+make -f berMakeFile
+qsub kinsub.csh
+make -f berMakeFile
+qsub kinsub.csh
+cd all_transport
+make -f berMakeFile
+qsub kinsub.csh
+qstat
+qstat
+qstat

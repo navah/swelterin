@@ -464,82 +464,82 @@ do j = 2, tn
 		
 !!!!!!!!!! CHANGE TRANSPORT !!!!!!!!!!!!!!
 			
-! ! 			! convert pH, pe to concentrations
-!  			!do i=1,xn/cell
-!  			!	do ii=1,yn/cell
-!  			!		solute(i,ii,1) = 10**(-solute(i,ii,1))
-!  			!		!solute(i,ii,2) = 10**(-solute(i,ii,2))
-!  			!	end do
-!  			!end do
-!
-!                         ! actual boundary conditions
-! 		do n=1,g_sol
-! 			!solute(:,yn/cell,n) = (soluteOcean(n)) ! top
-! 			do i=1,(yn/cell)
-! 				if (vTransport(i,yn/cell) .lt. 0.0) then
-! 					solute(i,yn/cell,n) = (soluteOcean(n)) ! last
-!                                     else
-!                                        solute(i,yn/cell,n)=(4.0/3.0)*solute(i,yn/cell-1,n)-(1.0/3.0)*solute(i,yn/cell-2,n)
-!
-! 				end if
-! 			end do
-! 			!solute(:,1,n) = (soluteOcean(n)) ! last
-! 			!solute(1,:,n) = (soluteOcean(n)) ! last
-! 			!solute(yn/cell,:,n) = (soluteOcean(n)) ! last
-! 			solute(:,1,n) = (4.0/3.0)*solute(:,2,n) - (1.0/3.0)*solute(:,3,n) ! bottom
-! 			!solute(1,:,n) = (4.0/3.0)*solute(2,:,n) - &
-! 			!					& (1.0/3.0)*solute(3,:,n)  ! left
-! 			!solute(yn/cell,:,n) = (4.0/3.0)*solute(yn/cell-1,:,n) - &
-! 			!					& (1.0/3.0)*solute(yn/cell-2,:,n)  ! right
-! 		end do
-!
-!
-!
-! 			n=1 ! ph
+! 			! convert pH, pe to concentrations
+ 			!do i=1,xn/cell
+ 			!	do ii=1,yn/cell
+ 			!		solute(i,ii,1) = 10**(-solute(i,ii,1))
+ 			!		!solute(i,ii,2) = 10**(-solute(i,ii,2))
+ 			!	end do
+ 			!end do
+
+                        ! actual boundary conditions
+		do n=1,g_sol
+			!solute(:,yn/cell,n) = (soluteOcean(n)) ! top
+			do i=1,(yn/cell)
+				if (vTransport(i,yn/cell) .lt. 0.0) then
+					solute(i,yn/cell,n) = (soluteOcean(n)) ! last
+                else
+                    solute(i,yn/cell,n)=(4.0/3.0)*solute(i,yn/cell-1,n)-(1.0/3.0)*solute(i,yn/cell-2,n)
+
+				end if
+			end do
+			!solute(:,1,n) = (soluteOcean(n)) ! last
+			!solute(1,:,n) = (soluteOcean(n)) ! last
+			!solute(yn/cell,:,n) = (soluteOcean(n)) ! last
+			solute(:,1,n) = (4.0/3.0)*solute(:,2,n) - (1.0/3.0)*solute(:,3,n) ! bottom
+			!solute(1,:,n) = (4.0/3.0)*solute(2,:,n) - &
+			!					& (1.0/3.0)*solute(3,:,n)  ! left
+			!solute(yn/cell,:,n) = (4.0/3.0)*solute(yn/cell-1,:,n) - &
+			!					& (1.0/3.0)*solute(yn/cell-2,:,n)  ! right
+		end do
+
+
+
+			n=1 ! ph
+	 		solTemp = solute(:,:,n)
+	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+! 			n=2 ! pe
 ! 	 		solTemp = solute(:,:,n)
 ! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-! ! 			n=2 ! pe
-! ! 	 		solTemp = solute(:,:,n)
-! ! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-! 			n=4 ! c
-! 	 		solTemp = solute(:,:,n)
-! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-! 			n=5 ! ca
-! 	 		solTemp = solute(:,:,n)
-! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-! 			n=6 ! mg
-! 	 		solTemp = solute(:,:,n)
-! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-! 			n=7 ! na
-! 	 		solTemp = solute(:,:,n)
-! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-! 			n=8 ! k
-! 	 		solTemp = solute(:,:,n)
-! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-! 			n=9 ! fe
-! 	 		solTemp = solute(:,:,n)
-! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-! 			n=10 ! s issues
-! 	 		solTemp = solute(:,:,n)
-! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-! 			n=11 ! si
-! 	 		solTemp = solute(:,:,n)
-! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-! 			n=12 ! cl
-! 	 		solTemp = solute(:,:,n)
-! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-! 			n=13 ! al
-! 	 		solTemp = solute(:,:,n)
-! 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
-!
-!
-! ! 			!! convert [H+], [e-] back to pH, pe
-!  			!do i=1,xn/cell
-!  			!	do ii=1,yn/cell
-!  			!		solute(i,ii,1) = -log10(solute(i,ii,1))
-! ! 			!		!solute(i,ii,2) = -log10(solute(i,ii,2))
-!  			!	end do
-!  			!end do
+			n=4 ! c
+	 		solTemp = solute(:,:,n)
+	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+			n=5 ! ca
+	 		solTemp = solute(:,:,n)
+	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+			n=6 ! mg
+	 		solTemp = solute(:,:,n)
+	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+			n=7 ! na
+	 		solTemp = solute(:,:,n)
+	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+			n=8 ! k
+	 		solTemp = solute(:,:,n)
+	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+			n=9 ! fe
+	 		solTemp = solute(:,:,n)
+	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+			n=10 ! s issues
+	 		solTemp = solute(:,:,n)
+	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+			n=11 ! si
+	 		solTemp = solute(:,:,n)
+	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+			n=12 ! cl
+	 		solTemp = solute(:,:,n)
+	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+			n=13 ! al
+	 		solTemp = solute(:,:,n)
+	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+
+
+! 			!! convert [H+], [e-] back to pH, pe
+ 			!do i=1,xn/cell
+ 			!	do ii=1,yn/cell
+ 			!		solute(i,ii,1) = -log10(solute(i,ii,1))
+! 			!		!solute(i,ii,2) = -log10(solute(i,ii,2))
+ 			!	end do
+ 			!end do
 
 !!!!!!!!!! CHANGE TRANSPORT !!!!!!!!!!!!!!
 
@@ -870,7 +870,7 @@ else
 				! run the phreeqc alteration model
  				alt0 = alt_next(hLocal(m),dt_local*mstep,priLocal(m,:), &
  						    secLocal(m,:),solLocal(m,:),medLocal(m,:))
-			end if
+			
 
 
 			! parse the phreeqc output
@@ -902,6 +902,8 @@ else
 			!write(*,*) medLocal(m,3) ! water
 			
 			!write(*,*) alt0
+			
+			end if
 			
 		end do
 		
