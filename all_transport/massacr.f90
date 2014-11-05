@@ -285,7 +285,7 @@ medium(:,:,2) = 0.0 ! s_sp
 medium(:,:,3) = .03860 ! water_volume
 !medium(:,1:(xn/cell)*(5/13),3) = .03 ! water_volume
 medium(:,:,4) = 0.0 ! rho_s
-medium(:,:,5) = 1.0 ! rxn toggle
+medium(:,:,5) = 0.0 ! rxn toggle
 medium(:,yn/cell,5) = 0.0
 medium(:,:,6) = 0.0 ! x-coord
 medium(:,:,7) = 0.0 ! y-coord
@@ -465,7 +465,7 @@ do j = 2, tn
 	
 		
 !!!!!!!!!! CHANGE TRANSPORT !!!!!!!!!!!!!!
-			
+
 ! 			! convert pH, pe to concentrations
  			!do i=1,xn/cell
  			!	do ii=1,yn/cell
@@ -479,20 +479,17 @@ do j = 2, tn
 			!solute(:,yn/cell,n) = (soluteOcean(n)) ! top
 			do i=1,(yn/cell)
 				if (vTransport(i,yn/cell) .lt. 0.0) then
-					solute(i,yn/cell,n) = (soluteOcean(n)) ! last
-                else
-                    solute(i,yn/cell,n)=(4.0/3.0)*solute(i,yn/cell-1,n)-(1.0/3.0)*solute(i,yn/cell-2,n)
+					solute(i,yn/cell,n) = (soluteOcean(n))*1.2 ! last
+					!else
+                    !solute(i,yn/cell,n)=(4.0/3.0)*solute(i,yn/cell-1,n)-(1.0/3.0)*solute(i,yn/cell-2,n)
 
 				end if
 			end do
-			!solute(:,1,n) = (soluteOcean(n)) ! last
-			!solute(1,:,n) = (soluteOcean(n)) ! last
-			!solute(yn/cell,:,n) = (soluteOcean(n)) ! last
-			solute(:,1,n) = (4.0/3.0)*solute(:,2,n) - (1.0/3.0)*solute(:,3,n) ! bottom
-			!solute(1,:,n) = (4.0/3.0)*solute(2,:,n) - &
-			!					& (1.0/3.0)*solute(3,:,n)  ! left
-			!solute(yn/cell,:,n) = (4.0/3.0)*solute(yn/cell-1,:,n) - &
-			!					& (1.0/3.0)*solute(yn/cell-2,:,n)  ! right
+!			solute(:,1,n) = (4.0/3.0)*solute(:,2,n) - (1.0/3.0)*solute(:,3,n) ! bottom
+! 			solute(1,:,n) = (4.0/3.0)*solute(2,:,n) - &
+! 								& (1.0/3.0)*solute(3,:,n)  ! left
+! 			solute(yn/cell,:,n) = (4.0/3.0)*solute(yn/cell-1,:,n) - &
+! 								& (1.0/3.0)*solute(yn/cell-2,:,n)  ! right
 		end do
 
 
@@ -500,7 +497,7 @@ do j = 2, tn
 			n=1 ! ph
 	 		solTemp = solute(:,:,n)
 	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
- 			n=2 ! pe
+ 			n=2 ! alk
  	 		solTemp = solute(:,:,n)
  	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
 			n=4 ! c
@@ -914,6 +911,8 @@ else
 				!write(*,*) medLocal(m,3) ! water
 			
 				!write(*,*) alt0
+			else
+				medLocal(m,5) = 0.0
 			end if
 			
 			end if
@@ -1369,14 +1368,10 @@ integer :: i, j, ii, n, m
 real(8) :: sol(xn/cell,yn/cell), sol0(xn/cell,yn/cell)
 real(8) :: uTransport(xn/cell,yn/cell), vTransport(xn/cell,yn/cell)
 ! solver stuff
-! real(8) :: uLong((xn/cell-2)*(yn/cell-2)), vLong((xn/cell-2)*(yn/cell-2))
-! real(8) :: aBand((xn/cell-2)*(yn/cell-2),5), bBand((xn/cell-2)*(yn/cell-2),5)
-! real(8) :: qx, qy, solute_next(xn/cell,yn/cell), vec((xn/cell-2)*(yn/cell-2))
-! real(8) :: sol_nextRow((xn/cell-2)*(yn/cell-2))
-real(8) :: uLong((xn/cell)*(yn/cell)), vLong((xn/cell)*(yn/cell))
-real(8) :: aBand((xn/cell)*(yn/cell),5), bBand((xn/cell)*(yn/cell),5)
-real(8) :: qx, qy, solute_next(xn/cell,yn/cell), vec((xn/cell)*(yn/cell))
-real(8) :: sol_nextRow((xn/cell)*(yn/cell))
+real(8) :: uLong((xn/cell-2)*(yn/cell-2)), vLong((xn/cell-2)*(yn/cell-2))
+real(8) :: aBand((xn/cell-2)*(yn/cell-2),5), bBand((xn/cell-2)*(yn/cell-2),5)
+real(8) :: qx, qy, solute_next(xn/cell,yn/cell), vec((xn/cell-2)*(yn/cell-2))
+real(8) :: sol_nextRow((xn/cell-2)*(yn/cell-2))
 
 
 
@@ -1390,309 +1385,195 @@ qy = dt*mstep/(dy*cell)
 write(*,*) "SOLUTE COURANT NUMBERS"
 write(*,*) qx*maxval(abs(uTransport))
 write(*,*) qy*maxval(abs(vTransport))
+write(*,*) dt*(1e-9)/(dy*dy*cell*cell)
 
 ! uLong = reshape(uTransport(2:xn/cell-1,2:yn/cell-1), (/(xn/cell-2)*(yn/cell-2)/))
 ! vLong = reshape(transpose(vTransport(2:xn/cell-1,2:yn/cell-1)), (/(xn/cell-2)*(yn/cell-2)/))
 
 
-uLong = reshape(uTransport(1:xn/cell,1:yn/cell), (/(xn/cell)*(yn/cell)/))
-vLong = reshape(transpose(vTransport(1:xn/cell,1:yn/cell)), (/(xn/cell)*(yn/cell)/))
+uLong = reshape(uTransport(2:xn/cell-1,2:yn/cell-1), (/(xn/cell-2)*(yn/cell-2)/))
+vLong = reshape(transpose(vTransport(2:xn/cell-1,2:yn/cell-1)), (/(xn/cell-2)*(yn/cell-2)/))
 
-! ! kinda lame finite difference advection scheme (order dx**2)
-! do i=2,(xn/cell)-1
-! do ii=2,(yn/cell)-1
-! 	solute_next(i,ii) = sol(i,ii) - uTransport(i,ii)*qx*(sol(i+1,ii)-sol(i-1,ii)) &
-! 	& - vTransport(i,ii)*qy*(sol(i,ii+1)-sol(i,ii-1))
-! end do
-! end do
+! diffusion separate step
+do i=2,(xn/cell)-1
+do ii=2,(yn/cell)-1
+	sol(i,ii) = sol(i,ii) + (1e-9)*dt*mstep*(sol(i+1,ii) + sol(i-1,ii) - 2.0*sol(i,ii))/(dx*dx*cell*cell)
+end do
+end do
 
-!!  fully 2d lax-wendroff advection scheme test (order dx**3?)
-! do i=2,(xn/cell)-1
-! 	do ii=2,(yn/cell)-1
-! 		solute_next(i,ii) = sol(i,ii) &
-! 		& - uTransport(i,ii) * qx * (sol(i+1,ii)-sol(i-1,ii)) &
-! 		& - vTransport(i,ii) * qy * (sol(i,ii+1)-sol(i,ii-1)) &
-! 		& - ((uTransport(i,ii)*qx)**2) * 0.5 * (sol(i+1,ii) - 2.0*sol(i,ii) + sol(i-1,ii)) &
-! 		& - ((vTransport(i,ii)*qy)**2) * 0.5 * (sol(i,ii+1) - 2.0*sol(i,ii) + sol(i,ii-1)) &
-! 		& + uTransport(i,ii) * vTransport(i,ii) * qx * qy * .25 * &
-! 		& (sol(i+1,ii+1) - sol(i-1,ii+1) - sol(i+1,ii-1) + sol(i-1,ii-1))
-!
-! 		! get rid of out-of-bounds truncation errors
-! 		if (solute_next(i,ii) .gt. maxval(sol0)) then
-! 			solute_next(i,ii) = maxval(sol0)
-! 		end if
-! 		if (solute_next(i,ii) .le. 0.0) then
-! 			solute_next(i,ii) = 1e-10
-! 		end if
-!
-! 	end do
-! end do
-!
-! do i=2,(xn/cell)-1
-! 	! top edge
-! 	if (vTransport(i,yn/cell) .ge. 0.0) then
-! 		solute_next(i,yn/cell) = sol(i,yn/cell) &
-! 		& - uTransport(i,yn/cell) * qx * (sol(i,yn/cell)-sol(i-1,yn/cell)) &
-! 		& - vTransport(i,yn/cell) * qy * (sol(i,yn/cell)-sol(i,yn/cell-1))
-!
-! 		! get rid of out-of-bounds truncation errors
-! 		if (solute_next(i,yn/cell) .gt. maxval(sol0)) then
-! 			solute_next(i,yn/cell) = maxval(sol0)
-! 		end if
-! 		if (solute_next(i,yn/cell) .le. 0.0) then
-! 			solute_next(i,yn/cell) = 1e-10
-! 		end if
-! 	end if
-!
-! 	! bottom edge
-! 	solute_next(i,1) = sol(i,1) &
-! 	& - uTransport(i,1) * qx * (sol(i+1,1)-sol(i,1)) &
-! 	& - vTransport(i,1) * qy * (sol(i,1+1)-sol(i,1))
-!
-! 	! get rid of out-of-bounds truncation errors
-! 	if (solute_next(i,1) .gt. maxval(sol0)) then
-! 		solute_next(i,1) = maxval(sol0)
-! 	end if
-! 	if (solute_next(i,1) .le. 0.0) then
-! 		solute_next(i,1) = 1e-10
-! 	end if
-!
-! 	! left edge
-! 	solute_next(1,i) = sol(1,i) &
-! 	& - vTransport(1,i) * qy * (sol(1,i+1)-sol(1,i)) &
-! 	& - uTransport(1,i) * qx * (sol(1+1,i)-sol(1,i))
-!
-! 	! get rid of out-of-bounds truncation errors
-! 	if (solute_next(1,i) .gt. maxval(sol0)) then
-! 		solute_next(1,i) = maxval(sol0)
-! 	end if
-! 	if (solute_next(1,i) .le. 0.0) then
-! 		solute_next(1,i) = 1e-10
-! 	end if
-!
-! 	! right edge
-! 	solute_next(xn/cell,i) = sol(xn/cell,i) &
-! 	& - vTransport(xn/cell,i) * qy * (sol(xn/cell,i)-sol(xn/cell,i-1)) &
-! 	& - uTransport(xn/cell,i) * qx * (sol(xn/cell,i)-sol((xn/cell)-1,i))
-!
-! 	! get rid of out-of-bounds truncation errors
-! 	if (solute_next(xn/cell,i) .gt. maxval(sol0)) then
-! 		solute_next(xn/cell,i) = maxval(sol0)
-! 	end if
-! 	if (solute_next(xn/cell,i) .le. 0.0) then
-! 		solute_next(xn/cell,i) = 1e-10
-! 	end if
-!
-!
-! end do
+do i=2,(xn/cell)-1
+do ii=2,(yn/cell)-1
+	sol(i,ii) = sol(i,ii) + (1e-9)*dt*mstep*(sol(i,ii+1) + sol(i,ii+1) - 2.0*sol(i,ii))/(dy*dy*cell*cell)
+end do
+end do
 
-! here lies a fully implicit version of the same thing. it seems to work just as well, but
-! in case i want to parallelize this part later, i might as well use the explicit method.
-! also boundary conditions are easier to deal with in the explicit method
+do i=2,(xn/cell)-1
+	sol(1,i) = sol(1,i) + (1e-9)*dt*mstep*(sol(1,i) - 2.0*sol(2,i) + sol(3,i))/(dx*dx*cell*cell)
+	sol(xn/cell,i) = sol(xn/cell,i) + (1e-9)*dt*mstep*(sol(xn/cell,i) - 2.0*sol(xn/cell-1,i)&
+	& + sol(xn/cell-2,i))/(dx*dx*cell*cell)
+	sol(i,xn/cell) = sol(i,xn/cell) + (1e-9)*dt*mstep*(sol(i,xn/cell) - 2.0*sol(i,xn/cell-1)&
+	& + sol(i,xn/cell-2))/(dy*dy*cell*cell)
+	sol(i,1) = sol(i,1) + (1e-9)*dt*mstep*(sol(i,1) - 2.0*sol(i,2)&
+	& + sol(i,3))/(dy*dy*cell*cell)
+end do
 
-! do ii=2,(yn/cell)-1
-! 	! right edge
-! 	solute_next(xn/cell,ii) = sol(xn/cell,ii) &
-! 	& - uTransport(xn/cell,ii) * qx * (sol(xn/cell,ii)-sol(xn/cell,ii-1)) &
-! 	& - vTransport(xn/cell,ii) * qy * (sol(xn/cell,ii)-sol(xn/cell-1,ii))
-!
-! 	! left edge
-! 	solute_next(1,ii) = sol(1,ii) &
-! 	& - uTransport(1,ii) * qx * (sol(1,ii+1)-sol(1,ii)) &
-! 	& - vTransport(1,ii) * qy * (sol(1+1,ii)-sol(1,ii))
-! end do
 
-! not using this implicit method
+!solute_next = sol
+
+
+! ADVECTION STEP
+
 ! VERTICAL BOUNDARY CONDITIONS
 sol(2,:) = sol(2,:) ! left
 sol(xn/cell-1,:) = sol(xn/cell-1,:) ! right
 
 ! vec = reshape(sol(2:xn/cell-1,2:yn/cell-1), (/(xn/cell-2)*(yn/cell-2)/))
-vec = reshape(sol(1:xn/cell,1:yn/cell), (/(xn/cell)*(yn/cell)/))
+vec = reshape(sol(2:xn/cell-1,2:yn/cell-1), (/(xn/cell-2)*(yn/cell-2)/))
 
 ! MAKE THE BAND
 aBand = 0.0
-do i = 1,(xn/cell)*(yn/cell)
-
-	!aBand(i,2) = 1.0
-	!if (i-1 .gt. 0) then
-	!aBand(i,1) = - uLong(i)*qx/2.0
-	!end if
-	!if (i+1 .le. (xn/cell)*(yn/cell)) then
-	!aBand(i,3) = uLong(i)*qx/2.0
-	!end if
-        ! switching solvers for a change
-        !aBand(i,2) = 1.0 - uLong(i)*qx
-	!if (i .gt. 1) then
-	!aBand(i,1) =  0.0
-	!end if
-	!if (i .le. (xn/cell)*(yn/cell)) then
-	!aBand(i,3) = uLong(i)*qx
-	!end if
+do i = 1,(xn/cell-2)*(yn/cell-2)
 
 	! first edge
-	if ((any(mod((/i-1/),xn/cell) .eq. 0.0)) .OR. (uLong(i) .le. 0.0)) then
+	if ((any(mod((/i-1/),xn/cell-2) .eq. 0.0)) .OR. (uLong(i) .le. 0.0)) then
 		aBand(i,2) = 1.0 - uLong(i)*qx
 		if (i .gt. 1) then
 		aBand(i,1) =  0.0
 		end if
-		if (i .lt. (xn/cell)*(yn/cell)) then
+		if (i .lt. (xn/cell-2)*(yn/cell-2)) then
 		aBand(i,3) = uLong(i)*qx
 		end if
 	end if
 
 	! last edge
-	if ((any(mod((/i/),xn/cell) .eq. 0.0)) .OR. (uLong(i) .gt. 0.0)) then
+	if ((any(mod((/i/),xn/cell-2) .eq. 0.0)) .OR. (uLong(i) .gt. 0.0)) then
 		aBand(i,2) = 1.0 + uLong(i)*qx
 		if (i .gt. 1) then
 		aBand(i,3) =  0.0
 		end if
-		if (i .le. (xn/cell)*(yn/cell)) then
+		if (i .le. (xn/cell-2)*(yn/cell-2)) then
 		aBand(i,1) = - uLong(i)*qx
 		end if
 	end if
 
-	! first edge
-	if (any(mod((/i-1/),xn/cell) .eq. 0.0) .or. (i .eq. 1)) then
-		aBand(i,2) = 1.0 - uLong(i)*qx
-		if (i .gt. 1) then
-		aBand(i,1) =  0.0
-		end if
-		if (i .lt. (xn/cell)*(yn/cell)) then
-		aBand(i,3) = uLong(i)*qx
-		end if
-	end if
+! 	! first edge
+! 	if (any(mod((/i-1/),xn/cell) .eq. 0.0) .or. (i .eq. 1)) then
+! 		aBand(i,2) = 1.0 - uLong(i)*qx
+! 		if (i .gt. 1) then
+! 		aBand(i,1) =  0.0
+! 		end if
+! 		if (i .lt. (xn/cell)*(yn/cell)) then
+! 		aBand(i,3) = uLong(i)*qx
+! 		end if
+! 	end if
 
-	! last edge
-	if (any(mod((/i/),xn/cell) .eq. 0.0) .or. (i .eq. (xn/cell)*(yn/cell))) then
-		aBand(i,2) = 1.0 + uLong(i)*qx
-		if (i .gt. 1) then
-		aBand(i,3) =  0.0
-		end if
-		if (i .le. (xn/cell)*(yn/cell)) then
-		aBand(i,1) = - uLong(i)*qx
-		end if
-	end if
+! 	! last edge
+! 	if (any(mod((/i/),xn/cell) .eq. 0.0) .or. (i .eq. (xn/cell)*(yn/cell))) then
+! 		aBand(i,2) = 1.0 + uLong(i)*qx
+! 		if (i .gt. 1) then
+! 		aBand(i,3) =  0.0
+! 		end if
+! 		if (i .le. (xn/cell)*(yn/cell)) then
+! 		aBand(i,1) = - uLong(i)*qx
+! 		end if
+! 	end if
 
 end do
 
-do i=1,((xn/cell)-1)
-	ii = i*(xn/cell)
+do i=1,((xn/cell-2)-1)
+	ii = i*(xn/cell-2)
 	aBand(ii,3) = 0.0
 	aBand(ii+1,1) = 0.0
 end do
 
 !!!!!!!!!!!! THIS !!!!!!!!!!!
-sol_nextRow = tridiag(aBand(:,1),aBand(:,2),aBand(:,3),vec,(xn/cell)*(yn/cell))
-sol(1:xn/cell,1:yn/cell) = reshape(sol_nextRow, (/xn/cell, yn/cell/))
+sol_nextRow = tridiag(aBand(:,1),aBand(:,2),aBand(:,3),vec,(xn/cell-2)*(yn/cell-2))
+sol(2:xn/cell-1,2:yn/cell-1) = reshape(sol_nextRow, (/xn/cell-2, yn/cell-2/))
 
 ! HORIZONTAL BOUNDARY CONDITIONS
 sol(:,2) = sol(:,2) ! bottom
 sol(:,xn/cell-1) = sol(:,xn/cell-1) ! top
 
-sol_nextRow = reshape(transpose(sol(1:xn/cell,1:yn/cell)), (/(xn/cell)*(yn/cell)/))
+sol_nextRow = reshape(transpose(sol(2:xn/cell-1,2:yn/cell-1)), (/(xn/cell-2)*(yn/cell-2)/))
 
 
 
 ! MAKE THE BAND
 bBand = 0.0
-do i = 1,(xn/cell)*(yn/cell)
-	!bBand(i,2) = 1.0
-	!if (i-1 .gt. 0) then
-	!bBand(i,1) = - vLong(i)*qy/2.0
-	!end if
-	!if (i+1 .le. (xn/cell)*(yn/cell)) then
-	!bBand(i,3) = vLong(i)*qy/2.0
-	!end if
-        !switching solvers for a change
-        !bBand(i,2) = 1.0 - vLong(i)*qy
-	!if (i .gt. 1) then
-	!bBand(i,1) =  0.0
-	!end if
-	!if (i .le. (xn/cell)*(yn/cell)) then
-	!bBand(i,3) = vLong(i)*qy
-	!end if
+do i = 1,(xn/cell-2)*(yn/cell-2)
 
 	! first edge x 2
-	if ((any(mod((/i-1/),xn/cell) .eq. 0.0)) .OR. (vLong(i) .le. 0.0)) then
+	if ((any(mod((/i-1/),xn/cell-2) .eq. 0.0)) .OR. (vLong(i) .le. 0.0)) then
 		bBand(i,2) = 1.0 - vLong(i)*qy
 		if (i .gt. 1) then
 		bBand(i,1) =  0.0
 		end if
-		if (i .lt. (xn/cell)*(yn/cell)) then
+		if (i .lt. (xn/cell-2)*(yn/cell-2)) then
 		bBand(i,3) = vLong(i)*qy
 		end if
 	end if
 
 	! last edge x 2
-	if ((any(mod((/i/),xn/cell) .eq. 0.0)) .OR. (vLong(i) .gt. 0.0)) then
+	if ((any(mod((/i/),xn/cell-2) .eq. 0.0)) .OR. (vLong(i) .gt. 0.0)) then
 		bBand(i,2) = 1.0 + vLong(i)*qy
 		if (i .gt. 1) then
 		bBand(i,3) =  0.0
 		end if
-		if (i .le. (xn/cell)*(yn/cell)) then
+		if (i .le. (xn/cell-2)*(yn/cell-2)) then
 		bBand(i,1) = - vLong(i)*qy
 		end if
 	end if
 
-	! first edge x 2
-	if (any(mod((/i-1/),xn/cell) .eq. 0.0) .or. (i .eq. 1)) then
-		bBand(i,2) = 1.0 - vLong(i)*qy
-		if (i .gt. 1) then
-		bBand(i,1) =  0.0
-		end if
-		if (i .lt. (xn/cell)*(yn/cell)) then
-		bBand(i,3) = vLong(i)*qy
-		end if
-	end if
+! 	! first edge x 2
+! 	if (any(mod((/i-1/),xn/cell) .eq. 0.0) .or. (i .eq. 1)) then
+! 		bBand(i,2) = 1.0 - vLong(i)*qy
+! 		if (i .gt. 1) then
+! 		bBand(i,1) =  0.0
+! 		end if
+! 		if (i .lt. (xn/cell)*(yn/cell)) then
+! 		bBand(i,3) = vLong(i)*qy
+! 		end if
+! 	end if
+!
+! 	! last edge x 2
+! 	if (any(mod((/i/),xn/cell) .eq. 0.0) .or. (i .eq. (xn/cell)*(yn/cell))) then
+! 		bBand(i,2) = 1.0 + vLong(i)*qy
+! 		if (i .gt. 1) then
+! 		bBand(i,3) =  0.0
+! 		end if
+! 		if (i .le. (xn/cell)*(yn/cell)) then
+! 		bBand(i,1) = - vLong(i)*qy
+! 		end if
+! 	end if
 
-	! last edge x 2
-	if (any(mod((/i/),xn/cell) .eq. 0.0) .or. (i .eq. (xn/cell)*(yn/cell))) then
-		bBand(i,2) = 1.0 + vLong(i)*qy
-		if (i .gt. 1) then
-		bBand(i,3) =  0.0
-		end if
-		if (i .le. (xn/cell)*(yn/cell)) then
-		bBand(i,1) = - vLong(i)*qy
-		end if
-	end if
-	
 end do
 
-do i=1,(((xn/cell))-1)
-	ii = i*((xn/cell))
+do i=1,(((xn/cell-2))-1)
+	ii = i*((xn/cell-2))
 	bBand(ii,3) = 0.0
 	bBand(ii+1,1) = 0.0
 end do
 
-sol_nextRow = tridiag(bBand(:,1),bBand(:,2),bBand(:,3),sol_nextRow,((xn/cell))*((yn/cell)))
-solute_next(1:(xn/cell),1:(yn/cell)) = transpose(reshape(sol_nextRow, (/(xn/cell), (yn/cell)/)))
+sol_nextRow = tridiag(bBand(:,1),bBand(:,2),bBand(:,3),sol_nextRow,((xn/cell-2))*((yn/cell-2)))
+solute_next(2:xn/cell-1,2:yn/cell-1) = transpose(reshape(sol_nextRow, (/(xn/cell-2), (yn/cell-2)/)))
 
 
 
 
-!do i=1,xn/cell
-!do ii=1,yn/cell
-!	if (solute_next(i,ii) .gt. maxval(sol0)) then
-!		solute_next(i,ii) = maxval(sol0)
-!	end if
-!	if (solute_next(i,ii) .lt. minval(sol0)) then
-!		solute_next(i,ii) = minval(sol0)
-!	end if
-!end do
-!end do
+do i=1,xn/cell
+do ii=1,yn/cell
+	if (solute_next(i,ii) .gt. maxval(sol0)) then
+		solute_next(i,ii) = maxval(sol0)
+	end if
+	if (solute_next(i,ii) .lt. minval(sol0)) then
+		solute_next(i,ii) = minval(sol0)
+	end if
+end do
+end do
 
 
-!do i=2,xn/cell-1
-!do ii=2,yn/cell-1
-!	if (solute_next(i,ii) .gt. maxval(sol0(i-1:i+1,ii-1:ii+1))) then
-!		solute_next(i,ii) = sol0(i,ii)
-!	end if
-!	if (solute_next(i,ii) .lt. minval(sol0(i-1:i+1,ii-1:ii+1))) then
-!		solute_next(i,ii) = sol0(i,ii)
-!	end if
-!end do
-!end do
+
+
 
 return
 

@@ -1,61 +1,23 @@
 SOLUTION_RAW                 1 Solution after simulation 1.
-  -temp                      41.0970153809
+  -temp                      26.5722351074
   -pressure                  1
-  -total_h                   1.5037691236506e-06
-  -total_o                   7.5129165952717e-07
-  -cb                        -8.1140307237988e-10
+  -total_h                   4.2865552724
+  -total_o                   2.1432776363605
+  -cb                        -3.2102730323229e-10
   -density                   1
   -totals
-    Al                       1.7052878392873e-15
-    C(-3)                    4.0939135447116e-10
-    C(-4)                    5.621292961929e-18
-    Ca                       4.6217386587245e-09
-    Cl(-1)                   9.7569353103157e-08
-    Fe(2)                    1.5024514837615e-14
-    Fe(3)                    5.2118434203407e-23
-    H(0)                     9.4492719092976e-13
-    K                        1.5923466969101e-12
-    Mg                       2.1803635018438e-13
-    Na                       8.7520772867553e-08
-    S(-2)                    1.0348828671357e-13
-    Si                       8.789413728967e-12
-  -pH                        8.6794552761342
-  -pe                        -8.0462687435199
-  -mu                        4.8844753641148
-  -ah2o                      0.80372362259688
-  -mass_water                1.3530147215687e-08
-  -soln_vol                  1.3656643299384e-08
-  -total_alkalinity          8.3637385155967e-12
+    H(0)                     6.5993177924966e-25
+  -pH                        7
+  -pe                        3
+  -mu                        1.0419648208578e-07
+  -ah2o                      0.99999999645732
+  -mass_water                0.0386000015
+  -soln_vol                  0.038730603840368
+  -total_alkalinity          3.2102730323229e-10
   -activities
-    Al                       -20.469451696509
-    C(-2)                    -66.006157964453
-    C(-3)                    -1.8201938506678
-    C(-4)                    -9.3814662398588
-    C(2)                     -31.045775953442
-    C(4)                     -22.962562465229
-    Ca                       -1.3693303055612
-    Cl(-1)                   0.51589720948937
-    Cl(1)                    -53.68183737408
-    Cl(3)                    -100.9307358565
-    Cl(5)                    -135.03227329675
-    Cl(7)                    -173.32652045371
-    E                        8.0462687435199
-    Fe(2)                    -7.3562689595888
-    Fe(3)                    -28.219380893821
-    H(0)                     -4.0416273581783
-    K                        -4.1301576090638
-    Mg                       -5.5866943295439
-    Na                       0.53644906421124
-    O(0)                     -79.327804738095
-    S(-2)                    -5.241857894778
-    S(2)                     -33.880729715246
-    S(3)                     -59.457878695992
-    S(4)                     -29.313187830651
-    S(5)                     -66.095831063075
-    S(6)                     -24.767835254591
-    S(7)                     -127.1508884535
-    S(8)                     -89.100507268993
-    Si                       -4.1929918211312
+    E                        -3
+    H(0)                     -25.068118263733
+    O(0)                     -41.552603505625
   -gammas
 KINETICS_RAW                 1 
   # KINETICS_MODIFY candidate identifiers #
@@ -104,8 +66,8 @@ KINETICS_RAW                 1
   -component                 Magnetite
       # KINETICS_MODIFY candidate identifiers #
       -tol                   1e-08
-      -m                     0.0399998505
-      -m0                    0.0399998505
+      -m                     0.0399999991
+      -m0                    0.0399999991
       -namecoef
         Magnetite            1
       -d_params
@@ -116,8 +78,8 @@ KINETICS_RAW                 1
   -component                 BGlass
       # KINETICS_MODIFY candidate identifiers #
       -tol                   1e-08
-      -m                     3.4101817547
-      -m0                    3.4101817547
+      -m                     9.6770000458
+      -m0                    9.6770000458
       -namecoef
         Al2O3                0.16
         CaO                  0.182
@@ -134,7 +96,7 @@ KINETICS_RAW                 1
   -equal_increments           1
   -count                     1
   -steps             
-    9999999867.968 
+    10000000359.04 
   # KINETICS workspace variables #
   -totals                    
 EQUILIBRIUM_PHASES_RAW       1 Pure-phase assemblage after simulation 1.
@@ -167,38 +129,38 @@ EQUILIBRIUM_PHASES_RAW       1 Pure-phase assemblage after simulation 1.
   -component                 Analcime
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.60537064694394
+      -moles                 0
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
       # PPassemblage workspace variables #
       -si_org                0
       -delta                 0
-      -initial_moles         0.6053706515
+      -initial_moles         0
       -totals                
   -component                 Andradite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.015294133333342
+      -moles                 0
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
       # PPassemblage workspace variables #
       -si_org                0
       -delta                 0
-      -initial_moles         0.0152941319
+      -initial_moles         0
       -totals                
   -component                 Annite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.033572591125253
+      -moles                 0
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
       # PPassemblage workspace variables #
       -si_org                0
       -delta                 0
-      -initial_moles         0.0335725915
+      -initial_moles         0
       -totals                
   -component                 Calcite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
@@ -263,14 +225,14 @@ EQUILIBRIUM_PHASES_RAW       1 Pure-phase assemblage after simulation 1.
   -component                 Daphnite-14a
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.033056280814303
+      -moles                 0
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
       # PPassemblage workspace variables #
       -si_org                0
       -delta                 0
-      -initial_moles         0.0330562478
+      -initial_moles         0
       -totals                
   -component                 Daphnite-7a
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
@@ -527,14 +489,14 @@ EQUILIBRIUM_PHASES_RAW       1 Pure-phase assemblage after simulation 1.
   -component                 Minnesotaite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.15348748759538
+      -moles                 0
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
       # PPassemblage workspace variables #
       -si_org                0
       -delta                 0
-      -initial_moles         0.1534875432
+      -initial_moles         0
       -totals                
   -component                 Monticellite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
@@ -671,14 +633,14 @@ EQUILIBRIUM_PHASES_RAW       1 Pure-phase assemblage after simulation 1.
   -component                 Prehnite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.50008077631554
+      -moles                 0
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
       # PPassemblage workspace variables #
       -si_org                0
       -delta                 0
-      -initial_moles         0.5000807476
+      -initial_moles         0
       -totals                
   -component                 Pseudowollastonite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
@@ -755,26 +717,26 @@ EQUILIBRIUM_PHASES_RAW       1 Pure-phase assemblage after simulation 1.
   -component                 Saponite-Na
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.40802898009996
+      -moles                 0
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
       # PPassemblage workspace variables #
       -si_org                0
       -delta                 0
-      -initial_moles         0.4080289801
+      -initial_moles         0
       -totals                
   -component                 Scolecite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.08909338536
+      -moles                 0
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
       # PPassemblage workspace variables #
       -si_org                0
       -delta                 0
-      -initial_moles         0.0890935127
+      -initial_moles         0
       -totals                
   -component                 SiO2(am)
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
@@ -803,14 +765,14 @@ EQUILIBRIUM_PHASES_RAW       1 Pure-phase assemblage after simulation 1.
   -component                 Stilbite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.0052949200710475
+      -moles                 0
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
       # PPassemblage workspace variables #
       -si_org                0
       -delta                 0
-      -initial_moles         0.0052948577
+      -initial_moles         0
       -totals                
   -component                 Tobermorite-9A
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
@@ -839,14 +801,14 @@ EQUILIBRIUM_PHASES_RAW       1 Pure-phase assemblage after simulation 1.
   -component                 Troilite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.0012355529998965
+      -moles                 0
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
       # PPassemblage workspace variables #
       -si_org                0
       -delta                 0
-      -initial_moles         0.001235553
+      -initial_moles         0
       -totals                
   -component                 Wollastonite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
