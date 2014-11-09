@@ -284,8 +284,8 @@ medium(:,:,1) = 0.0 ! phi
 medium(:,:,2) = 0.0 ! s_sp
 medium(:,:,3) = .03860 ! water_volume
 !medium(:,1:(xn/cell)*(5/13),3) = .03 ! water_volume
-medium(:,:,4) = 0.0 ! rho_s
-medium(:,:,5) = 0.0 ! rxn toggle
+medium(:,:,4) = .0386 ! rho_s, actually soln_vol, actuall rho*soln_vol
+medium(:,:,5) = 1.0 ! rxn toggle
 medium(:,yn/cell,5) = 0.0
 medium(:,:,6) = 0.0 ! x-coord
 medium(:,:,7) = 0.0 ! y-coord
@@ -462,7 +462,11 @@ do j = 2, tn
 		! make coarse grid average velocities
 		uTransport = (uTransport/mstep)
 		vTransport = (vTransport/mstep)
-	
+		!uTransport = abs(uTransport)
+		!vTransport = abs(vTransport)
+		yep = write_matrix ( xn/cell, yn/cell, real(uTransport,kind=4), 'mat_u.txt' )
+		yep = write_matrix ( xn/cell, yn/cell, real(vTransport,kind=4), 'mat_v.txt' )
+		yep = write_matrix ( xn/cell, yn/cell, real(h(1:xn:cell,1:yn:cell),kind=4), 'mat_h.txt' )
 		
 !!!!!!!!!! CHANGE TRANSPORT !!!!!!!!!!!!!!
 
@@ -488,6 +492,16 @@ do j = 2, tn
  			n=4 ! c
  	 		solTemp = solute(:,:,n)
  	 		solute(:,:,n) = solute_next(solTemp,uTransport,vTransport)
+			do i=1,(yn/cell)
+				!if (vTransport(i,yn/cell) .lt. 0.0) then
+					solute(i,yn/cell,n) = (soluteOcean(n))!*1.2 ! last
+				!else
+		            !solute(i,yn/cell,n)=(4.0/3.0)*solute(i,yn/cell-1,n)-(1.0/3.0)*solute(i,yn/cell-2,n)
+				!end if
+			end do
+			solute(1,:,n) = (4.0/3.0)*solute(2,:,n) - (1.0/3.0)*solute(3,:,n)  ! left
+			solute(yn/cell,:,n) = (4.0/3.0)*solute(yn/cell-1,:,n) - (1.0/3.0)*solute(yn/cell-2,:,n)  ! right
+			solute(:,1,n) = (4.0/3.0)*solute(:,2,n) - (1.0/3.0)*solute(:,3,n) ! bottom
 
 ! 			n=5 ! ca
 ! 	 		solTemp = solute(:,:,n)
@@ -519,20 +533,21 @@ do j = 2, tn
 
 
 		    ! actual boundary conditions
-		do n=1,g_sol
+		!n = 4
+		!do n=1,g_sol
 			!solute(:,yn/cell,n) = (soluteOcean(n)) ! top
-			do i=1,(yn/cell)
-				if (vTransport(i,yn/cell) .lt. 0.0) then
-					solute(i,yn/cell,n) = (soluteOcean(n))*1.2 ! last
-				else
-		            solute(i,yn/cell,n)=(4.0/3.0)*solute(i,yn/cell-1,n)-(1.0/3.0)*solute(i,yn/cell-2,n)
-
-				end if
-			end do
-			solute(1,:,n) = (4.0/3.0)*solute(2,:,n) - (1.0/3.0)*solute(3,:,n)  ! left
-			solute(yn/cell,:,n) = (4.0/3.0)*solute(yn/cell-1,:,n) - (1.0/3.0)*solute(yn/cell-2,:,n)  ! right
-			solute(:,1,n) = (4.0/3.0)*solute(:,2,n) - (1.0/3.0)*solute(:,3,n) ! bottom
-		end do
+			! do i=1,(yn/cell)
+! 				!if (vTransport(i,yn/cell) .lt. 0.0) then
+! 					solute(i,yn/cell,n) = (soluteOcean(n))!*1.2 ! last
+! 					!else
+! 		            !solute(i,yn/cell,n)=(4.0/3.0)*solute(i,yn/cell-1,n)-(1.0/3.0)*solute(i,yn/cell-2,n)
+!
+! 				!end if
+! 			end do
+! 			solute(1,:,n) = (4.0/3.0)*solute(2,:,n) - (1.0/3.0)*solute(3,:,n)  ! left
+! 			solute(yn/cell,:,n) = (4.0/3.0)*solute(yn/cell-1,:,n) - (1.0/3.0)*solute(yn/cell-2,:,n)  ! right
+! 			solute(:,1,n) = (4.0/3.0)*solute(:,2,n) - (1.0/3.0)*solute(:,3,n) ! bottom
+		!end do
 
 
 ! 			!! convert [H+], [e-] back to pH, pe
@@ -549,7 +564,7 @@ write(*,*) maxval(solute(:,:,4))
 
 		!-TRANSPOSE 1
 		! stretch everything out
-		!hLong = reshape(h(1:xn-1:cell,1:yn-1:cell), (/(xn/cell)*(yn/cell)/)) ! for cell > 1
+!		hLong = reshape(h(1:xn-1:cell,1:yn-1:cell), (/(xn/cell)*(yn/cell)/)) ! for cell > 1
 		hLong = reshape(h(1:xn:cell,1:yn:cell), (/(xn/cell)*(yn/cell)/)) ! for cell = 1
 !  		do i = 1,(xn/cell)*(yn/cell)
 !  			if (hLong(i) .gt. 308.0) then
@@ -686,10 +701,10 @@ write(*,*) maxval(solute(:,:,4))
 		 psimat(1:xn,1+yn*(j/mstep-1):yn*(j/mstep)) = psi
 		 umat(1:xn,1+yn*(j/mstep-1):yn*(j/mstep)) = u
 		 vmat(1:xn,1+yn*(j/mstep-1):yn*(j/mstep)) = v
-		 primaryMat(1:xn/cell,1+(yn/cell)*(j/mstep-1):1+(yn/cell)*(j/mstep),:) = primary
-		 secondaryMat(1:xn/cell,1+(yn/cell)*(j/mstep-1):1+(yn/cell)*(j/mstep),:) = secondary
-		 soluteMat(1:xn/cell,1+(yn/cell)*(j/mstep-1):1+(yn/cell)*(j/mstep),:) = solute
-		 mediumMat(1:xn/cell,1+(yn/cell)*(j/mstep-1):1+(yn/cell)*(j/mstep),:) = medium
+		 primaryMat(1:xn/cell,1+(yn/cell)*(j/mstep-1):(yn/cell)*(j/mstep),:) = primary
+		 secondaryMat(1:xn/cell,1+(yn/cell)*(j/mstep-1):(yn/cell)*(j/mstep),:) = secondary
+		 soluteMat(1:xn/cell,1+(yn/cell)*(j/mstep-1):(yn/cell)*(j/mstep),:) = solute
+		 mediumMat(1:xn/cell,1+(yn/cell)*(j/mstep-1):(yn/cell)*(j/mstep),:) = medium
 	 
 	end if 
 	! end mth timestep loop, finally
@@ -770,7 +785,10 @@ yep = write_matrix ( xn/cell, yn*tn/(cell*mstep), real(primaryMat(:,:,5),kind=4)
 yep = write_matrix ( xn/cell, yn*tn/(cell*mstep), real(mediumMat(:,:,1),kind=4), 'med_phi.txt' )
 yep = write_matrix ( xn/cell, yn*tn/(cell*mstep), real(mediumMat(:,:,2),kind=4), 'med_s_sp.txt' )
 yep = write_matrix ( xn/cell, yn*tn/(cell*mstep), real(mediumMat(:,:,3),kind=4), 'med_v_water.txt' )
-yep = write_matrix ( xn/cell, yn*tn/(cell*mstep), real(mediumMat(:,:,4),kind=4), 'med_rho_solid.txt' )
+yep = write_matrix ( xn/cell, yn*tn/(cell*mstep), real(mediumMat(:,:,4),kind=4), 'med_kgw.txt' )
+
+
+
 
 
 !--------------WRITE TO NETCDF FILES
@@ -884,7 +902,7 @@ else
 			
 			
 			
-			!if (alt0(1,2) .gt. 1.0) then
+			
 				! parse the phreeqc output
 				! changed 5 -> 3
 				solLocal(m,:) = (/ alt0(1,2), alt0(1,3), alt0(1,4), alt0(1,5), alt0(1,6), &
@@ -905,18 +923,19 @@ else
 				alt0(1,148), alt0(1,150), alt0(1,152) /)
 
 				!priLocal(m,:) = (/ alt0(1,72), alt0(1,74), alt0(1,76), alt0(1,78), alt0(1,80)/)
-				priLocal(m,:) = (/ alt0(1,154), alt0(1,156), alt0(1,158), alt0(1,160), alt0(1,162)/)
+				priLocal(m,:) = (/ alt0(1,158), alt0(1,160), alt0(1,162), alt0(1,164), alt0(1,166)/)
 
 				!medLocal(m,1:4) = (/ alt0(1,82), alt0(1,83), alt0(1,84), alt0(1,4)/)
-				medLocal(m,1:4) = (/ alt0(1,164), alt0(1,165), alt0(1,4), alt0(1,166)/)
+				medLocal(m,1:4) = (/ alt0(1,163), alt0(1,163), alt0(1,4), alt0(1,163)/)
 
 				! print something you want to look at
 				!write(*,*) medLocal(m,3) ! water
 			
 				!write(*,*) alt0
-				!else
-				!medLocal(m,5) = 0.0
-				!end if
+			if (alt0(1,2) .lt. 1.0) then
+				medLocal(m,5) = 0.0
+			end if
+
 			
 			end if
 			
@@ -1445,45 +1464,45 @@ do i = 1,(xn/cell)*(yn/cell)
 	! first edge
 	if ((any(mod((/i-1/),xn/cell) .eq. 0.0)) .OR. (uLong(i) .le. 0.0)) then
 		aBand(i,2) = 1.0 - uLong(i)*qx
-		!if (i .gt. 1) then
+		if (i .gt. 1) then
 		aBand(i,1) =  0.0
-		!end if
-		!if (i .lt. (xn/cell)*(yn/cell)) then
+		end if
+		if (i .lt. (xn/cell)*(yn/cell)) then
 		aBand(i,3) = uLong(i)*qx
-		!end if
+		end if
 	end if
 
 	! last edge
 	if ((any(mod((/i/),xn/cell) .eq. 0.0)) .OR. (uLong(i) .gt. 0.0)) then
 		aBand(i,2) = 1.0 + uLong(i)*qx
-		!if (i .gt. 1) then
+		if (i .gt. 1) then
 		aBand(i,1) = - uLong(i)*qx
-		!end if
-		!if (i .le. (xn/cell)*(yn/cell)) then
+		end if
+		if (i .le. (xn/cell)*(yn/cell)) then
 		aBand(i,3) =  0.0
-		!end if
+		end if
 	end if
 
 	! first edge
 	if (any(mod((/i-1/),xn/cell) .eq. 0.0)) then
 		aBand(i,2) = 1.0 - uLong(i)*qx
-		!if (i .gt. 1) then
+		if (i .gt. 1) then
 		aBand(i,1) =  0.0
-		!end if
-		!if (i .lt. (xn/cell)*(yn/cell)) then
+		end if
+		if (i .lt. (xn/cell)*(yn/cell)) then
 		aBand(i,3) = uLong(i)*qx
-		!end if
+		end if
 	end if
 
 	! last edge
 	if (any(mod((/i/),xn/cell) .eq. 0.0)) then
 		aBand(i,2) = 1.0 + uLong(i)*qx
-		!if (i .gt. 1) then
+		if (i .gt. 1) then
 		aBand(i,1) = - uLong(i)*qx
-		!end if
-		!if (i .le. (xn/cell)*(yn/cell)) then
+		end if
+		if (i .le. (xn/cell)*(yn/cell)) then
 		aBand(i,3) =  0.0
-		!end if
+		end if
 	end if
 
 end do
@@ -1513,45 +1532,45 @@ do i = 1,(xn/cell)*(yn/cell)
 	! first edge x 2
 	if ((any(mod((/i-1/),xn/cell) .eq. 0.0)) .OR. (vLong(i) .le. 0.0)) then
 		bBand(i,2) = 1.0 - vLong(i)*qy
-		!if (i .gt. 1) then
+		if (i .gt. 1) then
 		bBand(i,1) =  0.0
-		!end if
-		!if (i .lt. (xn/cell)*(yn/cell)) then
+		end if
+		if (i .lt. (xn/cell)*(yn/cell)) then
 		bBand(i,3) = vLong(i)*qy
-		!end if
+		end if
 	end if
 
 	! last edge x 2
 	if ((any(mod((/i/),xn/cell) .eq. 0.0)) .OR. (vLong(i) .gt. 0.0)) then
 		bBand(i,2) = 1.0 + vLong(i)*qy
-		!if (i .gt. 1) then
+		if (i .gt. 1) then
 		bBand(i,1) = - vLong(i)*qy
-		!end if
-		!if (i .lt. (xn/cell)*(yn/cell)) then
+		end if
+		if (i .lt. (xn/cell)*(yn/cell)) then
 		bBand(i,3) =  0.0
-		!end if
+		end if
 	end if
 
 	! first edge x 2
 	if (any(mod((/i-1/),xn/cell) .eq. 0.0)) then
 		bBand(i,2) = 1.0 - vLong(i)*qy
-		!if (i .gt. 1) then
+		if (i .gt. 1) then
 		bBand(i,1) =  0.0
-		!end if
-		!if (i .lt. (xn/cell)*(yn/cell)) then
+		end if
+		if (i .lt. (xn/cell)*(yn/cell)) then
 		bBand(i,3) = vLong(i)*qy
-		!end if
+		end if
 	end if
 
 	! last edge x 2
 	if (any(mod((/i/),xn/cell) .eq. 0.0)) then
 		bBand(i,2) = 1.0 + vLong(i)*qy
-		!if (i .gt. 1) then
+		if (i .gt. 1) then
 		bBand(i,1) = - vLong(i)*qy
-		!end if
-		!if (i .le. (xn/cell)*(yn/cell)) then
+		end if
+		if (i .le. (xn/cell)*(yn/cell)) then
 		bBand(i,3) =  0.0
-		!end if
+		end if
 	end if
 
 end do

@@ -191,7 +191,7 @@ siderite = 0.0
 ! SOLUTES TO STRINGS
 write(s_ph,'(F25.10)') solute(1)
 write(s_alk,'(F25.10)') solute(2)
-write(s_w,'(F25.10)') medium(3)
+write(s_water,'(F25.10)') solute(3)
 write(s_co2,'(F25.10)') solute(4)
 write(s_ca,'(F25.10)') solute(5)
 write(s_mg,'(F25.10)') solute(6)
@@ -206,7 +206,7 @@ write(s_hco3,'(F25.10)') solute(14)
 write(s_co3,'(F25.10)') solute(15)
 
 ! MEDIUM TO STRINGS
-write(s_water,'(F25.10)') medium(3)
+write(s_w,'(F25.10)') solute(3)
 
 ! PRIMARIES TO STRINGS
 write(s_feldspar,'(F25.10)') primary(1)
@@ -318,8 +318,8 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
 &"    C " // trim(s_co2) //NEW_LINE('')// &
 !&"    C " // trim(s_hco3) // "as HCO3-" //NEW_LINE('')// &
 &"    Alkalinity " // trim(s_alk) //NEW_LINE('')// &
-!&"    -water		5.0	# kg" //NEW_LINE('')// &
-&"    -water "// trim(s_w) //NEW_LINE('')// &
+!&"    -water		.0386 # kg" //NEW_LINE('')// &
+&"    -water "// trim(s_w) // " # kg" //NEW_LINE('')// &
 
 
 ! inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
@@ -428,18 +428,62 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
 ! &"   Greenalite 0.0 " // trim(s_greenalite) //NEW_LINE('')// &
 ! &"   Aragonite 0.0 " // trim(s_aragonite) //NEW_LINE('')// &
 ! no dolomite, aragonite
-&"SAVE solution 1"  //NEW_LINE('')// &
-&"SAVE equilibrium_phases 1"  //NEW_LINE('')// &
-&"END"  //NEW_LINE('')// &
+!&"SAVE solution 1"  //NEW_LINE('')// &
+!&"SAVE equilibrium_phases 1"  //NEW_LINE('')// &
+!&"END"  //NEW_LINE('')// &
 
+
+! ----------------------------------%%
+! KINETIC DISSOLUTION RATE LAWS
+! ----------------------------------%%
+	
+&"RATES" //NEW_LINE('')// &
+
+&"BGlass" //NEW_LINE('')// &
+&"-start" //NEW_LINE('')// &
+!CALC_VALUE('R(s_sp)')
+&"    10 rate0=M*46.5*1.53e-5*0.01*(1e4)*(2.51189e-6)*exp(-25.5/(.008314*TK))" // &
+&"*(((ACT('H+')^3)/(ACT('Al+3')))^.333)" //NEW_LINE('')// &
+&"    20 save rate0 * time" //NEW_LINE('')// &
+&"-end" //NEW_LINE('')// &
+
+&"Plagioclase" //NEW_LINE('')// &
+&"-start" //NEW_LINE('')// &
+!(1-SR('Plagioclase'))*
+&"    10 rate = (1-SR('Plagioclase'))*M*270.0*(1.53e-5)*0.01*(((1.58e-9)"//&
+&"*exp(-53.5/(.008314*TK))*(ACT('H+')^0.541) +(3.39e-12)*exp(-57.4/(.008314*TK)) +"//&
+&"(4.78e-15)*exp(-59.0/(.008314*TK))*(ACT('H+'))^-0.57))"//NEW_LINE('')//&
+&"    20 save rate * time"//NEW_LINE('')//&
+&"-end" //NEW_LINE('')// &
+
+&"Augite" //NEW_LINE('')// &
+&"-start" //NEW_LINE('')// &
+&"    10 rate0 = (1-SR('Augite'))*M*230.0*(1.53e-5)*0.01*(((1.58e-7)" // &
+&"*exp(-78.0/(.008314*TK))*(ACT('H+')^0.7)+(1.07e-12)*exp(-78.0/(.008314*TK))))" //NEW_LINE('')// & 
+&"    20 save rate0 * time" //NEW_LINE('')// &
+&"-end" //NEW_LINE('')// &
+
+&"Pigeonite" //NEW_LINE('')// &
+&"-start" //NEW_LINE('')// &
+&"    10 rate0 = (1-SR('Pigeonite'))*M*236.0*(1.53e-5)*0.01*(((1.58e-7)" // &
+&"*exp(-78.0/(.008314*TK))*(ACT('H+')^0.7)+(1.07e-12)*exp(-78.0/(.008314*TK))))"//NEW_LINE('')// &
+&"    20 save rate0 * time" //NEW_LINE('')// &
+&"-end" //NEW_LINE('')// &
+
+&"Magnetite" //NEW_LINE('')// &
+&"-start" //NEW_LINE('')// &
+&"    10 rate0 = (1-SR('Magnetite'))*M*231.0*(1.53e-5)*0.01*(((2.57e-9)" // &
+&"*exp(-18.6/(.008314*TK))*(ACT('H+')^0.279)+(1.66e-11)*exp(-18.6/(.008314*TK))))" //NEW_LINE('')// &
+&"    20 save rate0 * time" //NEW_LINE('')// &
+&"-end" //NEW_LINE('')// &
 
 ! ----------------------------------%%
 ! PRIMARY (KINETIC) CONSTITUENTS
 ! ----------------------------------%%
 
-&"Use solution 1" //NEW_LINE('')// &
-&"Use equilibrium_phases 1" //NEW_LINE('')// &
-&"KINETICS" //NEW_LINE('')// &
+!&"Use solution 1" //NEW_LINE('')// &
+!&"Use equilibrium_phases 1" //NEW_LINE('')// &
+&"KINETICS 1" //NEW_LINE('')// &
 &"Plagioclase" //NEW_LINE('')// &
 &"-m0 " // trim(s_feldspar) //NEW_LINE('')// &
 &"Augite" //NEW_LINE('')// &
@@ -487,132 +531,92 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
 
 
     
-! ----------------------------------%%
-! KINETIC DISSOLUTION RATE LAWS
-! ----------------------------------%%
-	
-&"RATES" //NEW_LINE('')// &
-
-&"BGlass" //NEW_LINE('')// &
-&"-start" //NEW_LINE('')// &
-!CALC_VALUE('R(s_sp)')
-&"    10 rate0=M*46.5*CALC_VALUE('R(s_sp)')*0.1*(1e4)*(2.51189e-6)*exp(-25.5/(.008314*TK))" // &
-&"*(((ACT('H+')^3)/(ACT('Al+3')))^.333)" //NEW_LINE('')// &
-&"    20 save rate0 * time" //NEW_LINE('')// &
-&"-end" //NEW_LINE('')// &
-
-&"Plagioclase" //NEW_LINE('')// &
-&"-start" //NEW_LINE('')// &
-!(1-SR('Plagioclase'))*
-&"    10 rate = (1-SR('Plagioclase'))*M*270.0*CALC_VALUE('R(s_sp)')*0.1*(((1.58e-9)"//&
-&"*exp(-53.5/(.008314*TK))*(ACT('H+')^0.541) +(3.39e-12)*exp(-57.4/(.008314*TK)) +"//&
-&"(4.78e-15)*exp(-59.0/(.008314*TK))*(ACT('H+'))^-0.57))"//NEW_LINE('')//&
-&"    20 save rate * time"//NEW_LINE('')//&
-&"-end" //NEW_LINE('')// &
-
-&"Augite" //NEW_LINE('')// &
-&"-start" //NEW_LINE('')// &
-&"    10 rate0 = (1-SR('Augite'))*M*230.0*CALC_VALUE('R(s_sp)')*0.1*(((1.58e-7)" // &
-&"*exp(-78.0/(.008314*TK))*(ACT('H+')^0.7)+(1.07e-12)*exp(-78.0/(.008314*TK))))" //NEW_LINE('')// & 
-&"    20 save rate0 * time" //NEW_LINE('')// &
-&"-end" //NEW_LINE('')// &
-
-&"Pigeonite" //NEW_LINE('')// &
-&"-start" //NEW_LINE('')// &
-&"    10 rate0 = (1-SR('Pigeonite'))*M*236.0*CALC_VALUE('R(s_sp)')*0.1*(((1.58e-7)" // &
-&"*exp(-78.0/(.008314*TK))*(ACT('H+')^0.7)+(1.07e-12)*exp(-78.0/(.008314*TK))))"//NEW_LINE('')// &
-&"    20 save rate0 * time" //NEW_LINE('')// &
-&"-end" //NEW_LINE('')// &
-
-&"Magnetite" //NEW_LINE('')// &
-&"-start" //NEW_LINE('')// &
-&"    10 rate0 = (1-SR('Magnetite'))*M*231.0*CALC_VALUE('R(s_sp)')*0.1*(((2.57e-9)" // &
-&"*exp(-18.6/(.008314*TK))*(ACT('H+')^0.279)+(1.66e-11)*exp(-18.6/(.008314*TK))))" //NEW_LINE('')// &
-&"    20 save rate0 * time" //NEW_LINE('')// &
-&"-end" //NEW_LINE('')// &
-
-! ----------------------------------%%
-! CALCULATE POROSITY AND STUFF
-! ----------------------------------%%
-
-&"CALCULATE_VALUES" //NEW_LINE('')// &
-
-&"R(sum)" //NEW_LINE('')// &
-&"-start" //NEW_LINE('')// &
-&"10 sum = EQUI('Stilbite')*832.2/2.15 + EQUI('SiO2(am)')*60.0/2.62" //&
-&"+ EQUI('Kaolinite')*258.2/2.6 + EQUI('Albite')*262.3/2.62" // &
-&"+ EQUI('Saponite-Mg')*385.537/2.4 + EQUI('Celadonite')*396.8/3.0" // &
-&"+ EQUI('Clinoptilolite-Ca')*1344.49/2.62 + EQUI('Pyrite')*120.0/4.84" // &
-&"+ EQUI('Montmor-Na')*103.8/5.3 + EQUI('Goethite')*88.8/3.8" // &
-&"+ EQUI('Dolomite')*184.3/2.84 + EQUI('Smectite-high-Fe-Mg')*425.7/2.7" // &
-&"+ EQUI('Dawsonite')*144.0/2.42 + EQUI('Anhydrite')*84.3/3.0" // &
-&"+ EQUI('Siderite')*115.8/3.96 + EQUI('Calcite')*100.0/2.71" // &
-&"+ EQUI('Quartz')*60.0/2.62 + EQUI('K-Feldspar')*193.0/2.56" // &
-&"+ KIN('Plagioclase')*270.0/2.68 + KIN('Augite')*230.0/3.4" // &
-&"+ KIN('Pigeonite')*239.6/3.38 + KIN('Magnetite')*231.0/5.15" // &
-&"+ KIN('BGlass')*46.5/2.92" // &
-&"" //NEW_LINE('')// &
-&"100 SAVE sum" //NEW_LINE('')// &
-&"-end" //NEW_LINE('')// &
-  
-&"R(phi)" //NEW_LINE('')// &
-&"-start" //NEW_LINE('')// &
-!&"10 phi = 1.0-(CALC_VALUE('R(sum)')/(CALC_VALUE('R(sum)')+(TOT('water')*1000.0)))" //&
-&"10 phi = 0.1" //&
-&"" //NEW_LINE('')// &
-&"100 SAVE phi" //NEW_LINE('')// &
-&"-end" //NEW_LINE('')// &
-
-&"R(water_volume)" //NEW_LINE('')// &
-&"-start" //NEW_LINE('')// &
-&"10 water_volume = TOT('water')" //NEW_LINE('')// &
-!&"10 water_volume = 0.3" //NEW_LINE('')// &
-&"100 SAVE water_volume" //NEW_LINE('')// &
-&"-end" //NEW_LINE('')// &
-  
-
-&"R(rho_s)" //NEW_LINE('')// &
-&"-start" //NEW_LINE('')// &
-!&"10 rho_s = CALC_VALUE('R(sum)')" //NEW_LINE('')// &
-&"10 rho_s = EQUI('Stilbite')*2.15 + EQUI('SiO2(am)')*2.62" //&
-&"+ EQUI('Kaolinite')*2.6 + EQUI('Albite')*2.62" // &
-&"+ EQUI('Saponite-Mg')*2.4 + EQUI('Celadonite')*3.0" // &
-&"+ EQUI('Clinoptilolite-Ca')*2.62 + EQUI('Pyrite')*4.84" // &
-&"+ EQUI('Montmor-Na')*5.3 + EQUI('Goethite')*3.8" // &
-&"+ EQUI('Dolomite')*2.84 + EQUI('Smectite-high-Fe-Mg')*2.7" // &
-&"+ EQUI('Dawsonite')*2.42 + EQUI('Anhydrite')*3.0" // &
-&"+ EQUI('Siderite')*3.96 + EQUI('Calcite')*2.71" // &
-&"+ EQUI('Quartz')*2.62 + EQUI('k-Feldspar')*2.56" // &
-&"+ KIN('Plagioclase')*2.68 + KIN('Augite')*3.4" // &
-&"+ KIN('Pigeonite')*3.38 + KIN('Magnetite')*5.15" // &
-&"+ KIN('BGlass')*2.92" //NEW_LINE('')// &
-&"20 rho_s = rho_s/ (EQUI('Stilbite') + EQUI('SiO2(am)')" //&
-&"+ EQUI('Kaolinite') + EQUI('Albite')" // &
-&"+ EQUI('Saponite-Mg') + EQUI('Celadonite')" // &
-&"+ EQUI('Clinoptilolite-Ca') + EQUI('Pyrite')" // &
-&"+ EQUI('Montmor-Na') + EQUI('Goethite')" // &
-&"+ EQUI('Dolomite') + EQUI('Smectite-high-Fe-Mg')" // &
-&"+ EQUI('Dawsonite') + EQUI('Anhydrite')" // &
-&"+ EQUI('Siderite') + EQUI('Calcite')" // &
-&"+ EQUI('Quartz') + EQUI('K-Feldspar')" // &
-&"+ KIN('Plagioclase') + KIN('Augite')" // &
-&"+ KIN('Pigeonite') + KIN('Magnetite')" // &
-&"+ KIN('BGlass'))" //NEW_LINE('')// &
-&"30 rho_s = rho_s * 1000000.0" //NEW_LINE('')// &
-&"100 SAVE rho_s" //NEW_LINE('')// &
-&"-end" //NEW_LINE('')// &
-  
-  
-&"R(s_sp)" //NEW_LINE('')// &
-&"-start" //NEW_LINE('')// &
-!&"10 s_sp = (CALC_VALUE('R(phi)')/(1.0-CALC_VALUE('R(phi)')))*400.0/CALC_VALUE('R(rho_s)')" //&
-&"10 s_sp = 1.53e-5" //&
-&"" //NEW_LINE('')// &
-&"100 SAVE s_sp" //NEW_LINE('')// &
-&"-end" //NEW_LINE('')// &
-
-
-!&"END" //NEW_LINE('')// &
+!
+! ! ----------------------------------%%
+! ! CALCULATE POROSITY AND STUFF
+! ! ----------------------------------%%
+!
+! &"CALCULATE_VALUES" //NEW_LINE('')// &
+!
+! &"R(sum)" //NEW_LINE('')// &
+! &"-start" //NEW_LINE('')// &
+! ! &"10 sum = EQUI('Stilbite')*832.2/2.15 + EQUI('SiO2(am)')*60.0/2.62" //&
+! ! &"+ EQUI('Kaolinite')*258.2/2.6 + EQUI('Albite')*262.3/2.62" // &
+! ! &"+ EQUI('Saponite-Mg')*385.537/2.4 + EQUI('Celadonite')*396.8/3.0" // &
+! ! &"+ EQUI('Clinoptilolite-Ca')*1344.49/2.62 + EQUI('Pyrite')*120.0/4.84" // &
+! ! &"+ EQUI('Montmor-Na')*103.8/5.3 + EQUI('Goethite')*88.8/3.8" // &
+! ! &"+ EQUI('Dolomite')*184.3/2.84 + EQUI('Smectite-high-Fe-Mg')*425.7/2.7" // &
+! ! &"+ EQUI('Dawsonite')*144.0/2.42 + EQUI('Anhydrite')*84.3/3.0" // &
+! ! &"+ EQUI('Siderite')*115.8/3.96 + EQUI('Calcite')*100.0/2.71" // &
+! ! &"+ EQUI('Quartz')*60.0/2.62 + EQUI('K-Feldspar')*193.0/2.56" // &
+! ! &"+ KIN('Plagioclase')*270.0/2.68 + KIN('Augite')*230.0/3.4" // &
+! ! &"+ KIN('Pigeonite')*239.6/3.38 + KIN('Magnetite')*231.0/5.15" // &
+! ! &"+ KIN('BGlass')*46.5/2.92" // &
+!  &"10 sum = 5.0" //&
+! &"" //NEW_LINE('')// &
+! &"100 SAVE sum" //NEW_LINE('')// &
+! &"-end" //NEW_LINE('')// &
+!
+! &"R(phi)" //NEW_LINE('')// &
+! &"-start" //NEW_LINE('')// &
+! !&"10 phi = 1.0-(CALC_VALUE('R(sum)')/(CALC_VALUE('R(sum)')+(TOT('water')*1000.0)))" //&
+! &"10 phi = 0.1" //&
+! &"" //NEW_LINE('')// &
+! &"100 SAVE phi" //NEW_LINE('')// &
+! &"-end" //NEW_LINE('')// &
+!
+! &"R(water_volume)" //NEW_LINE('')// &
+! &"-start" //NEW_LINE('')// &
+! !&"10 water_volume = SOLN_VOL / RHO" //NEW_LINE('')// &
+! &"10 water_volume = 0.3" //NEW_LINE('')// &
+! &"100 SAVE water_volume" //NEW_LINE('')// &
+! &"-end" //NEW_LINE('')// &
+!
+!
+! &"R(rho_s)" //NEW_LINE('')// &
+! &"-start" //NEW_LINE('')// &
+! ! &"10 rho_s = EQUI('Stilbite')*2.15 + EQUI('SiO2(am)')*2.62" //&
+! ! &"+ EQUI('Kaolinite')*2.6 + EQUI('Albite')*2.62" // &
+! ! &"+ EQUI('Saponite-Mg')*2.4 + EQUI('Celadonite')*3.0" // &
+! ! &"+ EQUI('Clinoptilolite-Ca')*2.62 + EQUI('Pyrite')*4.84" // &
+! ! &"+ EQUI('Montmor-Na')*5.3 + EQUI('Goethite')*3.8" // &
+! ! &"+ EQUI('Dolomite')*2.84 + EQUI('Smectite-high-Fe-Mg')*2.7" // &
+! ! &"+ EQUI('Dawsonite')*2.42 + EQUI('Anhydrite')*3.0" // &
+! ! &"+ EQUI('Siderite')*3.96 + EQUI('Calcite')*2.71" // &
+! ! &"+ EQUI('Quartz')*2.62 + EQUI('k-Feldspar')*2.56" // &
+! ! &"+ KIN('Plagioclase')*2.68 + KIN('Augite')*3.4" // &
+! ! &"+ KIN('Pigeonite')*3.38 + KIN('Magnetite')*5.15" // &
+! ! &"+ KIN('BGlass')*2.92" //NEW_LINE('')// &
+! ! &"20 rho_s = rho_s/ (EQUI('Stilbite') + EQUI('SiO2(am)')" //&
+! ! &"+ EQUI('Kaolinite') + EQUI('Albite')" // &
+! ! &"+ EQUI('Saponite-Mg') + EQUI('Celadonite')" // &
+! ! &"+ EQUI('Clinoptilolite-Ca') + EQUI('Pyrite')" // &
+! ! &"+ EQUI('Montmor-Na') + EQUI('Goethite')" // &
+! ! &"+ EQUI('Dolomite') + EQUI('Smectite-high-Fe-Mg')" // &
+! ! &"+ EQUI('Dawsonite') + EQUI('Anhydrite')" // &
+! ! &"+ EQUI('Siderite') + EQUI('Calcite')" // &
+! ! &"+ EQUI('Quartz') + EQUI('K-Feldspar')" // &
+! ! &"+ KIN('Plagioclase') + KIN('Augite')" // &
+! ! &"+ KIN('Pigeonite') + KIN('Magnetite')" // &
+! ! &"+ KIN('BGlass'))" //NEW_LINE('')// &
+! !&"30 rho_s = rho_s * 1000000.0" //NEW_LINE('')// &
+! &"10 rho_s = 2.93e6" //NEW_LINE('')// &
+! &"100 SAVE rho_s" //NEW_LINE('')// &
+! &"-end" //NEW_LINE('')// &
+!
+!
+! &"R(s_sp)" //NEW_LINE('')// &
+! &"-start" //NEW_LINE('')// &
+! !&"10 s_sp = (CALC_VALUE('R(phi)')/(1.0-CALC_VALUE('R(phi)')))*400.0/CALC_VALUE('R(rho_s)')" //&
+! &"10 s_sp = 1.53e-5" //&
+! &"" //NEW_LINE('')// &
+! &"100 SAVE s_sp" //NEW_LINE('')// &
+! &"-end" //NEW_LINE('')// &
+!
+! !&"SAVE solution 1"  //NEW_LINE('')// &
+! !&"SAVE equilibrium_phases 1"  //NEW_LINE('')// &
+!
+! !&"END" //NEW_LINE('')// &
 
 
 ! ----------------------------------%%
@@ -629,13 +633,13 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
 ! DEFINE THE KIND OF OUTPUT
 ! ----------------------------------%%
 
-&"DUMP" //NEW_LINE('')// &
-&"    -solution 1" //NEW_LINE('')// &
-&"    -equilibrium_phases" //NEW_LINE('')// &
+!&"DUMP" //NEW_LINE('')// &
+!&"    -solution 1" //NEW_LINE('')// &
+!&"    -equilibrium_phases" //NEW_LINE('')// &
 
   &"SELECTED_OUTPUT" //NEW_LINE('')// &
   &"    -reset false" //NEW_LINE('')// &
-  &"    -high_precision true" //NEW_LINE('')// &
+!  &"    -high_precision true" //NEW_LINE('')// &
   &"    -k plagioclase augite pigeonite magnetite bglass" //NEW_LINE('')// &
   &"    -ph" //NEW_LINE('')// &
   &"    -pe false" //NEW_LINE('')// &
@@ -643,7 +647,7 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
   &"    -totals C" //NEW_LINE('')// &
   &"    -totals Ca Mg Na K Fe S Si Cl Al " //NEW_LINE('')// &
   &"    -molalities HCO3-" //NEW_LINE('')// &
-  &"    -water" //NEW_LINE('')// &
+  &"    -water true" //NEW_LINE('')// &
   &"    -alkalinity" //NEW_LINE('')// &
   &"    -p stilbite sio2(am) kaolinite albite saponite-mg celadonite Clinoptilolite-Ca" //NEW_LINE('')// &
   &"    -p pyrite Montmor-Na goethite dolomite Smectite-high-Fe-Mg Dawsonite" //NEW_LINE('')// &
@@ -660,7 +664,8 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
   ! NEXT ROUND
   &"    -p Andradite Troilite Pyrrhotite Minnesotaite Fayalite Daphnite-7A" //NEW_LINE('')// &
   &"    -p Daphnite-14A Cronstedtite-7A Greenalite Aragonite" //NEW_LINE('')// &
-  &"    -calculate_values R(phi) R(s_sp) R(water_volume) R(rho_s)" //NEW_LINE('')// &
+  &"    -p Siderite Magnesite" //NEW_LINE('')// &
+  !&"    -calculate_values R(phi) R(s_sp) R(water_volume) R(rho_s)" //NEW_LINE('')// &
   &"    -time" //NEW_LINE('')// &
 &"END"
   
@@ -726,9 +731,9 @@ END IF
 ! PRINT DUMP/OUTPUT
 DO i=1,GetOutputStringLineCount(id)
 	call GetOutputStringLine(id, i, line)
-! 	if ((medium(6) .gt. 2800.0) .and. (medium(7) .lt. -1100.00)) then
-! 		write(*,*) trim(line)
-! 	end if
+ 	if ((medium(6) .gt. 2800.0) .and. (medium(7) .lt. -1100.00)) then
+ 		!write(*,*) trim(line)
+ 	end if
 	!write(*,*) trim(line)
 END DO
   
@@ -743,6 +748,8 @@ END DO
   
 ! WRITE AWAY
 allocate(outmat(GetSelectedOutputStringLineCount(id)+1,all))
+!write(*,*) size(outmat,1)
+!write(*,*) size(outmat,2)
 DO i=1,GetSelectedOutputStringLineCount(id)
 	call GetSelectedOutputStringLine(id, i, line)
 	! HEADER BITS YOU MAY WANT
@@ -751,11 +758,17 @@ DO i=1,GetSelectedOutputStringLineCount(id)
 	   !write(*,*) "cell"
 	   !write(*,*) trim(line) ! PRINT LABELS FOR EVERY FIELD (USEFUL)
 		
+		if ((medium(6) .gt. 2800.0) .and. (medium(7) .lt. -1100.00)) then
+			!write(*,*) trim(line)
+		end if
+		
 	end if
 	! MEAT
 	if (i .gt. 1) then
 		if ((medium(6) .gt. 2800.0) .and. (medium(7) .lt. -1100.00)) then
 			!write(*,*) trim(line)
+			!write(*,*) " "
+			!write(*,*) "line!"
 		end if
 		
 		read(line,*) outmat(i,:)
@@ -769,7 +782,9 @@ END DO
   
 
 ! OUTPUT TO THE MAIN MASSACR METHOD
-alter(1,:) = outmat(2,:)
+alter(1,:) = outmat(3,:)
+!write(*,*) outmat
+write(*,*) alter(1,4)
 
 IF (RunString(id, inputz0).NE.0) THEN
 	alter(1,:) = 0.0
