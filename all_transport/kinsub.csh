@@ -18,7 +18,7 @@
 #PBS -m abe -M navah@uchicago.edu
 # set the number of nodes to use, and number of processors
 # to use per node
-#PBS -l nodes=compute-1-6:ppn=12
+#PBS -l nodes=compute-1-1:ppn=12
 #
 # or, if using only one node, you can do it this way too
 ##PBS -l ncpus=5

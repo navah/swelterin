@@ -288,9 +288,9 @@ medium(:,:,2) = 0.0 ! s_sp
 medium(:,:,3) = .03860 ! water_volume
 !medium(:,1:(xn/cell)*(5/13),3) = .03 ! water_volume
 medium(:,:,4) = .0386 ! rho_s, actually soln_vol, actuall rho*soln_vol
-medium(:,:,5) = 0.0 ! rxn toggle
+medium(:,:,5) = 1.0 ! rxn toggle
 medium(:,yn/cell,5) = 0.0
-medium(:,1:4,5) = 0.0
+!medium(:,1:4,5) = 0.0
 medium(:,:,6) = 0.0 ! x-coord
 medium(:,:,7) = 0.0 ! y-coord
 
@@ -523,7 +523,7 @@ do j = 2, tn
 
 			n=2 ! alk
 			solTemp = solute(:,:,n)
-			solute(:,:,n) = solute_next(solTemp,uTransport,vTransport,sea(n))
+			!solute(:,:,n) = solute_next(solTemp,uTransport,vTransport,sea(n))
 			do i=1,(yn/cell)
 				!if (vTransport(i,yn/cell) .lt. 0.0) then
 					!solute(i,yn/cell,n) = (soluteOcean(n))!*1.2 ! last
@@ -1637,16 +1637,17 @@ vLong = reshape(transpose(vTransport(1:xn/cell,1:yn/cell)), (/(xn/cell)*(yn/cell
 
 ! ADVECTION STEP
 
-! VERTICAL BOUNDARY CONDITIONS
-sol(2,:) = sol(2,:) ! left
-sol(xn/cell-1,:) = sol(xn/cell-1,:) ! right
 
-! vec = reshape(sol(2:xn/cell-1,2:yn/cell-1), (/(xn/cell-2)*(yn/cell-2)/))
+! L R boundary conditions
+do i = 1, xn/cell
+	if (uTransport(1,i) .gt. 0.0) then
+		sol(1,i) = sol(1,i) + uTransport(1,i)*seaw*qx
+	end if
+	if (uTransport(xn/cell,i) .le. 0.0) then
+		sol(xn/cell,i) = sol(xn/cell,i) + uTransport(xn/cell,i)*seaw*qx
+	end if
+end do
 
-sol(:,xn/cell) = sol(:,xn/cell) - vTransport(:,xn/cell)*seaw*qy/2.0
-sol(:,1) = sol(:,1) + vTransport(:,1)*seaw*qy/2.0
-sol(1,:) = sol(1,:) + uTransport(1,:)*seaw*qx/2.0
-sol(xn/cell,:) = sol(xn/cell,:) - uTransport(xn/cell,:)*seaw*qx/2.0
 vec = reshape(sol(1:xn/cell,1:yn/cell), (/(xn/cell)*(yn/cell)/))
 
 ! MAKE THE BAND
@@ -1654,18 +1655,20 @@ aBand = 0.0
 do i = 1,(xn/cell)*(yn/cell)
 
 	! flow left
-	if ((uLong(i) .le. 0.0)) then
+	if ((uLong(i) .lt. 0.0)) then
 		aBand(i,2) = 1.0 - uLong(i)*qx
 		if (i .gt. 1) then
 		aBand(i,1) =  0.0
 		end if
 		if (i .lt. (xn/cell)*(yn/cell)) then
 		aBand(i,3) = uLong(i)*qx
+		else
+		aBand(i,3) = 0.0
 		end if
 	end if
 
 	! flow right
-	if ((uLong(i) .gt. 0.0)) then
+	if ((uLong(i) .ge. 0.0)) then
 		aBand(i,2) = 1.0 + uLong(i)*qx
 		if (i .gt. 1) then
 		aBand(i,1) = - uLong(i)*qx
@@ -1675,24 +1678,24 @@ do i = 1,(xn/cell)*(yn/cell)
 		end if
 	end if
 
-	! left edge
-	if (any(mod((/i-1/),xn/cell) .eq. 0.0) .and. (uLong(i) .gt. 0.0)) then
-		aBand(i,2) = 1.0 
+	! left edge, flow right
+	if (any(mod((/i-1/),xn/cell) .eq. 0.0) .and. (uLong(i) .ge. 0.0)) then
+		aBand(i,2) = 1.0 + uLong(i)*qx
 		if (i .gt. 1) then
 		aBand(i,1) =  0.0
 		end if
 		if (i .lt. (xn/cell)*(yn/cell)) then
-		aBand(i,3) = uLong(i)*qx/2.0
+		aBand(i,3) = 0.0
 		end if
 	end if
 
-	! right edge 
-	if (any(mod((/i/),xn/cell) .eq. 0.0) .and. (uLong(i) .le. 0.0)) then
-		aBand(i,2) = 1.0
+	! right edge, flow left
+	if (any(mod((/i/),xn/cell) .eq. 0.0) .and. (uLong(i) .lt. 0.0)) then
+		aBand(i,2) = 1.0 - uLong(i)*qx
 		if (i .gt. 1) then
-		aBand(i,1) = - uLong(i)*qx/2.0
+		aBand(i,1) = 0.0
 		end if
-		if (i .le. (xn/cell)*(yn/cell)) then
+		if (i .lt. (xn/cell)*(yn/cell)) then
 		aBand(i,3) =  0.0
 		end if
 	end if
@@ -1709,9 +1712,15 @@ end do
 sol_nextRow = tridiag(aBand(:,1),aBand(:,2),aBand(:,3),vec,(xn/cell)*(yn/cell))
 sol(1:xn/cell,1:yn/cell) = reshape(sol_nextRow, (/xn/cell, yn/cell/))
 
-! HORIZONTAL BOUNDARY CONDITIONS
-sol(:,2) = sol(:,2) ! bottom
-sol(:,xn/cell-1) = sol(:,xn/cell-1) ! top
+! top bottom boundary conditions
+do i = 1, xn/cell
+	if (vTransport(i,1) .gt. 0.0) then
+		sol(i,1) = sol(i,1) + vTransport(i,1)*seaw*qy
+	end if
+	if (vTransport(i,xn/cell) .le. 0.0) then
+		sol(i,xn/cell) = sol(i,xn/cell) - vTransport(i,xn/cell)*seaw*qy
+	end if
+end do
 
 sol_nextRow = reshape(transpose(sol(1:xn/cell,1:yn/cell)), (/(xn/cell)*(yn/cell)/))
 
@@ -1729,6 +1738,8 @@ do i = 1,(xn/cell)*(yn/cell)
 		end if
 		if (i .lt. (xn/cell)*(yn/cell)) then
 		bBand(i,3) = vLong(i)*qy
+		else
+		bBand(i,3) = 0.0
 		end if
 	end if
 
@@ -1743,22 +1754,22 @@ do i = 1,(xn/cell)*(yn/cell)
 		end if
 	end if
 
-	! bottom edge
+	! bottom edge, flow up
 	if (any(mod((/i-1/),xn/cell) .eq. 0.0) .and. (vLong(i) .gt. 0.0)) then
-		bBand(i,2) = 1.0 
+		bBand(i,2) = 1.0 + vLong(i)*qy
 		if (i .gt. 1) then
 		bBand(i,1) =  0.0
 		end if
 		if (i .lt. (xn/cell)*(yn/cell)) then
-		bBand(i,3) = vLong(i)*qy/2.0
+		bBand(i,3) = 0.0
 		end if
 	end if
 
 	! top edge, flow down
 	if ((any(mod((/i/),xn/cell) .eq. 0.0)) .and. (vLong(i) .le. 0.0)) then
-		bBand(i,2) = 1.0
+		bBand(i,2) = 1.0 - vLong(i)*qy
 		if (i .gt. 1) then
-		bBand(i,1) = - vLong(i)*qy/2.0
+		bBand(i,1) = 0.0
 		end if
 		if (i .le. (xn/cell)*(yn/cell)) then
 		bBand(i,3) =  0.0

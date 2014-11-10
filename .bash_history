@@ -1,9 +1,6 @@
 make -f berMakeFile
 qsub kinsub.csh
 qstat
-make -f berMakeFile
-qsub kinsub.csh
-qstat
 cd ..
 pwd
 make -f berMakeFile
@@ -998,3 +995,6 @@ qstat
 make -f berMakeFile
 make -f berMakeFile
 qsub kinsub.csh
+git add .
+git commit -m "ghost points and matrix partitioning"
+git push -u origin master
