@@ -1,60 +1,53 @@
 SOLUTION_RAW                 1 
-  -temp                      5.0784606934
+  -temp                      43.7568664551
   -pressure                  1
-  -total_h                   2.5884243455425
-  -total_o                   1.2988555097573
-  -cb                        2.7248961775198e-05
+  -total_h                   1.5602680170755e-05
+  -total_o                   7.8015997655851e-06
+  -cb                        1.323249680611e-17
   -density                   1
   -totals
-    Al                       5.1276720000002e-10
-    C(4)                     5.516801005812e-05
-    Ca                       4.552673508e-06
-    Cl(-1)                   0.021075198072
-    Fe(2)                    4.5978403897294e-18
-    Fe(3)                    4.6615154021595e-12
-    K                        4.116355236e-06
-    Mg                       9.9989604e-10
-    Na                       0.02338218432
-    S(6)                     0.0010848056268
-    Si                       6.605140764e-05
-  -pH                        9.3783438121337
+    Al                       1.4050000000102e-17
+    C(4)                     6.9994121402221e-11
+    Ca                       1.3756716085e-10
+    Cl(-1)                   7.6713012350541e-08
+    K                        1.21657545e-12
+    Mg                       4.0464e-15
+    Na                       7.6544553792433e-08
+    S(6)                     2.1913911451397e-11
+  -pH                        7
   -pe                        4
-  -mu                        0.95293742380759
-  -ah2o                      0.96795812484272
-  -mass_water                0.0233076
-  -soln_vol                  0.023378493326446
-  -total_alkalinity          0.000123351277632
+  -mu                        0.52434536845103
+  -ah2o                      0.98182735385768
+  -mass_water                1.405e-07
+  -soln_vol                  1.418204616862e-07
+  -total_alkalinity          6.4072637856162e-11
   -activities
-    Al                       -20.188590861365
-    Alkalinity               -3.1768473128371
-    C(-2)                    -182.88602603968
-    C(-3)                    -135.98479403815
-    C(-4)                    -90.35654436277
-    C(2)                     -38.371715987659
-    C(4)                     -3.1768473128371
-    Ca                       -4.4117716384923
-    Cl(-1)                   -0.27991482542479
-    Cl(1)                    -35.502862770511
-    Cl(3)                    -63.377793123932
-    Cl(5)                    -76.4125419243
-    Cl(7)                    -93.906605960339
+    Al                       -17.198597001553
+    C(-2)                    -148.74341070999
+    C(-3)                    -105.82680481594
+    C(-4)                    -71.673604352091
+    C(2)                     -30.863323860516
+    C(4)                     -3.6109389598538
+    Ca                       -3.6313310426336
+    Cl(-1)                   -0.48256199768951
+    Cl(1)                    -33.43553472704
+    Cl(3)                    -59.462580451738
+    Cl(5)                    -72.451765468575
+    Cl(7)                    -89.616975954629
     E                        -4
-    Fe(2)                    -16.74831696377
-    Fe(3)                    -26.064660605099
-    H(0)                     -30.277344585625
-    K                        -3.9788852864657
-    Mg                       -8.0229435904143
-    Na                       -0.20951813882061
-    O(0)                     -38.541532986074
-    S(-2)                    -83.850226361551
-    S(2)                     -90.696135839843
-    S(3)                     -93.460216913445
-    S(4)                     -33.13993049791
-    S(5)                     -75.548938979579
-    S(6)                     -2.436650234751
-    S(7)                     -67.771272023966
-    S(8)                     -50.089886654873
-    Si                       -3.3853127595345
+    H(0)                     -24.722760561039
+    K                        -5.2676699549359
+    Mg                       -8.0965636422546
+    Na                       -0.456312079368
+    O(0)                     -37.013725497093
+    S(-2)                    -66.971465513946
+    S(2)                     -74.036748740256
+    S(3)                     -78.606995252969
+    S(4)                     -30.100371219989
+    S(5)                     -64.368809041081
+    S(6)                     -4.7730382789706
+    S(7)                     -62.454628230307
+    S(8)                     -46.069407612508
   -gammas
 KINETICS_RAW                 1 
   # KINETICS_MODIFY candidate identifiers #
@@ -115,8 +108,8 @@ KINETICS_RAW                 1
   -component                 BGlass
       # KINETICS_MODIFY candidate identifiers #
       -tol                   1e-08
-      -m                     8.3157
-      -m0                    8.3157
+      -m                     3.9949
+      -m0                    3.9949
       -namecoef
         Al2O3                0.16
         CaO                  0.182
@@ -133,7 +126,7 @@ KINETICS_RAW                 1
   -equal_increments           1
   -count                     1
   -steps             
-    10000000827.968 
+    10000002459.041 
   # KINETICS workspace variables #
   -totals                    
 EQUILIBRIUM_PHASES_RAW       1 
@@ -154,7 +147,7 @@ EQUILIBRIUM_PHASES_RAW       1
   -component                 Albite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.047077
+      -moles                 0
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
@@ -166,7 +159,7 @@ EQUILIBRIUM_PHASES_RAW       1
   -component                 Analcime
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.062282
+      -moles                 0.53767
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
@@ -178,7 +171,7 @@ EQUILIBRIUM_PHASES_RAW       1
   -component                 Andradite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.036473
+      -moles                 0.022622
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
@@ -190,7 +183,7 @@ EQUILIBRIUM_PHASES_RAW       1
   -component                 Annite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0
+      -moles                 0.030166
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
@@ -214,7 +207,7 @@ EQUILIBRIUM_PHASES_RAW       1
   -component                 Celadonite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.007591
+      -moles                 0
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
@@ -262,7 +255,7 @@ EQUILIBRIUM_PHASES_RAW       1
   -component                 Daphnite-14a
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0
+      -moles                 0.058143
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
@@ -382,7 +375,7 @@ EQUILIBRIUM_PHASES_RAW       1
   -component                 Gismondine
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.06929
+      -moles                 0
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
@@ -526,7 +519,7 @@ EQUILIBRIUM_PHASES_RAW       1
   -component                 Minnesotaite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0
+      -moles                 0.086593
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
@@ -634,7 +627,7 @@ EQUILIBRIUM_PHASES_RAW       1
   -component                 Nontronite-Na
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.04583
+      -moles                 0
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
@@ -670,7 +663,7 @@ EQUILIBRIUM_PHASES_RAW       1
   -component                 Prehnite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0
+      -moles                 0.45231
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
@@ -754,7 +747,7 @@ EQUILIBRIUM_PHASES_RAW       1
   -component                 Saponite-Na
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0.086583
+      -moles                 0.37019
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
@@ -766,7 +759,7 @@ EQUILIBRIUM_PHASES_RAW       1
   -component                 Scolecite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0
+      -moles                 0.0028593
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
@@ -802,7 +795,7 @@ EQUILIBRIUM_PHASES_RAW       1
   -component                 Stilbite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0
+      -moles                 0.056531
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
@@ -838,7 +831,7 @@ EQUILIBRIUM_PHASES_RAW       1
   -component                 Troilite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 0
+      -moles                 0.001318
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0

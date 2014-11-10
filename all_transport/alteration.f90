@@ -308,7 +308,7 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
 &"    temp" // trim(s_temp) //NEW_LINE('')// &
 &"    Ca " // trim(s_ca) //NEW_LINE('')// &
 &"    Mg " // trim(s_mg) //NEW_LINE('')// &
-&"    Na " // trim(s_na) //NEW_LINE('')// &
+&"    Na " // trim(s_na) // " charge" //NEW_LINE('')// &
 &"    K " // trim(s_k) //NEW_LINE('')// &
 &"    Fe " // trim(s_fe) //NEW_LINE('')// &
 &"    S "// trim(s_s)  //NEW_LINE('')// &
@@ -317,7 +317,7 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
 &"    Al " // trim(s_al) //NEW_LINE('')// &
 &"    C " // trim(s_co2) //NEW_LINE('')// &
 !&"    C " // trim(s_hco3) // "as HCO3-" //NEW_LINE('')// &
-&"    Alkalinity " // trim(s_alk) //NEW_LINE('')// &
+!&"    Alkalinity " // trim(s_alk) //NEW_LINE('')// &
 !&"    -water		.0386 # kg" //NEW_LINE('')// &
 &"    -water "// trim(s_w) // " # kg" //NEW_LINE('')// &
 
@@ -784,7 +784,7 @@ END DO
 ! OUTPUT TO THE MAIN MASSACR METHOD
 alter(1,:) = outmat(3,:)
 !write(*,*) outmat
-write(*,*) alter(1,4)
+!write(*,*) alter(1,4)
 
 IF (RunString(id, inputz0).NE.0) THEN
 	alter(1,:) = 0.0
