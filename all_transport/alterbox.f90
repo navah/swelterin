@@ -1,4 +1,4 @@
-module alteration
+module alterbox
 !use globals
 INCLUDE "IPhreeqc.f90.inc"
 save
@@ -119,15 +119,15 @@ contains
 !
 ! ----------------------------------------------------------------------------------%%
 
-function alter ( temp, timestep, primary, secondary, solute, medium)
+function alterb ( temp, timestep, primary, secondary, solute, medium)
 
 implicit none
-INTEGER(KIND=4) :: id, all=167
+INTEGER(KIND=4) :: id, all=96
 INTEGER(KIND=4) :: i, order
 CHARACTER(LEN=63200) :: line
 character(len=63200) :: inputz0
 character(len=4) :: fake_in
-real(8) :: alter(1,167)
+real(8) :: alterb(8,96)
 real(8), allocatable :: outmat(:,:)
 
 
@@ -345,7 +345,7 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
 ! HYDROTHERMAL MINERAL CHOICES
 ! ----------------------------------%%
 
-&"EQUILIBRIUM_PHASES 1" //NEW_LINE('')// &
+ &"EQUILIBRIUM_PHASES 1" //NEW_LINE('')// &
 !&"    CO2(g) -3.25 1000" //NEW_LINE('')// &
 &"    Kaolinite 0.0 " // trim(s_kaolinite)  //NEW_LINE('')// &
 &"    Goethite 0.0 " // trim(s_goethite) //NEW_LINE('')// &
@@ -436,46 +436,41 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
 ! ----------------------------------%%
 ! KINETIC DISSOLUTION RATE LAWS
 ! ----------------------------------%%
-	
+
 &"RATES" //NEW_LINE('')// &
 
 &"BGlass" //NEW_LINE('')// &
 &"-start" //NEW_LINE('')// &
 !CALC_VALUE('R(s_sp)')
-&"    10 rate0=M*46.5*1.53e-5*0.1*100.0*(1e4)*(2.51189e-6)*exp(-25.5/(.008314*TK))" // &
-&"*(((ACT('H+')^3)/(ACT('Al+3')))^.333)" //NEW_LINE('')// &
+&"    10 rate0=M*exp(-25.0/(.008314*TK))" //NEW_LINE('')// &
 &"    20 save rate0 * time" //NEW_LINE('')// &
 &"-end" //NEW_LINE('')// &
 
 &"Plagioclase" //NEW_LINE('')// &
 &"-start" //NEW_LINE('')// &
 !(1-SR('Plagioclase'))*
-&"    10 rate = (1-SR('Plagioclase'))*M*270.0*100.0*(1.53e-5)*0.01*(((1.58e-9)"//&
-&"*exp(-53.5/(.008314*TK))*(ACT('H+')^0.541) +(3.39e-12)*exp(-57.4/(.008314*TK)) +"//&
-&"(4.78e-15)*exp(-59.0/(.008314*TK))*(ACT('H+'))^-0.57))"//NEW_LINE('')//&
-&"    20 save rate * time"//NEW_LINE('')//&
+&"    10 rate0=M*.00465" //NEW_LINE('')// &
+&"    20 save rate0 * time" //NEW_LINE('')// &
 &"-end" //NEW_LINE('')// &
 
 &"Augite" //NEW_LINE('')// &
 &"-start" //NEW_LINE('')// &
-&"    10 rate0 = (1-SR('Augite'))*M*230.0*(1.53e-5)*0.01*100.0*(((1.58e-7)" // &
-&"*exp(-78.0/(.008314*TK))*(ACT('H+')^0.7)+(1.07e-12)*exp(-78.0/(.008314*TK))))" //NEW_LINE('')// & 
+&"    10 rate0=M*.00465" //NEW_LINE('')// &
 &"    20 save rate0 * time" //NEW_LINE('')// &
 &"-end" //NEW_LINE('')// &
 
 &"Pigeonite" //NEW_LINE('')// &
 &"-start" //NEW_LINE('')// &
-&"    10 rate0 = (1-SR('Pigeonite'))*M*236.0*(1.53e-5)*0.01*100.0*(((1.58e-7)" // &
-&"*exp(-78.0/(.008314*TK))*(ACT('H+')^0.7)+(1.07e-12)*exp(-78.0/(.008314*TK))))"//NEW_LINE('')// &
+&"    10 rate0=M*.00465" //NEW_LINE('')// &
 &"    20 save rate0 * time" //NEW_LINE('')// &
 &"-end" //NEW_LINE('')// &
 
 &"Magnetite" //NEW_LINE('')// &
 &"-start" //NEW_LINE('')// &
-&"    10 rate0 = (1-SR('Magnetite'))*M*231.0*(1.53e-5)*0.01*100.0*(((2.57e-9)" // &
-&"*exp(-18.6/(.008314*TK))*(ACT('H+')^0.279)+(1.66e-11)*exp(-18.6/(.008314*TK))))" //NEW_LINE('')// &
+&"    10 rate0=M*.00465" //NEW_LINE('')// &
 &"    20 save rate0 * time" //NEW_LINE('')// &
 &"-end" //NEW_LINE('')// &
+
 
 ! ----------------------------------%%
 ! PRIMARY (KINETIC) CONSTITUENTS
@@ -525,7 +520,7 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
 !2.63895
 &"-m0 " // trim(s_glass) //NEW_LINE('')// &
 
-&"    -step " // trim(s_timestep) // " in 1" //NEW_LINE('')// &
+&"    -step " // trim(s_timestep) // " in 5" //NEW_LINE('')// &
 
 &"INCREMENTAL_REACTIONS true" //NEW_LINE('')// &
 
@@ -633,9 +628,9 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
 ! DEFINE THE KIND OF OUTPUT
 ! ----------------------------------%%
 
-!&"DUMP" //NEW_LINE('')// &
-!&"    -solution 1" //NEW_LINE('')// &
-!&"    -equilibrium_phases" //NEW_LINE('')// &
+&"DUMP" //NEW_LINE('')// &
+&"    -solution 1" //NEW_LINE('')// &
+&"    -equilibrium_phases" //NEW_LINE('')// &
 
   &"SELECTED_OUTPUT" //NEW_LINE('')// &
   &"    -reset false" //NEW_LINE('')// &
@@ -649,22 +644,22 @@ inputz0 = "SOLUTION 1 " //NEW_LINE('')// &
   &"    -molalities HCO3-" //NEW_LINE('')// &
   &"    -water true" //NEW_LINE('')// &
   &"    -alkalinity" //NEW_LINE('')// &
-  &"    -p stilbite sio2(am) kaolinite albite saponite-mg celadonite Clinoptilolite-Ca" //NEW_LINE('')// &
-  &"    -p pyrite Montmor-Na goethite dolomite Smectite-high-Fe-Mg Dawsonite" //NEW_LINE('')// &
-  &"    -p Anhydrite siderite calcite quartz k-feldspar" //NEW_LINE('')// &
-  &"    -p saponite-na Nontronite-Na Nontronite-Mg Nontronite-K Nontronite-H " //NEW_LINE('')// &
-  &"    -p Nontronite-Ca muscovite mesolite hematite diaspore" //NEW_LINE('')// &
+  &"    -s stilbite sio2(am) kaolinite albite saponite-mg celadonite Clinoptilolite-Ca" //NEW_LINE('')// &
+  &"    -s pyrite Montmor-Na goethite dolomite Smectite-high-Fe-Mg Dawsonite" //NEW_LINE('')// &
+  &"    -s Anhydrite siderite calcite quartz k-feldspar" //NEW_LINE('')// &
+  &"    -s saponite-na Nontronite-Na Nontronite-Mg Nontronite-K Nontronite-H " //NEW_LINE('')// &
+  &"    -s Nontronite-Ca muscovite mesolite hematite diaspore" //NEW_LINE('')// &
   ! NEW MINERALS ADDED 10/18/2014
-  &"    -p Akermanite Analcime Annite Clinozoisite Dicalcium_silicate" //NEW_LINE('')// &
-  &"    -p Diopside Epidote Ettringite Ferrite-Ca Foshagite Gismondine" //NEW_LINE('')// &
-  &"    -p Gyrolite Hedenbergite Hillebrandite Larnite Laumontite" //NEW_LINE('')// &
-  &"    -p Lawsonite Merwinite Monticellite Natrolite Okenite" //NEW_LINE('')// &
-  &"    -p Phlogopite Prehnite Pseudowollastonite Rankinite Scolecite" //NEW_LINE('')// &
-  &"    -p Tobermorite-9A Tremolite Wollastonite Xonotlite  Zoisite" //NEW_LINE('')// &
+  &"    -s Akermanite Analcime Annite Clinozoisite Dicalcium_silicate" //NEW_LINE('')// &
+  &"    -s Diopside Epidote Ettringite Ferrite-Ca Foshagite Gismondine" //NEW_LINE('')// &
+  &"    -s Gyrolite Hedenbergite Hillebrandite Larnite Laumontite" //NEW_LINE('')// &
+  &"    -s Lawsonite Merwinite Monticellite Natrolite Okenite" //NEW_LINE('')// &
+  &"    -s Phlogopite Prehnite Pseudowollastonite Rankinite Scolecite" //NEW_LINE('')// &
+  &"    -s Tobermorite-9A Tremolite Wollastonite Xonotlite  Zoisite" //NEW_LINE('')// &
   ! NEXT ROUND
-  &"    -p Andradite Troilite Pyrrhotite Minnesotaite Fayalite Daphnite-7A" //NEW_LINE('')// &
-  &"    -p Daphnite-14A Cronstedtite-7A Greenalite Aragonite" //NEW_LINE('')// &
-  &"    -p Siderite Magnesite" //NEW_LINE('')// &
+  &"    -s Andradite Troilite Pyrrhotite Minnesotaite Fayalite Daphnite-7A" //NEW_LINE('')// &
+  &"    -s Daphnite-14A Cronstedtite-7A Greenalite Aragonite" //NEW_LINE('')// &
+  &"    -s Siderite Magnesite" //NEW_LINE('')// &
   !&"    -calculate_values R(phi) R(s_sp) R(water_volume) R(rho_s)" //NEW_LINE('')// &
   &"    -time" //NEW_LINE('')// &
 &"END"
@@ -748,6 +743,7 @@ END DO
   
 ! WRITE AWAY
 allocate(outmat(GetSelectedOutputStringLineCount(id)+1,all))
+write(*,*) shape(outmat)
 !write(*,*) size(outmat,1)
 !write(*,*) size(outmat,2)
 DO i=1,GetSelectedOutputStringLineCount(id)
@@ -756,20 +752,17 @@ DO i=1,GetSelectedOutputStringLineCount(id)
 	if (i .eq. 1) then
  	   !write(12,*) trim(line)
 	   !write(*,*) "cell"
-	   !write(*,*) trim(line) ! PRINT LABELS FOR EVERY FIELD (USEFUL)
+	   write(*,*) trim(line) ! PRINT LABELS FOR EVERY FIELD (USEFUL)
 		
-		if ((medium(6) .gt. 2800.0) .and. (medium(7) .lt. -1100.00)) then
-			!write(*,*) trim(line)
-		end if
+
 		
 	end if
 	! MEAT
 	if (i .gt. 1) then
-		if ((medium(6) .gt. 2800.0) .and. (medium(7) .lt. -1100.00)) then
-			!write(*,*) trim(line)
-			!write(*,*) " "
-			!write(*,*) "line!"
-		end if
+		!write(*,*) trim(line)
+		!write(*,*) " "
+		!write(*,*) "line!"
+
 		
 		read(line,*) outmat(i,:)
 		
@@ -782,12 +775,12 @@ END DO
   
 
 ! OUTPUT TO THE MAIN MASSACR METHOD
-alter(1,:) = outmat(3,:)
+alterb(:,:) = outmat(:,:)
 !write(*,*) outmat
 !write(*,*) alter(1,4)
 
 IF (RunString(id, inputz0).NE.0) THEN
-	alter(1,:) = 0.0
+	alterb(1,:) = 0.0
 END IF
 
 ! DESTROY INSTANCE
@@ -803,10 +796,10 @@ END IF
 
 return
   
-end function alter
+end function alterb
 
 
 
 
 
-end module alteration
+end module alterbox

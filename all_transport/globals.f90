@@ -17,6 +17,7 @@ real(8) :: one_array(xn,yn) = 1.0
 real(8) :: pec = 200.0
 real(8) :: dTdx(xn,yn), dTdy(xn,yn), dPdx(xn,yn), dPdy(xn,yn)
 real(8) :: sea(15)
+CHARACTER(*), PARAMETER :: fileplace = "/home/navah/all_transport/stop_alk/"
 
 
 contains
