@@ -1,7 +1,4 @@
 qstat
-qstat
-qsub kinsub.csh
-qstat
 qsub kinsub.csh
 qstat
 qsub kinsub.csh
@@ -998,3 +995,6 @@ ifort -I/home/navah/include -c alterbox.f90
 ifort -I/home/navah/include -c littleChunk.f90
 ifort -I/home/navah/include -o littleChunk littleChunk.o alterbox.o -L/home/navah/lib -liphreeqc
 ./littleChunk
+git add .
+git commit -m "indexed mineral saturation evolution"
+git push -u origin master

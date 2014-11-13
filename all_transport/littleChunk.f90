@@ -12,27 +12,28 @@ PROGRAM main
 	
 	! inputs
 	real(8) :: temp, timestep, primary(5), secondary(69), solute(15), medium(7)
+	real(8) :: yep
 	
 	! other stuff
 	integer :: i, j
-	real(8) ::  alt0(8,96) 
+	real(8) ::  alt0(63,96) 
 	
 	! initial conditions
-	timestep = 200.0
+	timestep = 20000000.0*60.0
 	temp = 50.0
 	
 	primary(1) = 0.0 !12.96 ! feldspar
 	primary(2) = 0.0 !6.96 ! augite
 	primary(3) = 0.0 !1.26 ! pigeonite
 	primary(4) = 0.0 !.4 ! magnetite
-	primary(5) = 9.677 ! basaltic glass
+	primary(5) = 96.77 ! basaltic glass
 	
 	secondary = 0.0
 	
 	! ocean today (w. sources)
 	solute(1) = 7.8 ! ph
 	solute(2) = .0023 ! Alk 1.6e-3
-	solute(3) = .03860 ! water mass
+	solute(3) = 38.60 ! water mass
 	solute(4) = .0023 !1.2e-2 ! H2CO3
 	solute(5) = .0105 ! Ca
 	solute(6) = .0533 ! Mg
@@ -96,7 +97,10 @@ PROGRAM main
 	
 	end do
 	
-	write(*,*) alt0(:,5)
+	write(*,*) alt0(:,95)
 	
+	write(*,*) alt0(:,31)
+	
+	yep = write_matrix ( 63, 96, real(alt0(:,:),kind=4), 'alterbox.txt' )
 	
 END PROGRAM main
