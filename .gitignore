@@ -8,6 +8,8 @@
 *.mod
 *.dat
 *.csv
+.*
+!.gitignore
 
 # Compiled source #
 ###################
