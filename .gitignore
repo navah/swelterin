@@ -10,6 +10,7 @@
 *.csv
 .*
 !.gitignore
+.ssh/
 
 # Compiled source #
 ###################
